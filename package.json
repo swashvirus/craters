@@ -1,0 +1,20 @@
+{
+  "name": "craters.js",
+  "version": "1.0.0",
+  "description": "a micro frame work for making games \"mini games\" suitable for js13kbgames",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swashvirus/craters.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swashvirus/craters.js/issues"
+  },
+  "homepage": "https://github.com/swashvirus/craters.js#readme"
+}
