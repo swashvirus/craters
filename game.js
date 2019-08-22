@@ -1,4 +1,8 @@
-// Load Game Core Modules
+/***
+** Craters.js Hello world 
+** Load Game Core Modules
+** 
+***/
 var gameLoop = require('./app/core/game.loop.js'),
 	gameUpdate = require('./app/core/game.update.js'),
 	gameRender = require('./app/core/game.render.js'),
@@ -6,14 +10,14 @@ var gameLoop = require('./app/core/game.loop.js'),
 	$container = document.getElementById('container');
 	
 
-function Game(w, h, targetFps, debug) {
+function Game(w, h, frames, debug) {
 var that;
 
 // Setup some constants
 this.constants = {
     width: w,
     height: h,
-    targetFps: targetFps,
+    frames: frames,
     debug: debug
 };
 
