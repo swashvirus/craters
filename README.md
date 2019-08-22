@@ -1,5 +1,6 @@
 # craters.js
+[craters.js nodejs version](https://github.com/swashvirus/node-craters.js)
 ![](final.gif)
-minimal only includes a loop , update , render.
-which makes it simple to use and hackable ,
-a micro frame work for making games "mini games" suitable for js13kbgames
+#### minimal 2.5kb zipped minified only includes a loop , update , render.
+which makes it simple to use, hackable leaves enough room for the game logic
+a microframe 'boilerplate' work for making games "mini games" suitable for js13kbgames
