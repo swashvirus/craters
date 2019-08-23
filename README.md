@@ -1,6 +1,8 @@
-# craters.js
-[craters.js nodejs version](https://github.com/swashvirus/node-craters.js)
+# Craters.js ☄️
+[craters.js nodejs version ☄️](https://github.com/swashvirus/node-craters.js)
 ![](final.gif)
-#### minimal 2.5kb zipped minified only includes a loop , update , render.
-which makes it simple to use, hackable leaves enough room for the game logic
-a microframe 'boilerplate' work for making games "mini games" suitable for js13kbgames
+#### Short escription 
+simple to use micro framework lightweight and minimal 2kb zipped and minified includes all you need to get a game up and running in a few lines of code, a loop , update , render. which makes it simple to modify and hackable framework. leaving enough room for the game logic.
+#### suitable usecase 
+suitable for [js13kgames](https://js13kgames.com) competition
+anyone trying to build a game using a skeleton framework as opposed to complex alternatives
