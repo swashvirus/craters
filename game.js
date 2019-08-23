@@ -1,11 +1,12 @@
 /***
-	** Craters.js hello world game ,
-	** 
-***/
-// Begin by loading Game Core Modules
+	 // Craters.js hello world game ,
+	 // ...
+**/
+// load core game modules 
 var gameLoop = require('./app/core/game.loop.js'),
 	gameUpdate = require('./app/core/game.update.js'),
 	gameRender = require('./app/core/game.render.js'),
+	// load required plugins
 	canvas = require('./app/plugins/utils.canvas.js'),
 	$container = document.getElementById('container');
 
@@ -15,14 +16,14 @@ var that;
 
 // Setup some constants
 this.constants = {
-    width: w,
-    height: h,
-    frames: frames,
-    debug: debug
-};
+	width: w,
+	height: h,
+	frames: frames,
+	debug: debug
+}
 
 // Instantiate an empty state object
-this.state = {};
+this.state = {}
 // Generate a canvas and store it as our viewport
 this.viewport = canvas.generateCanvas(w, h);
 this.viewport.id = "gameViewport";
@@ -40,24 +41,25 @@ this.loop = gameLoop( this );
 
 that = this;
 
-that.state.entities = that.state.entities || {};
+that.state.entities = that.state.entities || {}
 // comment
 var comet = function(name){
-  this.name = name;
-  this.type = 'lunar';
-  this.state = {
-	  position: {x:0, y:0},
-	  radius: 20
-  };
-  // comment
-  this.update = function (){
-	    // update the comet's shaking moves ,
+	// comment
+	this.name = name;
+	this.type = 'lunar';
+	this.state = {
+		position: {x:0, y:0},
+		radius: 20
+	}
+	// comment
+	this.update = function (){
+		// update the comet's shaking moves ,
 		this.state.position.x += (Math.random() - 0.5);
 		this.state.position.y += (Math.random() - 0.5);
 		// 'DOS' console.log(this.name + ' ' + this.type + ' state:' + JSON.stringify(this.state));
-  };
-  // comment
-  this.render = function (){
+	}
+	// comment
+	this.render = function (){
 		// draw the entities ,
 		that.context.save();
 		that.context.font = '64px Impact';
@@ -66,9 +68,8 @@ var comet = function(name){
 		that.context.font = '32px Impact';
 		that.context.fillText('It\'s working.️', 65, (w / 2), (w));
 		that.context.restore();
-  }
-  
-};
+	}
+}
 
 // init an instance of a comet
 that.state.entities.comet = new comet('f18');
