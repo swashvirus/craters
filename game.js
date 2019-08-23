@@ -1,15 +1,15 @@
 /***
-** Craters.js Hello world 
-** Load Game Core Modules
-** 
+	** Craters.js hello world game ,
+	** 
 ***/
+// Begin by loading Game Core Modules
 var gameLoop = require('./app/core/game.loop.js'),
 	gameUpdate = require('./app/core/game.update.js'),
 	gameRender = require('./app/core/game.render.js'),
 	canvas = require('./app/plugins/utils.canvas.js'),
 	$container = document.getElementById('container');
-	
 
+// comment
 function Game(w, h, frames, debug) {
 var that;
 
@@ -23,8 +23,7 @@ this.constants = {
 
 // Instantiate an empty state object
 this.state = {};
-  // burnSfx = new sound('burn.mp3');
-  // Generate a canvas and store it as our viewport
+// Generate a canvas and store it as our viewport
 this.viewport = canvas.generateCanvas(w, h);
 this.viewport.id = "gameViewport";
 
@@ -42,17 +41,37 @@ this.loop = gameLoop( this );
 that = this;
 
 that.state.entities = that.state.entities || {};
-that.state.entities.text = {
-	update: function (){
-		// 
-	},
-	render: function (){
+// comment
+var comet = function(name){
+  this.name = name;
+  this.type = 'lunar';
+  this.state = {
+	  position: {x:0, y:0},
+	  radius: 20
+  };
+  // comment
+  this.update = function (){
+	    // update the comet's shaking moves ,
+		this.state.position.x += (Math.random() - 0.5);
+		this.state.position.y += (Math.random() - 0.5);
+		// 'DOS' console.log(this.name + ' ' + this.type + ' state:' + JSON.stringify(this.state));
+  };
+  // comment
+  this.render = function (){
+		// draw the entities ,
 		that.context.save();
+		that.context.font = '64px Impact';
+		that.context.fillText('☄️', (10 + this.state.position.x) , ((w / 2) + this.state.position.x), (w));
+		// comment
 		that.context.font = '32px Impact';
-		that.context.fillText('It\'s working.', 5, w/2, w);
+		that.context.fillText('It\'s working.️', 65, (w / 2), (w));
 		that.context.restore();
-	}
+  }
+  
 };
+
+// init an instance of a comet
+that.state.entities.comet = new comet('f18');
 
 	return this;
 }
