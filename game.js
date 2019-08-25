@@ -1,5 +1,8 @@
-// comment
-var game = require('./app/core/craters.js');
+/** Craters.js Demo Game
+ *  This module contains the main game including entities
+ *  everything was initiated in the craters.js 
+ */
+var game = require('./lib/modules/game.craters.js');
 var cg = new game('#container', window.innerWidth, window.innerHeight, 60, true);
 
 cg.state.entities = cg.state.entities || {}
