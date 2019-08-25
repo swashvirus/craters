@@ -1,55 +1,18 @@
-/***
-	 // Craters.js hello world game ,
-	 // ...
-**/
-// load core game modules 
-var gameLoop = require('./app/core/game.loop.js'),
-	gameUpdate = require('./app/core/game.update.js'),
-	gameRender = require('./app/core/game.render.js'),
-	// load required plugins
-	canvas = require('./app/plugins/utils.canvas.js'),
-	$container = document.getElementById('container');
-
 // comment
-function Game(w, h, frames, debug) {
-var that;
+var game = require('./app/core/craters.js');
+var cg = new game('#container', window.innerWidth, window.innerHeight, 60, true);
 
-// Setup some constants
-this.constants = {
-	width: w,
-	height: h,
-	frames: frames,
-	debug: debug
-}
+cg.state.entities = cg.state.entities || {}
 
-// Instantiate an empty state object
-this.state = {}
-// Generate a canvas and store it as our viewport
-this.viewport = canvas.generateCanvas(w, h);
-this.viewport.id = "gameViewport";
-
-// Get and store the canvas context as a global
-this.context = this.viewport.getContext('2d');
-
-// Append viewport into our container within the dom
-$container.insertBefore(this.viewport, $container.firstChild);
-
-// Instantiate core modules with the current scope
-this.update = gameUpdate( this );
-this.render = gameRender( this );
-this.loop = gameLoop( this );
-
-that = this;
-
-that.state.entities = that.state.entities || {}
+var w = cg.constants.width,
+	h = cg.constants.hieght;
 // comment
 var comet = function(name){
 	// comment
 	this.name = name;
 	this.type = 'lunar';
 	this.state = {
-		position: {x:0, y:0},
-		radius: 20
+		position: {x:0, y:0}
 	}
 	// comment
 	this.update = function (){
@@ -61,23 +24,15 @@ var comet = function(name){
 	// comment
 	this.render = function (){
 		// draw the entities ,
-		that.context.save();
-		that.context.font = '64px Impact';
-		that.context.fillText('☄️', (10 + this.state.position.x) , ((w / 2) + this.state.position.x), (w));
+		cg.context.save();
+		cg.context.font = '64px Impact';
+		cg.context.fillText('☄️', (10 + this.state.position.x) , ((w / 2) + this.state.position.x), (w));
 		// comment
-		that.context.font = '32px Impact';
-		that.context.fillText('It\'s working.️', 65, (w / 2), (w));
-		that.context.restore();
+		cg.context.font = '32px Impact';
+		cg.context.fillText('It\'s working.️', 65, (w / 2), (w));
+		cg.context.restore();
 	}
 }
 
 // init an instance of a comet
-that.state.entities.comet = new comet('f18');
-
-	return this;
-}
-
-// Instantiate a new game in the global scope at full screen
-window.game = new Game(window.innerWidth, window.innerHeight, 60, true);
-
-module.exports = game;
+cg.state.entities.comet = new comet('f18');
