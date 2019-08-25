@@ -8,7 +8,7 @@ an example illustration is included in the dist folder alternatively you can bui
 `sudo git clone https://github.com/swashvirus/craters.js.git`
 `cd ./craters.js && webpack`
 #### writing the demo game yourself
-`
+```javascript
 // load craters.js here
 var game = require('./app/core/craters.js');
 var cg = new game('#container', window.innerWidth, window.innerHeight, 60, true);
@@ -47,4 +47,4 @@ var comet = function(name){
 
 // add an instance of a comet into the game  
 cg.state.entities.comet = new comet('f18');
-`
+```
