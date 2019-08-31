@@ -6,11 +6,11 @@
 
 (function(window){ "use strict";
 
-window.cg = {
+window.craters = {
 	version:'1.0.1'
 }
 
-cg.game = class game {
+craters.game = class game {
 	constructor(container,  width,  height, frames, debug) {
 	    this.container = container;
 	    this.constants = {
@@ -24,31 +24,31 @@ cg.game = class game {
 		    entities: {}
 	    };
 	    
-	    this.init ();
-		
-    };
-    
-	init () {
 		// Generate a canvas and store it as our viewport
-	    this.viewport = gameCanvas.generateCanvas( this.constants.width,  this.constants.height);
-	    this.viewport.id = "gameViewport";
+		this.viewport = gameCanvas.generateCanvas( this.constants.width,  this.constants.height);
+		this.viewport.id = "gameViewport";
+		
+		// Get and store the canvas context as a global
+		this.context = this.viewport.getContext('2d');
+		
+		// Append viewport into our container within the dom
+		this.container = document.querySelector(this.container);
+		this.container.insertBefore(this.viewport, this.container.firstChild);
+		
+		// Instantiate core modules with the current scope
+		this.update = new gameUpdate( this );
+		this.render = new gameRender( this );
+		this.loop   = new gameLoop( this );
+		this.init();
+	}
 	
-	    // Get and store the canvas context as a global
-	    this.context = this.viewport.getContext('2d');
-	
-	    // Append viewport into our container within the dom
-	    this.container = document.querySelector(this.container);
-	    this.container.insertBefore(this.viewport, this.container.firstChild);
-	
-	    // Instantiate core modules with the current scope
-	    this.update = new gameUpdate( this );
-	    this.render = new gameRender( this );
-	    this.loop   = new gameLoop( this );
+	init(){
+		
 	}
 	
 };
 
-cg.entity = class entity {
+craters.entity = class entity {
 	constructor () {
 		this.state = {
 			position: {x:0, y:0}
@@ -64,7 +64,7 @@ cg.entity = class entity {
 	}
 }
 
-cg.class = class {
+craters.class = class {
 	constructor () {
 		this.init();
 	}
@@ -272,7 +272,5 @@ class gameCanvas {
       return canvas;
     }
 };
-
-module.exports = cg;
 
 })(window);

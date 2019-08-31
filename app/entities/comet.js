@@ -1,23 +1,4 @@
-"use strict";
-/** Craters.js Demo Game
- *  This module contains the main game including entities
- *  everything was initiated in the craters.js 
- */
-require('./craters/craters.js');
-
-class mygame extends craters.game {
-	
-	init () {
-		super.init();
-		// now init my game 
-		window.that = this;
-		window.w = this.constants.width,
-		window.h = this.constants.hieght;
-		that.state.entities.comet = new comet('f18');
-	}
-}
-
-class comet extends craters.entity {
+var comet = class comet extends craters.entity {
 	// comment */
 	constructor (name) {
 		super();
@@ -43,5 +24,3 @@ class comet extends craters.entity {
 		that.context.restore();
 	}
 }
-
-window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, true);
