@@ -27,7 +27,7 @@ class comet extends craters.entity {
 		this.scope = scope;
 		this.type = 'kinematic';
 		this.name = name;
-		this.state.pos = {x: 10, y: (this.scope.constants.height / 2) - 25}
+		this.state.pos = {x: 0, y: (this.scope.constants.height / 2)}
 	}
 	
 	update (){
@@ -40,11 +40,11 @@ class comet extends craters.entity {
 	render (){
 		// draw the entities ,
 		this.scope.context.save();
-		this.scope.context.font = '64px Impact';
+		this.scope.context.font = '64px Arial';
 		this.scope.context.fillText('☄️', (10 + this.state.pos.x) , (this.state.pos.y), (this.scope.constants.width));
 		// comment
-		this.scope.context.font = '32px Impact';
-		this.scope.context.fillText('It\'s working.️', 65, (this.scope.constants.width / 2), (this.scope.constants.width));
+		this.scope.context.font = '32px Arial';
+		this.scope.context.fillText('It\'s working.️', 65, (this.scope.constants.height / 2), (this.scope.constants.width));
 		this.scope.context.restore();
 	}
 }
