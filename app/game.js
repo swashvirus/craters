@@ -49,4 +49,4 @@ class comet extends craters.entity {
 	}
 }
 
-window.cg = new mygame('#container', window.innerWidth, window.innerHeight, 6, true);
+window.cg = new mygame('#container', window.innerWidth, window.innerHeight, 60, true);

@@ -16,12 +16,15 @@ note the example game is included in the dist folder alternatively you can build
 #### writing the demo game yourself
 ```javascript
 "use strict";
+"use strict";
 /** Craters.js Demo Game
  *  This module contains the main game including entities
  *  everything was initiated in the craters.js 
  */
-// load craters. js --- script tag works just good as well
-require('./craters/craters.js');
+
+// load craters. js --- script tag 
+// works just good as well 
+// only using craters.min.js ofcourse
 
 class mygame extends craters.container {
 	
@@ -62,7 +65,7 @@ class comet extends craters.entity {
 	}
 }
 
-window.cg = new mygame('#container', window.innerWidth, window.innerHeight, 6, true);
+window.cg = new mygame('#container', window.innerWidth, window.innerHeight, 60, true);
 
 ```
 #### TODO
