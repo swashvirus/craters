@@ -3,45 +3,50 @@
  *  This module contains the main game including entities
  *  everything was initiated in the craters.js 
  */
+
+// load craters. js --- script tag 
+// works just good as well 
+// only using craters.min.js ofcourse
+
 require('./craters/craters.js');
 
-class mygame extends craters.game {
+class mygame extends craters.container {
 	
 	init () {
 		super.init();
-		// now init my game 
-		window.that = this;
-		window.w = this.constants.width,
-		window.h = this.constants.hieght;
-		that.state.entities.comet = new comet('f18');
+		// now init my game
+		// deploy a new comet into the world
+		this.state.entities.push( new comet(this, 'f18') );
 	}
 }
 
 class comet extends craters.entity {
-	// comment */
-	constructor (name) {
+	// extend the entity class */
+	constructor (scope, name) {
 		super();
-		
+		this.scope = scope;
+		this.type = 'kinematic';
 		this.name = name;
+		this.state.pos = {x: 10, y: (this.scope.constants.height / 2) - 25}
 	}
 	
 	update (){
 		// update the comet's shaking moves ,
-		this.state.position.x += (Math.random() - 0.5);
-		this.state.position.y += (Math.random() - 0.5);
+		this.state.pos.x += (Math.random() - 0.5);
+		this.state.pos.y += (Math.random() - 0.5);
 		// 'DOS' console.log(this.name + ' ' + this.type + ' state:' + JSON.stringify(this.state));
 	}
-	// comment
+	// draws the entity on the canvas
 	render (){
 		// draw the entities ,
-		that.context.save();
-		that.context.font = '64px Impact';
-		that.context.fillText('☄️', (10 + this.state.position.x) , ((w / 2) + this.state.position.x), (w));
+		this.scope.context.save();
+		this.scope.context.font = '64px Impact';
+		this.scope.context.fillText('☄️', (10 + this.state.pos.x) , (this.state.pos.y), (this.scope.constants.width));
 		// comment
-		that.context.font = '32px Impact';
-		that.context.fillText('It\'s working.️', 65, (w / 2), (w));
-		that.context.restore();
+		this.scope.context.font = '32px Impact';
+		this.scope.context.fillText('It\'s working.️', 65, (this.scope.constants.width / 2), (this.scope.constants.width));
+		this.scope.context.restore();
 	}
 }
 
-window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, true);
+window.cg = new mygame('#container', window.innerWidth, window.innerHeight, 6, true);

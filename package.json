@@ -1,17 +1,17 @@
 {
   "name": "craters.js",
-  "version": "1.0.0",
-  "description": "a micro frame work for making games \"mini games\" suitable for js13kbgames",
+  "version": "0.0.0.1",
+  "description": "a micro game engine",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/swashvirus/craters.js.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "John Swana",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/swashvirus/craters.js/issues"
