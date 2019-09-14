@@ -13,24 +13,25 @@ var entity = class entity {
 		
 		this.state = {
 		
-			size:  {x: 16, y:16},
-			pos:   {x: 0, y:0},
+			size:  {x: 20, y: 20},
+			pos:   {x: 0, y: 0},
 			vel:   {x: 0, y: 0},
 			accel: {x: 0, y: 0},
-			radius: 8,
-			mass: 4
+			radius: 10,
+			mass: 10
 		}
 	}
 	
 	update (){
-		// comment
+		// update the sub entities if there's any
+		// by firing off the update function one by one
 		for(var entity = 0; entity < this.entities.length; entity ++) {
 			this.entities[entity].update();
 		}
 	}
 	
 	render (){
-		// comment
+		// render the sub entities if there's any
 		for(var entity = 0; entity < this.entities.length; entity ++) {
 			this.entities[entity].render();
 		}

@@ -15,7 +15,7 @@ Number.prototype.boundary = Boundary;
 (function(window){ "use strict";
 
 	window.craters = {
-		version:'1.0.1',
+		version:'0.0.0.1',
 		container: container,
 		entity: entity
 	}
