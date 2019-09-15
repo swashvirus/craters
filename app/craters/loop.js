@@ -78,9 +78,9 @@ var loop = class loop {
 	
 	            // Update the game state
 	            scope.state = scope.physics( now );
-	            scope.state = scope.update( now );
+	            scope.update(scope, now );
 	            // Render the next frame
-	            scope.render();
+	            scope.render(scope, now);
 	        }
 	    };
 	

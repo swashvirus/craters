@@ -1,7 +1,7 @@
 "use strict";
-// Craters.js Demo Game
-// This module contains the main game including entities
-//  everything was initiated in the craters.js 
+/** Craters.js Demo Game
+ * This module contains the main game including entities
+ **/
 
 // load craters.js --- script tag 
 // works just good as well 
@@ -11,11 +11,16 @@ require('./craters/craters.js');
 
 class mygame extends craters.container {
 	
-	init () {
-		super.init();
-		// now init my game
+	intitiate () {
+		super.intitiate();
+		// now intitiate my game
 		// deploy a new comet into the world
 		this.state.entities.push( new comet(this, 'f18') );
+	}
+	
+	update () {
+	
+		super.update(this);
 	}
 }
 
@@ -50,4 +55,4 @@ class comet extends craters.entity {
 	}
 }
 
-window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, true);
+window.game = new mygame('#container', window.innerWidth, window.innerHeight, 6, true);
