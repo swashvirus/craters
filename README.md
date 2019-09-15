@@ -9,20 +9,15 @@ everything is an entity with methods update and render called per frame rate
 the main container is a method called container
 containers have entities and their entities can also have entities as long as they inherit the craters.entity class
 leaving enough room for the game logic. suitable for [js13kgames](https://js13kgames.com) competition or anyone trying to build a game using a skeleton framework as opposed to complex alternatives
-#### Let's Blast Off 🚀
+
 note the example game is included in the dist folder alternatively you can build it on your own 
 `sudo git clone https://github.com/swashvirus/craters.js.git`
 `cd ./craters.js && webpack`
 #### writing the demo game yourself
 ```javascript
 "use strict";
-/** Craters.js Demo Game
- * This module contains the main game including entities
- **/
-
-// load craters.js --- script tag 
-// works just good as well 
-// only using craters.min.js ofcourse found in the dist folder
+// load craters.js
+// script tag works just good as well
 
 require('./craters/craters.js');
 
@@ -34,15 +29,10 @@ class mygame extends craters.container {
 		// deploy a new comet into the world
 		this.state.entities.push( new comet(this, 'f18') );
 	}
-	
-	update () {
-	
-		super.update(this);
-	}
 }
 
 class comet extends craters.entity {
-	// extend the entity class */
+	// extend the entity class
 	constructor (scope, name) {
 		super();
 		this.scope = scope;
@@ -61,7 +51,6 @@ class comet extends craters.entity {
 	
 	// draws the entity on the canvas
 	render (){
-		// draw the entities ,
 		this.scope.context.save();
 		this.scope.context.font = '64px Arial';
 		this.scope.context.fillText('☄️', (10 + this.state.pos.x) , (this.state.pos.y), (this.scope.constants.width));
@@ -72,7 +61,7 @@ class comet extends craters.entity {
 	}
 }
 
-window.game = new mygame('#container', window.innerWidth, window.innerHeight, 6, true);
+window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, true);
 ```
 #### TODO
 - mini collision detection

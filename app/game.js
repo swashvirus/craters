@@ -1,11 +1,6 @@
 "use strict";
-/** Craters.js Demo Game
- * This module contains the main game including entities
- **/
-
-// load craters.js --- script tag 
-// works just good as well 
-// only using craters.min.js ofcourse found in the dist folder
+// load craters.js
+// script tag works just good as well
 
 require('./craters/craters.js');
 
@@ -17,15 +12,10 @@ class mygame extends craters.container {
 		// deploy a new comet into the world
 		this.state.entities.push( new comet(this, 'f18') );
 	}
-	
-	update () {
-	
-		super.update(this);
-	}
 }
 
 class comet extends craters.entity {
-	// extend the entity class */
+	// extend the entity class
 	constructor (scope, name) {
 		super();
 		this.scope = scope;
@@ -44,7 +34,6 @@ class comet extends craters.entity {
 	
 	// draws the entity on the canvas
 	render (){
-		// draw the entities ,
 		this.scope.context.save();
 		this.scope.context.font = '64px Arial';
 		this.scope.context.fillText('☄️', (10 + this.state.pos.x) , (this.state.pos.y), (this.scope.constants.width));
@@ -55,4 +44,4 @@ class comet extends craters.entity {
 	}
 }
 
-window.game = new mygame('#container', window.innerWidth, window.innerHeight, 6, true);
+window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, true);
