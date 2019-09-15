@@ -1,7 +1,6 @@
 "use strict";
-// load craters.js
-// script tag works just good as well
 
+// load craters.js script tag works too
 require('./craters/craters.js');
 
 class mygame extends craters.container {

@@ -1,19 +1,25 @@
 # Craters.js ☄️
 ![](craters.gif)
-[craters.js nodejs version️](https://github.com/swashvirus/node-craters.js)
-#### Short escription
-craters.js is a simple to use micro game engine both lightweight and portable so minimal that it's just 1.5kb in size zipped and minified 
-in it. it includes all basics you need to get a game up and running in a few lines of code 
-a main loop , update and render. at its core
-everything is an entity with methods update and render called per frame rate
-the main container is a method called container
-containers have entities and their entities can also have entities as long as they inherit the craters.entity class
-leaving enough room for the game logic. suitable for [js13kgames](https://js13kgames.com) competition or anyone trying to build a game using a skeleton framework as opposed to complex alternatives
 
+[craters.js nodejs version️](https://github.com/swashvirus/node-craters.js)
+
+#### Short description
+craters.js is a simple to use micro game engine both lightweight and portable so minimal that it's just 1.5kb in size! zipped and minified.
+in it, it includes all basics you need to get a game up and running in a few lines of code 
+leaving enough room for the game logic. suitable for [js13kgames](https://js13kgames.com) competition
+
+#### structure
+container is a method which creates an instance of a game world
+the container and entities both have methods update and render
+
+containers have entities and their entities can also have entities as long as they inherit the craters.entity class
+
+#### let's make a game 🚀
 note the example game is included in the dist folder alternatively you can build it on your own 
 `sudo git clone https://github.com/swashvirus/craters.js.git`
 `cd ./craters.js && webpack`
-#### writing the demo game yourself
+
+##### writing the demo game yourself
 ```javascript
 "use strict";
 // load craters.js
