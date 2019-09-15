@@ -1,4 +1,7 @@
 (function(window){ "use strict";
+// basic physics world 
+// gravity acceleration and velocity
+// affecting entities in the world
 
 var physics = class physics {
 
@@ -6,28 +9,6 @@ var physics = class physics {
 		
 		return this.physics(scope);
 		
-	}
-	
-	static circlecollision(c1, c2)
-	{
-		var a = c1.pos.x - c2.pos.x;
-		var b = c1.pos.y - c2.pos.y;
-		var c = (a * a) + (b * b);
-		var radii = c1.radius + c2.radius;
-		return radii * radii >= c;
-	}
-	
-	static solvecircle (c1, c2) {
-		
-		nVX1 = (c1.vel.x * (c1.mass - c2.mass) + (2 * c2.mass * c2.vel.x)) / (c1.mass + c2.mass);
-		nVY1 = (c1.vel.y * (c1.mass - c2.mass) + (2 * c2.mass * c2.vel.y)) / (c1.mass + c2.mass);
-		nVX2 = (c2.vel.x * (c2.mass - c1.mass) + (2 * c1.mass * c1.vel.x)) / (c1.mass + c2.mass);
-		nVY2 = (c2.vel.y * (c2.mass - c1.mass) + (2 * c1.mass * c1.vel.y)) / (c1.mass + c2.mass);
-		
-		c1.x = c1.x + nVX1;
-		c1.y = c1.y + nVY1;
-		c2.x = c2.x + nVX2;
-		c2.y = c2.y + nVY2;
 	}
 	
 	physics (scope) {
