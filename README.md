@@ -1,7 +1,7 @@
 # Craters.js ☄️
 ![](craters.gif)
 
-[craters.js nodejs version️](https://github.com/swashvirus/node-craters.js)
+[craters.js documentation](https://swashvirus.github.io/documentation-craters.js/)
 
 #### Short description
 craters.js is a simple to use micro game engine both lightweight and portable so minimal that it's just 1.5kb in size! zipped and minified.
