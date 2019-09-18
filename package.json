@@ -1,11 +1,18 @@
 {
   "name": "craters.js",
-  "version": "0.0.0.2",
+  "version": "1.0.1.1",
   "description": "a micro game engine",
   "main": "index.js",
   "scripts": {
     "test": ""
   },
+  "keywords": [
+	  "node",
+	  "nodejs",
+	  "javascript",
+	  "library",
+	  "game-engine"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/swashvirus/craters.js.git"

@@ -34,7 +34,8 @@ the games instance can have entities and entities can also have their own entiti
 note the example game is included in the dist folder alternatively you can build it on your own 
 
 ```bash sudo git clone https://github.com/swashvirus/craters.js.git ```
-```bash cd ./craters.js && webpack ```
+npm install
+```npm install craters.js ```
 
 ##### writing the demo game yourself
 ```javascript
