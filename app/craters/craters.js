@@ -3,8 +3,10 @@
  * updating the game state and re-rendering the canvas
  * (using the updated state) at the configured FPS.
  */
-var container = require('./container.js'),
-	entity = require('./entity.js');
+var game = require('./game.js'),
+	entity = require('./entity.js'),
+	loader = require('./loader.js'),
+	sound = require('./sound.js');
 
 var Boundary = function numberBoundary(min, max) {
     return Math.min( Math.max(this, min), max );
@@ -15,9 +17,11 @@ Number.prototype.boundary = Boundary;
 (function(window){ "use strict";
 
 	window.craters = {
-		version:'0.0.0.1',
-		container: container,
-		entity: entity
+		version:'0.0.0.2',
+		game: game,
+		entity: entity,
+		loader: loader,
+		sound: sound
 	}
 
 })(window);

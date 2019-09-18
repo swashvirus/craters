@@ -1,21 +1,16 @@
+(function(window){ "use strict";
 
-/**
- * SoundBox
- * By Starbeamrainbowlabs
- * License: MIT License
- * A super simple JS library for playing sound effects and other audio.
- *
- * Note to self: When making a release, remember to update the version number at the bottom of the file!
- */
-// "use strict";
+// modified soundbox.js lib
+class sound {
 
-var sound = function () {
+	constructor () {
 	
-	this.sounds = {}; // The loaded sounds and their instances
-	this.instances = []; // Sounds that are currently playing
-	this.default_volume = 1;
+		this.sounds = {}; // The loaded sounds and their instances
+		this.instances = []; // Sounds that are currently playing
+		this.default_volume = 1;
+	}
 	
-	this.load = function (sound_name, path, callback) {
+	load (sound_name, path, callback) {
 		this.sounds[sound_name] = new Audio(path);
 		if(typeof callback == "function")
 			this.sounds[sound_name].addEventListener("canplaythrough", callback);
@@ -26,12 +21,27 @@ var sound = function () {
 			});
 	};
 	
-	this.remove = function (sound_name) {
+	remove (sound_name) {
 		if(typeof this.sounds != "undefined")
 			delete this.sounds[sound_name];
 	};
 	
-	this.play = function (sound_name, callback, volume , loop ) {
+	unlock ( sound_name, callback, volume , loop ) {
+		var that = this;
+		var events = ['touchstart', 'touchend', 'mousedown', 'keydown'];
+		var unlock = function unlock() {
+		events.forEach(function (event) {
+			document.body.removeEventListener(event, unlock)
+		});
+			that.play( sound_name, callback, volume , loop );
+		};
+		
+		events.forEach(function (event) {
+			document.body.addEventListener(event, unlock, false)
+		});
+	}
+	
+	play ( sound_name, callback, volume , loop ) {
 		loop = loop || false;
 		
 		if(typeof this.sounds[sound_name] == "undefined") {
@@ -56,10 +66,11 @@ var sound = function () {
 			soundInstance.addEventListener("ended", callback);
 			return true;
 		}
+		
 		return new Promise((resolve, reject) => soundInstance.addEventListener("ended", resolve));
 	};
 	
-	this.stop_all = function () {
+	stop_all () {
 		// Pause all currently playing sounds
 		
 		// Shallow clone the array to avoid issues with instances auto-removing themselves
@@ -69,8 +80,8 @@ var sound = function () {
 			instance.dispatchEvent(new Event("ended"));
 		}
 	}
-	
-	return this;
 }
 
-module.exports = sound 
+module.exports = sound
+
+})(window);

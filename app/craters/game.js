@@ -1,8 +1,8 @@
 (function(window){ "use strict";
 	
-	class container {
-		constructor(container,  width,  height, frames, debug) {
-		    this.container = container || 'body';
+	class game {
+		constructor(game,  width,  height, frames, debug) {
+		    this.game = game || 'body';
 		    this.constants = {
 			    gravity: {
 				    x: 0, 
@@ -12,7 +12,10 @@
 			    width:  width,
 			    height: height,
 			    frames: frames,
-			    debug:  debug
+			    debug:  debug,
+			    bgcolor: 'rgba(0,0,0,0)',
+			    fillcolor: '#ff0',
+			    font: '1em Arial'
 		    };
 		    
 		    this.state = {
@@ -45,12 +48,11 @@
 			// Get and store the canvas context as a global
 			this.context = this.viewport.getContext('2d');
 			
-			// Append viewport into our container within the dom
-			this.container = document.querySelector(this.container); 
-			this.container.insertBefore(this.viewport, this.container.firstChild);
+			// Append viewport into our game within the dom
+			this.game = document.querySelector(this.game); 
+			this.game.insertBefore(this.viewport, this.game.firstChild);
 			
 			// Initiate core modules with the current scope
-			this.physics = new physics( this );
 			this.loop = new loop( this );
 			this.intitiate ();
 		}
@@ -75,10 +77,15 @@
 				h = scope.constants.height;
 			
 			// Clear out the canvas
+			scope.context.font = scope.constants.font;
+			scope.context.save();
 			scope.context.clearRect(0, 0, w, h);
-			
+			scope.context.fillStyle = scope.constants.bgcolor;
+			scope.context.fillRect(0, 0, w, h);
+			scope.context.fill();
+			scope.context.restore();
 			// Spit out some text
-			scope.context.fillStyle = '#ff0';
+			scope.context.fillStyle = scope.constants.fillcolor;
 			// If we want to show the FPS, then render it in the top right corner.
 			if (scope.constants.debug) {
 				scope.context.fillText('fps : ' + scope.loop.fps, w - 100, 50);
@@ -174,7 +181,6 @@
 		            }
 		
 		            // Update the game state
-		            scope.state = scope.physics( now );
 		            scope.update(scope, now );
 		            // Render the next frame
 		            scope.render(scope, now);
@@ -188,54 +194,6 @@
 		}
 	}
 
-	// basic physics world 
-	// gravity acceleration and velocity
-	// affecting entities in the world
-	
-	class physics {
-	
-		constructor ( scope ) {
-			
-			return this.physics(scope);
-		}
-		
-		physics (scope) {
-		    return function physics( tFrame ) {
-		        var state = scope.state || [],
-		            entities = state.entities;
-	            
-	            this.KINEMATIC = 'kinematic';
-	            this.DYNAMIC = 'dynamic';
-	            
-				var elapsed = tFrame / 1000 ;
-			    var g = scope.constants.gravity;
-				    g.x = g.x / 100;
-				    g.y = g.y / 100;
-			    var entities = scope.state.entities,
-				    entity, collisions;
-			    for (var i = 0, length = entities.length; i < length; i++) {
-			        entity = entities[i];
-			        switch (entity.type) {
-			            case this.DYNAMIC:
-			                entity.state.vel.x += entity.state.accel.x * elapsed + g.x;
-			                entity.state.vel.y += entity.state.accel.y * elapsed + g.y;
-			                entity.state.pos.x  += entity.state.vel.x * elapsed;
-			                entity.state.pos.y  += entity.state.vel.y * elapsed;
-			                break;
-			            case this.KINEMATIC:
-			                entity.state.vel.x += entity.state.accel.x * elapsed;
-			                entity.state.vel.y += entity.state.accel.y * elapsed;
-			                entity.state.pos.x  += entity.state.vel.x * elapsed;
-			                entity.state.pos.y  += entity.state.vel.y * elapsed;
-			                break;
-			        }
-			    }
-		
-		        return state;
-		    }
-		}
-	}
-	
-	module.exports = container
+	module.exports = game
 	
 })(window);

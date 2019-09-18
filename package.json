@@ -1,6 +1,6 @@
 {
   "name": "craters.js",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "description": "a micro game engine",
   "main": "index.js",
   "scripts": {
