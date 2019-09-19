@@ -14,7 +14,7 @@
 			    frames: frames,
 			    debug:  debug,
 			    bgcolor: 'rgba(0,0,0,0)',
-			    fillcolor: '#ff0',
+			    color: '#ff0',
 			    font: '1em Arial'
 		    };
 		    
@@ -85,7 +85,7 @@
 			scope.context.fill();
 			scope.context.restore();
 			// Spit out some text
-			scope.context.fillStyle = scope.constants.fillcolor;
+			scope.context.fillStyle = scope.constants.color;
 			// If we want to show the FPS, then render it in the top right corner.
 			if (scope.constants.debug) {
 				scope.context.fillText('fps : ' + scope.loop.fps, w - 100, 50);

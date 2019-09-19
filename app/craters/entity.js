@@ -12,12 +12,11 @@
 			
 			this.state = {
 			
-				size:  {x: 100, y: 100},
+				size:  {x: 10, y: 10},
 				pos:   {x: 0, y: 0},
 				vel:   {x: 0, y: 0},
 				accel: {x: 0, y: 0},
 				radius: 10,
-				mass: 10,
 				angle: 0
 			}
 			
@@ -69,7 +68,6 @@
 				frames: args.frames || [],
 				angle:  args.angle || 0,
 				image:  args.image || new Image(),
-				loop:   args.loop || true,
 				delay:  args.delay || 5,
 				tick:   args.tick || 0,
 				orientation: args.orientation || 'horizontal'
