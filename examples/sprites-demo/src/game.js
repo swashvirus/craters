@@ -40,30 +40,30 @@ class ladybug extends craters.entity {
 	constructor (scope, name) {
 		super();
 		
-		this.state.size = {x:196, y:218};
-		this.sprite.frames = [0, 1, 2];
-		this.sprite.image = media.fetch('./src/media/bug.png');
-		
 		this.scope = scope;
+		
+		this.state.size = {x:196, y:218};
 		this.type = 'kinematic';
 		this.name = name;
 		this.state.pos = {x: (this.scope.constants.width / 2) - (this.state.size.x / 2), y: (this.scope.constants.height - this.state.size.y)}
-		var that = this;
+		
 		window.joystick = new virtualJoystick({
 			strokeStyle: 'rgba(0,0,0, 0)',
 			mouseSupport: true
 		});
+		
+		this.scope.state.entities.push(new craters.sprite(this.scope, {pos: this.state.pos, size: this.state.size, frames: [0, 1, 2], image: media.fetch('./src/media/bug.png')}))
 	}
 	
 	// executed per frame rate updates the entity
 	update () {
 	
 		super.update ();
-		var that = this;
 		
 		var dy = window.joystick.deltaY();
 		var dx = window.joystick.deltaX();
 		
+		var that = this;
 		if( ( window.joystick.left() ||  window.joystick.right() ||  window.joystick.up() ||  window.joystick.down()) && (dy && dx) !==0 ) {
 			
 			that.state.angle = Math.atan2(dy, dx) / (Math.PI / 180);
@@ -73,43 +73,23 @@ class ladybug extends craters.entity {
 	
 	// draws the entity on the canvas
 	render () {
+	
 		super.render();
 	}
 }
 
 class boltbug extends craters.entity {
 	
-	constructor (scope, opt) {
-	super();
-		
-		this.state.pos = {x:opt.pos.x, y:opt.pos.y};
-		this.state.size = {x: 214, y: 282};
-		this.sprite.frames = [0, 1, 2];
-		this.sprite.image = media.fetch('./src/media/bolt.png');
-		
-		this.state.angle = (Math.random() * 360);
-		
+	constructor (scope, args) {
+		super();
+	
 		this.scope = scope;
+		this.state.pos = args.pos || {x:0, y:0};
+		this.state.angle = (Math.random() * 360);
+		this.scope.state.entities.push(new craters.sprite(this.scope, {size: {x: 214, y: 282}, pos: this.state.pos , frames: [0, 1, 2], image: media.fetch('./src/media/bolt.png'), angle: this.state.angle}))
+		
 		this.type = 'kinematic';
 		this.name = name;
-	}
-}
-
-class bullet extends craters.entity {
-	
-	constructor (scope, opt) {
-	super();
-		
-		this.scope = scope;
-		this.state.size = {x: 38, y: 38};
-		this.sprite.frames = [0];
-		this.sprite.image = media.fetch( './src/media/bullet.png' );
-		
-		this.state.angle = opt.angle;
-		this.state.accel.y = 10;
-		this.state.pos = {x:opt.pos.x, y:opt.pos.y};
-		
-		this.type = 'kinematic';
 	}
 }
 

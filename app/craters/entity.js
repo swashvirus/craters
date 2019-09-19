@@ -1,8 +1,7 @@
 (function(window) { "use strict";
 
-	var entity = class entity {
+	class entity {
 		constructor () {
-			this.entities = []
 			// Setup the defaults if no parameters are given
 			// Type represents the collision detector's handling
 			this.type = this.type || 'dynamic'
@@ -22,16 +21,7 @@
 				angle: 0
 			}
 			
-			this.sprite = {
-			
-				frames: [],
-				pos: {x:0, y:0},
-				image: new Image(),
-				orientation: orientation || 'horizontal',
-				loop: true,
-				delay: 5,
-				delaytick:0
-			}
+			this.entities = [];
 		}
 		
 		update () {
@@ -60,47 +50,70 @@
 		}
 		
 		render () {
-		var that = this; 
-		that.scope.context.save();
-		that.scope.context.translate(this.state.pos.x + (this.state.size.x / 2), this.state.pos.y + (this.state.size.y / 2));
-		that.scope.context.rotate((that.state.angle) * (Math.PI / 180));
-		that.scope.context.translate(- (this.state.pos.x + (this.state.size.x / 2)), - (this.state.pos.y + (this.state.size.y / 2)));
 		
-		// render the sub entities if there's any
-		for(var entity = 0; entity < this.entities.length; entity ++) {
-			this.entities[entity].render();
-		}
-		
-		function drawFrame(img, frameX, frameY, canvasX, canvasY) {
-		  that.scope.context.drawImage(img,
-		                (frameX * that.state.size.x), (frameY * that.state.size.y), that.state.size.x, that.state.size.y,
-		                canvasX, canvasY, that.state.size.x, that.state.size.y );
-		}
-		
-		if (this.sprite.delaytick <= 0) {
-			
-			if(this.orientation == 'vertical') {
-				
-				this.sprite.pos.y = this.sprite.frames.shift()
-				this.sprite.frames.push(this.sprite.pos.y)
-			
-			} else {
-			
-				this.sprite.pos.x = this.sprite.frames.shift()
-				this.sprite.frames.push(this.sprite.pos.x)
+			for(var entity = 0; entity < this.entities.length; entity ++) {
+				this.entities[entity].render();
 			}
-			
-			this.sprite.delaytick = this.sprite.delay;
-		}
-		
-			this.sprite.delaytick--;
-			drawFrame(this.sprite.image, this.sprite.pos.x, this.sprite.pos.y, this.state.pos.x, this.state.pos.y);
-		
-		that.scope.context.restore();
-		
 		}
 	}
-	
-	module.exports = entity
+
+	class sprite extends entity {
+		constructor (scope, args) {
+			super();
+			
+			this.scope = scope;
+			this.state = {
+				cord:    args.pos || {x:0, y:0},
+				pos:    {x:0, y:0},
+				size:   args.size || {x:0, y:0},
+				frames: args.frames || [],
+				angle:  args.angle || 0,
+				image:  args.image || new Image(),
+				loop:   args.loop || true,
+				delay:  args.delay || 5,
+				tick:   args.tick || 0,
+				orientation: args.orientation || 'horizontal'
+			}
+		}
+		
+		update () {
+		
+			if (this.state.tick <= 0) {
+					
+					if(this.orientation == 'vertical') {
+						
+						this.state.pos.y = this.state.frames.shift()
+						this.state.frames.push(this.state.pos.y)
+					
+					} else {
+					
+						this.state.pos.x = this.state.frames.shift()
+						this.state.frames.push(this.state.pos.x)
+					}
+					
+					this.state.tick = this.state.delay;
+			}
+				
+				this.state.tick--;
+		}
+		
+		render () {
+		
+			super.render(this);
+			
+			this.scope.context.save();
+			this.scope.context.translate(this.state.pos.x + (this.state.size.x / 2), this.state.pos.y + (this.state.size.y / 2));
+			this.scope.context.rotate((this.state.angle) * (Math.PI / 180));
+			this.scope.context.translate(- (this.state.pos.x + (this.state.size.x / 2)), - (this.state.pos.y + (this.state.size.y / 2)));
+			
+			this.scope.context.drawImage(this.state.image,
+			(this.state.pos.x * this.state.size.x), (this.state.pos.y * this.state.size.y), this.state.size.x, this.state.size.y,
+			this.state.cord.x, this.state.cord.y, this.state.size.x, this.state.size.y);
+			
+			this.scope.context.restore();
+		}
+	}
+
+	module.exports = { entity, sprite }
 
 })(window);

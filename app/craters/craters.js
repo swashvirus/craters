@@ -19,7 +19,8 @@ Number.prototype.boundary = Boundary;
 	window.craters = {
 		version:'0.0.0.2',
 		game: game,
-		entity: entity,
+		entity: entity.entity,
+		sprite: entity.sprite,
 		loader: loader,
 		sound: sound
 	}
