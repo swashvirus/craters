@@ -1,6 +1,5 @@
 # Craters.js ☄️
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/craters.js)
-![es modules](https://img.shields.io/badge/es-modules-lightblue)
 
 ![](craters.gif)
 
@@ -40,12 +39,12 @@ note the example game is included in the dist folder alternatively you can build
 
 clone repository
 ```bash 
-	git clone https://github.com/swashvirus/craters.js.git
+git clone https://github.com/swashvirus/craters.js.git
 ```
 npm install
 
 ```bash
-	npm install craters.js
+npm install craters.js
 ```
 
 ##### writing the demo game yourself
