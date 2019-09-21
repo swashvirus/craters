@@ -1,12 +1,7 @@
+import { game, entity, sprite, loader } from 'craters.js';
+
 "use strict";
-
-var media = new craters.loader;
-	media.load([
-	'./src/media/bug.png',
-	'./src/media/bolt.png'
-]);
-
-class mygame extends craters.game {
+class mygame extends game {
 	
 	intitiate () {
 	
@@ -31,27 +26,33 @@ class mygame extends craters.game {
 	}
 }
 
-class ladybug extends craters.entity {
-	// extend the entity class
+class ladybug extends entity {
 	constructor (scope, name) {
 		super();
 		
 		this.state.size = {x:196, y:218};
 		this.state.pos = {x: (scope.constants.width / 2) - (this.state.size.x / 2), y: (scope.constants.height - this.state.size.y)}
 				
-		scope.state.entities.push(new craters.sprite(scope, {pos: this.state.pos, size: this.state.size, frames: [0, 1, 2], image: media.fetch('./src/media/bug.png')}))
+		scope.state.entities.push(new sprite(scope, {pos: this.state.pos, size: this.state.size, frames: [0, 1, 2], image: media.fetch('./src/media/bug.png')}))
 	}
 }
 
-class boltbug extends craters.entity {
+class boltbug extends entity {
 	constructor (scope, args) {
 		super();
 		
 		this.state.pos = args.pos;
 		this.state.angle = (Math.random() * 360);
 		
-		scope.state.entities.push(new craters.sprite(scope, {size: {x: 214, y: 282}, pos: this.state.pos , frames: [0, 1, 2], image: media.fetch('./src/media/bolt.png'), angle: this.state.angle}))
+		scope.state.entities.push(new sprite(scope, {size: {x: 214, y: 282}, pos: this.state.pos , frames: [0, 1, 2], image: media.fetch('./src/media/bolt.png'), angle: this.state.angle}))
 	}
 }
 
-window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, false);
+// what this does is , it loads all resources 
+// and later , it starts the game if all files were loaded
+
+var media = new loader;
+	media.load([
+	'./src/media/bug.png',
+	'./src/media/bolt.png'
+], function() { window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, false)});
