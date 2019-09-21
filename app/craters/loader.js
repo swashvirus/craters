@@ -1,17 +1,17 @@
-class loader {
+class Loader {
   constructor () {
     this.rescache = {}
-  }
+  };
 
   load (res, cbk) {
     var that = this
     if (res instanceof Array) {
-      res.forEach(function (url) {
-        that.rescache[url] = false
-        that.fetch(url, cbk)
+      res.forEach(function (i) {
+        that.rescache[i] = false
+        that.fetch(i, cbk)
       })
     } else {
-      that.rescache[url] = false
+      that.rescache[res] = false
       that.fetch(res, cbk)
     }
   }
@@ -36,7 +36,7 @@ class loader {
     if (typeof cbk === 'function') {
       var ready = true
       for (var item in that.rescache) {
-        if (that.rescache.hasOwnProperty(item) && !that.rescache[item]) {
+        if (Object.prototype.hasOwnProperty.call(that.rescache, item) && !that.rescache[item]) {
           ready = false
         }
       }
@@ -46,4 +46,4 @@ class loader {
   }
 }
 
-export { loader }
+export { Loader }

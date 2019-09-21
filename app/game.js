@@ -1,11 +1,9 @@
-'use strict'
-// load craters.js script tag works too
-import { game } from './craters/craters.js'
+'use strict';
+import { Game } from './craters/craters.js'
 
-class mygame extends game {
+class mygame extends Game {
     intitiate() {
-        super.intitiate()
-        // now intitiate my game
+        super.intitiate();
     }
 
     render() {
@@ -14,5 +12,4 @@ class mygame extends game {
         this.context.fillText('It\'s working.️', 65, (this.constants.height / 2), (this.constants.width))
     }
 }
-
 window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, true)

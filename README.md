@@ -1,9 +1,8 @@
-# Craters.js ☄️
+# craters.js ☄️
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/craters.js)
 ![es modules](https://img.shields.io/badge/es-modules-green)
 
-![](craters.gif)
-
+![craters.js logo](craters.gif)
 [craters.js documentation](https://swashvirus.github.io/documentation-craters.js/)
 
 #### Short description
@@ -41,6 +40,7 @@ note the example game is included in the dist folder alternatively you can build
 clone repository
 ```bash 
 git clone https://github.com/swashvirus/craters.js.git
+# import app/craters/craters.js
 ```
 npm install
 
@@ -51,14 +51,11 @@ npm install craters.js
 ##### writing the demo game yourself
 ```javascript
 'use strict';
-// bundled versions can be found in the dist
-// import { game } from 'craters.js' // npm package
-import { game } from './craters/craters.js'
+import { Game } from 'craters.js'
 
-class mygame extends game {
+class mygame extends Game {
     intitiate() {
-        super.intitiate()
-        // now intitiate my game
+        super.intitiate();
     }
 
     render() {
@@ -70,4 +67,5 @@ class mygame extends game {
 
 window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, true)
 ```
-Let's make craters a reality contribute even a missing colon
+Issues and Contributors are welcome
+[CHANGELOG](CHANGELOG.md)

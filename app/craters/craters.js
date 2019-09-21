@@ -3,21 +3,21 @@
 // updating the game state and re-rendering the canvas
 // (using the updated state) at the configured FPS.
 
-import { game } from './game.js'
-import { entity, sprite } from './entity.js'
-import { loader } from './loader.js'
-import { sound } from './sound.js'
+import { Game } from './game.js'
+import { Entity, Sprite } from './entity.js'
+import { Loader } from './loader.js'
+import { Sound } from './sound.js'
 
-const Boundary = function numberBoundary (min, max) {
+const boundary = function numberboundary (min, max) {
   return Math.min(Math.max(this, min), max)
 }
 // Expose methods
-Number.prototype.boundary = Boundary
+Number.prototype.boundary = boundary
 
-class craters {
+class Craters {
   static version () {
     return '0.0.0.3'
   }
 }
 
-export { craters, loader, game, entity, sprite, sound }
+export { Craters, Loader, Game, Entity, Sprite, Sound }

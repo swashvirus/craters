@@ -1,4 +1,4 @@
-class entity {
+class Entity {
   constructor () {
     // Setup the defaults if no parameters are given
     // Type represents the collision detector's handling
@@ -29,7 +29,7 @@ class entity {
       angle: 0
     }
 
-    this.entities = []
+    this.entities = [];
   }
 
   update () {
@@ -62,7 +62,7 @@ class entity {
   }
 }
 
-class sprite extends entity {
+class Sprite extends Entity {
   constructor (scope, args) {
     super()
 
@@ -91,7 +91,7 @@ class sprite extends entity {
 
   update () {
     if (this.state.tick <= 0) {
-      if (this.orientation == 'vertical') {
+      if (this.orientation === 'vertical') {
         this.state.pos.y = this.state.frames.shift()
         this.state.frames.push(this.state.pos.y)
       } else {
@@ -121,4 +121,4 @@ class sprite extends entity {
   }
 }
 
-export { entity, sprite }
+export { Entity, Sprite }

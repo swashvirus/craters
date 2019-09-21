@@ -1,6 +1,6 @@
-class game {
-  constructor (game, width, height, frames, debug) {
-    this.game = game || 'body';
+class Game {
+  constructor (container, width, height, frames, debug) {
+    this.container = container || 'body';
     this.constants = {
       gravity: {
         x: 0,
@@ -28,7 +28,7 @@ class game {
     var deviceRatio = window.devicePixelRatio;
     // Iterate through our backing store props and determine the proper backing ratio.
     var backingRatio = backingStores.reduce(function (prev, curr) {
-      return (context.hasOwnProperty(curr) ? context[curr] : 1)
+      return (Object.prototype.hasOwnProperty.call(context, curr) ? context[curr] : 1)
     });
     // Return the proper pixel ratio by dividing the device ratio by the backing ratio
     var ratio = deviceRatio / backingRatio;
@@ -48,11 +48,11 @@ class game {
     this.context = this.viewport.getContext('2d');
 
     // Append viewport into our game within the dom
-    this.game = document.querySelector(this.game);
-    this.game.insertBefore(this.viewport, this.game.firstChild);
+    this.container = document.querySelector(this.container);
+    this.container.insertBefore(this.viewport, this.container.firstChild);
 
     // Initiate core modules with the current scope
-    this.loop = new loop(this);
+    this.loop = new Loop(this);
     this.intitiate();
   }
 
@@ -98,7 +98,7 @@ class game {
     }
   }
 }
-class loop {
+class Loop {
   constructor (scope) {
     return this.loop(scope)
   }
@@ -189,7 +189,7 @@ class loop {
   }
 }
 
-class entity {
+class Entity {
   constructor () {
     // Setup the defaults if no parameters are given
     // Type represents the collision detector's handling
@@ -253,7 +253,7 @@ class entity {
   }
 }
 
-class sprite extends entity {
+class Sprite extends Entity {
   constructor (scope, args) {
     super();
 
@@ -282,7 +282,7 @@ class sprite extends entity {
 
   update () {
     if (this.state.tick <= 0) {
-      if (this.orientation == 'vertical') {
+      if (this.orientation === 'vertical') {
         this.state.pos.y = this.state.frames.shift();
         this.state.frames.push(this.state.pos.y);
       } else {
@@ -312,20 +312,20 @@ class sprite extends entity {
   }
 }
 
-class loader {
+class Loader {
   constructor () {
     this.rescache = {};
-  }
+  };
 
   load (res, cbk) {
     var that = this;
     if (res instanceof Array) {
-      res.forEach(function (url) {
-        that.rescache[url] = false;
-        that.fetch(url, cbk);
+      res.forEach(function (i) {
+        that.rescache[i] = false;
+        that.fetch(i, cbk);
       });
     } else {
-      that.rescache[url] = false;
+      that.rescache[res] = false;
       that.fetch(res, cbk);
     }
   }
@@ -350,7 +350,7 @@ class loader {
     if (typeof cbk === 'function') {
       var ready = true;
       for (var item in that.rescache) {
-        if (that.rescache.hasOwnProperty(item) && !that.rescache[item]) {
+        if (Object.prototype.hasOwnProperty.call(that.rescache, item) && !that.rescache[item]) {
           ready = false;
         }
       }
@@ -361,56 +361,55 @@ class loader {
 }
 
 // modified soundbox.js lib
-class sound {
+class Sound {
   constructor () {
     this.sounds = {}; // The loaded sounds and their instances
     this.instances = []; // Sounds that are currently playing
-    this.default_volume = 1;
-  }
+    this.defaultVolume = 1;
+  };
 
-  load (sound_name, path, callback) {
-    this.sounds[sound_name] = new Audio(path);
+  load (name, path, callback) {
+    this.sounds[name] = new Audio(path);
     if (typeof callback === 'function') {
-      this.sounds[sound_name].addEventListener('canplaythrough', callback);
+      this.sounds[name].addEventListener('canplaythrough', callback);
     } else {
       return new Promise((resolve, reject) => {
-        this.sounds[sound_name].addEventListener('canplaythrough', resolve);
-        this.sounds[sound_name].addEventListener('error', reject);
+        this.sounds[name].addEventListener('canplaythrough', resolve);
+        this.sounds[name].addEventListener('error', reject);
       })
     }
   };
 
-  remove (sound_name) {
+  remove (name) {
     if (typeof this.sounds !== 'undefined') {
-      delete this.sounds[sound_name];
+      delete this.sounds[name];
     }
   };
 
-  unlock (sound_name, callback, volume, loop) {
+  unlock (name, callback, volume, loop) {
     var that = this;
     var events = ['touchstart', 'touchend', 'mousedown', 'keydown'];
     var unlock = function unlock () {
       events.forEach(function (event) {
         document.body.removeEventListener(event, unlock);
       });
-      that.play(sound_name, callback, volume, loop);
+      that.play(name, callback, volume, loop);
     };
 
     events.forEach(function (event) {
       document.body.addEventListener(event, unlock, false);
     });
-  }
+  };
 
-  play (sound_name, callback, volume, loop) {
+  play (name, callback, volume, loop) {
     loop = loop || false;
 
-    if (typeof this.sounds[sound_name] === 'undefined') {
-      console.error("Can't find sound called '" + sound_name + "'.");
+    if (typeof this.sounds[name] === 'undefined') {
+      console.error("Can't find sound called '" + name + "'.");
       return false
     }
-
-    var soundInstance = this.sounds[sound_name].cloneNode(true);
-    soundInstance.volume = typeof volume === 'number' ? volume : this.default_volume;
+    var soundInstance = this.sounds[name].cloneNode(true);
+    soundInstance.volume = typeof volume === 'number' ? volume : this.defaultVolume;
     soundInstance.loop = loop;
     soundInstance.play();
     this.instances.push(soundInstance);
@@ -418,7 +417,7 @@ class sound {
     // Don't forget to remove the instance from the instances array
     soundInstance.addEventListener('ended', () => {
       var index = this.instances.indexOf(soundInstance);
-      if (index != -1) this.instances.splice(index, 1);
+      if (index !== -1) this.instances.splice(index, 1);
     });
 
     // Attach the callback / promise
@@ -426,16 +425,15 @@ class sound {
       soundInstance.addEventListener('ended', callback);
       return true
     }
-
     return new Promise((resolve, reject) => soundInstance.addEventListener('ended', resolve))
   };
 
-  stop_all () {
+  stopAll () {
     // Pause all currently playing sounds
 
     // Shallow clone the array to avoid issues with instances auto-removing themselves
-    var instances_to_stop = this.instances.slice();
-    for (var instance of instances_to_stop) {
+    var instancesToStop = this.instances.slice();
+    for (var instance of instancesToStop) {
       instance.pause();
       instance.dispatchEvent(new Event('ended'));
     }
@@ -444,16 +442,16 @@ class sound {
 
 // Craters.js micro game framework
 
-const Boundary = function numberBoundary (min, max) {
+const boundary = function numberboundary (min, max) {
   return Math.min(Math.max(this, min), max)
 };
 // Expose methods
-Number.prototype.boundary = Boundary;
+Number.prototype.boundary = boundary;
 
-class craters {
+class Craters {
   static version () {
     return '0.0.0.3'
   }
 }
 
-export { craters, entity, game, loader, sound, sprite };
+export { Craters, Entity, Game, Loader, Sound, Sprite };

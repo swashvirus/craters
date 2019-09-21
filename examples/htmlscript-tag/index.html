@@ -38,10 +38,10 @@
 <body scroll="no" style="margin: 0">
     <div id="container"></div>
     <script type="module">
-        import { game, entity, sprite, loader } from './../../../dist/craters.js';
+        import { Game, Entity, Sprite, Loader } from './../../../dist/craters.js';
          "use strict";
          
-         class mygame extends game {
+         class Buggame extends Game {
          
          	intitiate() {
          
@@ -71,7 +71,7 @@
          	}
          }
          
-         class ladybug extends entity {
+         class ladybug extends Entity {
          	constructor(scope, name) {
          		super();
          
@@ -84,7 +84,7 @@
          			y: (scope.constants.height - this.state.size.y)
          		}
          
-         		scope.state.entities.push(new sprite(scope, {
+         		scope.state.entities.push(new Sprite(scope, {
          			pos: this.state.pos,
          			size: this.state.size,
          			frames: [0, 1, 2],
@@ -93,14 +93,14 @@
          	}
          }
          
-         class boltbug extends entity {
+         class boltbug extends Entity {
          	constructor(scope, args) {
          		super();
          
          		this.state.pos = args.pos;
          		this.state.angle = (Math.random() * 360);
          
-         		scope.state.entities.push(new sprite(scope, {
+         		scope.state.entities.push(new Sprite(scope, {
          			size: {
          				x: 214,
          				y: 282
@@ -116,12 +116,12 @@
          // what this does is , it loads all resources 
          // and later , it starts the game if all files were loaded
          
-         var media = new loader;
+         var media = new Loader;
          media.load([
          	'./src/media/bug.png',
          	'./src/media/bolt.png'
          ], function () {
-         	window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, false)
+         	window.game = new Buggame('#container', window.innerWidth, window.innerHeight, 60, false)
          });
       </script>
 </body>

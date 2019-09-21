@@ -1,6 +1,6 @@
-class game {
-  constructor (game, width, height, frames, debug) {
-    this.game = game || 'body'
+class Game {
+  constructor (container, width, height, frames, debug) {
+    this.container = container || 'body'
     this.constants = {
       gravity: {
         x: 0,
@@ -28,7 +28,7 @@ class game {
     var deviceRatio = window.devicePixelRatio
     // Iterate through our backing store props and determine the proper backing ratio.
     var backingRatio = backingStores.reduce(function (prev, curr) {
-      return (context.hasOwnProperty(curr) ? context[curr] : 1)
+      return (Object.prototype.hasOwnProperty.call(context, curr) ? context[curr] : 1)
     })
     // Return the proper pixel ratio by dividing the device ratio by the backing ratio
     var ratio = deviceRatio / backingRatio
@@ -48,11 +48,11 @@ class game {
     this.context = this.viewport.getContext('2d')
 
     // Append viewport into our game within the dom
-    this.game = document.querySelector(this.game)
-    this.game.insertBefore(this.viewport, this.game.firstChild)
+    this.container = document.querySelector(this.container)
+    this.container.insertBefore(this.viewport, this.container.firstChild)
 
     // Initiate core modules with the current scope
-    this.loop = new loop(this)
+    this.loop = new Loop(this)
     this.intitiate()
   }
 
@@ -99,7 +99,7 @@ class game {
   }
 };
 
-class loop {
+class Loop {
   constructor (scope) {
     return this.loop(scope)
   }
@@ -190,4 +190,4 @@ class loop {
   }
 }
 
-export { game }
+export { Game }

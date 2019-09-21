@@ -1,1 +1,1 @@
-module.exports = require("./app/craters/craters.js")
+module.exports = require('./app/craters/craters.js')
