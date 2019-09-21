@@ -5,3 +5,12 @@
 * sprite
 * loader
 * sound
+#### v0.0.0.3
+* sprite is an entity
+	use case multi purpose use where image drawing is required i.e hub icons
+	`tip` pass a reference to entity pos and angle to keep entity synchronized with the sprite
+	the first argument is the scope,
+* loader has a callback
+	use case starting the game after resource loading process is done
+* ES modules
+	reduces bundle size by including only what you need

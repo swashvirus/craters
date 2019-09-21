@@ -1,26 +1,29 @@
 {
   "name": "craters.js",
-  "version": "1.0.4",
-  "description": "a micro game engine",
-  "main": "./app/game.js",
+  "version": "1.0.5",
+  "description": "A Compact Game Engine that helps you build fast, modern HTML5 Games",
+  "main": "./index.js",
   "scripts": {
-    "test": ""
+    "test": "",
+    "build": "rollup --config && webpack"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/swashvirus/craters.js.git"
   },
   "keywords": [
-	  "node",
-	  "nodejs",
-	  "javascript",
-	  "library",
-	  "game-engine"
+    "node",
+    "nodejs",
+    "javascript",
+    "library",
+    "game-engine"
   ],
   "author": "John Swana",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/swashvirus/craters.js/issues"
   },
-  "homepage": "https://github.com/swashvirus/craters.js#readme"
+  "homepage": "https://github.com/swashvirus/craters.js#readme",
+  "dependencies": {
+  }
 }
