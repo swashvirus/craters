@@ -10,8 +10,11 @@ craters.js is a simple to use micro game engine both lightweight and portable so
 in it, it includes all basics you need to get a game up and running in a few lines of code 
 leaving enough room for the game logic. suitable for [js13kgames](https://js13kgames.com) competition
 
+[Demo sample game](https://swashvirus.github.io/craters.js/examples/sprites-demo/index.html)
+
 #### features ✨
-[Read changelog](CHANGELOG.md)
+- Changelog
+	[Read changelog](CHANGELOG.md)
 - ES modules
 	reduces bundle size
 - Sound.js
