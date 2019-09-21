@@ -11,7 +11,7 @@ in it, it includes all basics you need to get a game up and running in a few lin
 leaving enough room for the game logic. suitable for [js13kgames](https://js13kgames.com) competition
 
 #### features ✨
-[READ CHANGELOG](CHANGELOG.md)
+[Read changelog](CHANGELOG.md)
 - ES modules
 	reduces bundle size
 - Sound.js
