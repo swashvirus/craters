@@ -68,11 +68,11 @@ class Sprite extends Entity {
 
     this.scope = scope
     this.state = {
-      cord: args.pos || {
+      pos: args.pos || {
         x: 0,
         y: 0
       },
-      pos: {
+      crop: {
         x: 0,
         y: 0
       },
@@ -92,11 +92,11 @@ class Sprite extends Entity {
   update () {
     if (this.state.tick <= 0) {
       if (this.orientation === 'vertical') {
-        this.state.pos.y = this.state.frames.shift()
-        this.state.frames.push(this.state.pos.y)
+        this.state.crop.y = this.state.frames.shift()
+        this.state.frames.push(this.state.crop.y)
       } else {
-        this.state.pos.x = this.state.frames.shift()
-        this.state.frames.push(this.state.pos.x)
+        this.state.crop.x = this.state.frames.shift()
+        this.state.frames.push(this.state.crop.x)
       }
 
       this.state.tick = this.state.delay
@@ -109,13 +109,13 @@ class Sprite extends Entity {
     super.render(this)
 
     this.scope.context.save()
-    this.scope.context.translate(this.state.pos.x + (this.state.size.x / 2), this.state.pos.y + (this.state.size.y / 2))
+    this.scope.context.translate(this.state.crop.x + (this.state.size.x / 2), this.state.crop.y + (this.state.size.y / 2))
     this.scope.context.rotate((this.state.angle) * (Math.PI / 180))
-    this.scope.context.translate(-(this.state.pos.x + (this.state.size.x / 2)), -(this.state.pos.y + (this.state.size.y / 2)))
+    this.scope.context.translate(-(this.state.crop.x + (this.state.size.x / 2)), -(this.state.crop.y + (this.state.size.y / 2)))
 
     this.scope.context.drawImage(this.state.image,
-      (this.state.pos.x * this.state.size.x), (this.state.pos.y * this.state.size.y), this.state.size.x, this.state.size.y,
-      this.state.cord.x, this.state.cord.y, this.state.size.x, this.state.size.y)
+      (this.state.crop.x * this.state.size.x), (this.state.crop.y * this.state.size.y), this.state.size.x, this.state.size.y,
+      this.state.pos.x, this.state.pos.y, this.state.size.x, this.state.size.y)
 
     this.scope.context.restore()
   }
