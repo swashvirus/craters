@@ -1,12 +1,7 @@
 class Game {
   constructor (container, width, height, frames, debug) {
     this.container = container || 'body'
-    this.constants = {
-      gravity: {
-        x: 0,
-        y: 100
-      },
-
+    this.state = {
       width: width,
       height: height,
       frames: frames,
@@ -16,10 +11,7 @@ class Game {
       font: '1em Arial'
     }
 
-    this.state = {
-      entities: []
-    }
-
+    this.entities = [];
     // Generate a canvas and store it as our viewport
     var canvas = document.createElement('canvas')
     var context = canvas.getContext('2d')
@@ -34,10 +26,10 @@ class Game {
     var ratio = deviceRatio / backingRatio
 
     // Set the canvas' width then downscale via CSS
-    canvas.width = Math.round(this.constants.width * ratio)
-    canvas.height = Math.round(this.constants.height * ratio)
-    canvas.style.width = this.constants.width + 'px'
-    canvas.style.height = this.constants.height + 'px'
+    canvas.width = Math.round(this.state.width * ratio)
+    canvas.height = Math.round(this.state.height * ratio)
+    canvas.style.width = this.state.width + 'px'
+    canvas.style.height = this.state.height + 'px'
     // Scale the context so we get accurate pixel density
     context.setTransform(ratio, 0, 0, ratio, 0, 0)
 
@@ -53,7 +45,8 @@ class Game {
 
     // Initiate core modules with the current scope
     this.loop = new Loop(this)
-    this.intitiate()
+    this.intitiate();
+    
   }
 
   intitiate () {
@@ -61,53 +54,45 @@ class Game {
   }
 
   update (scope, now) {
-    var state = scope.state || []
-    var entities = state.entities
-    for (var entity = 0; entity < entities.length; entity++) {
+    for (var entity = 0; entity < this.entities.length; entity++) {
       // Fire off each active entities `render` method
-      entities[entity].update()
+      this.entities[entity].update()
     }
   }
 
   render (scope, now) {
     // Setup globals
-    var w = scope.constants.width
-    var h = scope.constants.height
+    var w = scope.state.width
+    var h = scope.state.height
 
     // Clear out the canvas
-    scope.context.font = scope.constants.font
+    scope.context.font = scope.state.font
     scope.context.save()
     scope.context.clearRect(0, 0, w, h)
-    scope.context.fillStyle = scope.constants.bgcolor
+    scope.context.fillStyle = scope.state.bgcolor
     scope.context.fillRect(0, 0, w, h)
     scope.context.fill()
     scope.context.restore()
     // Spit out some text
-    scope.context.fillStyle = scope.constants.color
+    scope.context.fillStyle = scope.state.color
     // If we want to show the FPS, then render it in the top right corner.
-    if (scope.constants.debug) {
+    if (scope.state.debug) {
       scope.context.fillText('fps : ' + scope.loop.fps, w - 100, 50)
     }
-
     // If there are entities, iterate through them and call their `render` methods
-    var state = scope.state || []
-    var entities = state.entities
-    for (var entity = 0; entity < entities.length; entity++) {
+    for (var entity = 0; entity < this.entities.length; entity++) {
       // Fire off each active entities `render` method
-      entities[entity].render()
+      this.entities[entity].render()
     }
   }
 };
 
 class Loop {
   constructor (scope) {
-    return this.loop(scope)
-  }
-
-  loop (scope) {
+  
     var loop = {}
     // Initialize timer variables so we can calculate FPS
-    var fps = scope.constants.frames
+    var fps = scope.state.frames
     var fpsInterval = 1000 / fps
     var before = window.performance.now()
     // Set up an object to contain our alternating FPS calculations

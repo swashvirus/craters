@@ -54,17 +54,14 @@ npm install craters.js
 ##### writing the demo game yourself
 ```javascript
 'use strict';
-import { Game } from 'craters.js'
+import { Game } from './craters/craters.js'
 
 class mygame extends Game {
-    intitiate() {
-        super.intitiate();
-    }
 
     render() {
         super.render(this)
         this.context.font = '2em Arial'
-        this.context.fillText('It\'s working.️', 65, (this.constants.height / 2), (this.constants.width))
+        this.context.fillText('It\'s working.️', 65, (this.state.height / 2), (this.state.width))
     }
 }
 

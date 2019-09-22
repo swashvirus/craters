@@ -8,7 +8,6 @@ class Entity {
     // another object will receive upon colliding
     this.collision = this.collision || 'elastic'
     this.state = {
-
       size: {
         x: 10,
         y: 10

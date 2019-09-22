@@ -14,3 +14,10 @@
 	use case starting the game after resource loading process is done
 * ES modules
 	reduces bundle size by including only what you need
+#### v0.0.0.4
+* constructor
+	all constructors start with a capital letter i.e Game , Entity 
+* name changes
+	game method has a its constants object renamed to state
+	and entities removed from state object , its now accessed by game.entities instead of game.state.entities
+	more simplification and code comments coming soon.
