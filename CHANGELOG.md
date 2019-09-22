@@ -21,3 +21,6 @@
 	game method has a its constants object renamed to state
 	and entities removed from state object , its now accessed by game.entities instead of game.state.entities
 	more simplification and code comments coming soon.
+* sprite tip;
+	it can be used to create an entity quick and fast
+	i.e ladybug extends sprite

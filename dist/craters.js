@@ -176,13 +176,6 @@ class Loop {
 
 class Entity {
   constructor () {
-    // Setup the defaults if no parameters are given
-    // Type represents the collision detector's handling
-    this.type = this.type || 'dynamic';
-
-    // Collision represents the type of collision
-    // another object will receive upon colliding
-    this.collision = this.collision || 'elastic';
     this.state = {
       size: {
         x: 10,
@@ -213,21 +206,10 @@ class Entity {
     for (var entity = 0; entity < this.entities.length; entity++) {
       this.entities[entity].update();
     }
-
-    switch (this.type) {
-      case 'dynamic':
-        this.state.vel.x += this.state.accel.x;
-        this.state.vel.y += this.state.accel.y;
-        this.state.pos.x += this.state.vel.x;
-        this.state.pos.y += this.state.vel.y;
-        break
-      case 'kinematic':
-        this.state.vel.x += this.state.accel.x;
-        this.state.vel.y += this.state.accel.y;
-        this.state.pos.x += this.state.vel.x;
-        this.state.pos.y += this.state.vel.y;
-        break
-    }
+    this.state.vel.x += this.state.accel.x;
+    this.state.vel.y += this.state.accel.y;
+    this.state.pos.x += this.state.vel.x;
+    this.state.pos.y += this.state.vel.y;
   }
 
   render () {
