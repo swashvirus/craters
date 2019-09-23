@@ -1,0 +1,18 @@
+<!DOCTYPE html><html>
+	<script type="text/javascript" src="./../../dist/craters.js"></script>
+	<script type="text/javascript">
+		"use strict";
+		class mygame extends cg.Game 
+		{
+			render () {
+				super.render(this)
+				
+				this.state.bgcolor = "#29434d";
+				this.context.font = '2em Arial'
+				this.context.fillText('It\'s working.️', 65, (this.state.height / 2), (this.state.width))
+			}
+		};
+		
+		window.game = new mygame ('html', window.innerWidth, window.innerHeight, 60, true)
+	</script>
+</html>
