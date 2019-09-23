@@ -2,11 +2,12 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    './build/game': './app/game.js',
-    './dist/craters': './dist/craters'
+    './build/game.min.js': './app/game.js',
+    './dist/craters.min.js': './dist/craters.js',
+    './dist/craters.min.mjs': './dist/craters.mjs'
   },
   output: {
     path: path.resolve(__dirname, './'),
-    filename: '[name].min.js'
+    filename: '[name]'
   }
 }

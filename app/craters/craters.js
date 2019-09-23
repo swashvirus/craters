@@ -16,7 +16,7 @@ Number.prototype.boundary = boundary
 
 class Craters {
   static version () {
-    return '0.0.0.3'
+    return '0.0.0.4'
   }
 }
 

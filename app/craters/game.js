@@ -11,7 +11,7 @@ class Game {
       font: '1em Arial'
     }
 
-    this.entities = [];
+    this.entities = []
     // Generate a canvas and store it as our viewport
     var canvas = document.createElement('canvas')
     var context = canvas.getContext('2d')
@@ -45,8 +45,7 @@ class Game {
 
     // Initiate core modules with the current scope
     this.loop = new Loop(this)
-    this.intitiate();
-    
+    this.intitiate()
   }
 
   intitiate () {
@@ -89,7 +88,6 @@ class Game {
 
 class Loop {
   constructor (scope) {
-  
     var loop = {}
     // Initialize timer variables so we can calculate FPS
     var fps = scope.state.frames

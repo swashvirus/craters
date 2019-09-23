@@ -21,7 +21,7 @@ class Entity {
       angle: 0
     }
 
-    this.entities = [];
+    this.entities = []
   }
 
   update () {
