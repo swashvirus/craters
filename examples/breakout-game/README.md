@@ -1,1 +1,3 @@
-# demo-craters.js-samples sprites demo
+### breakout Game
+* work in progress 
+* the source code includes things not committed yet.
