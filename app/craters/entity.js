@@ -1,5 +1,40 @@
-class Entity {
+class Game {
+  constructor (container, width, height, fps, debug) {
+    this.entities = []
+    this.state = {
+      container: container,
+      size: {
+	      x: 10,
+	      y: 10
+      },
+      
+      bgcolor: 'rgba(0,0,0,0)',
+      color: '#ff0',
+      font: '1em Arial'
+    }
+  }
+
+  update () {
+    for (var entity = 0; entity < this.entities.length; entity++) {
+      // Fire off each active entities `render` method
+      this.entities[entity].update()
+    }
+  }
+  
+  render () {
+	for (var entity = 0; entity < this.entities.length; entity++) {
+    // Fire off each active entities `render` method
+    this.entities[entity].render() }
+  }
+  
+  clearContext (context, size) {
+	  context.clearRect(0, 0, size.x, size.y)
+  }
+}
+
+class Entity extends Game {
   constructor () {
+    super();
     this.state = {
       size: {
         x: 10,
@@ -20,26 +55,15 @@ class Entity {
       radius: 10,
       angle: 0
     }
-
-    this.entities = []
   }
 
   update () {
-    // update the sub entities if there's any
-    // by firing off the update function one by one
-    for (var entity = 0; entity < this.entities.length; entity++) {
-      this.entities[entity].update()
-    }
+    super.update ();
+    
     this.state.vel.x += this.state.accel.x
     this.state.vel.y += this.state.accel.y
     this.state.pos.x += this.state.vel.x
     this.state.pos.y += this.state.vel.y
-  }
-
-  render () {
-    for (var entity = 0; entity < this.entities.length; entity++) {
-      this.entities[entity].render()
-    }
   }
 }
 
@@ -48,29 +72,30 @@ class Sprite extends Entity {
     super()
 
     this.scope = scope
-    this.state = {
-      pos: args.pos || {
+    this.state.pos = args.pos || {
         x: 0,
         y: 0
-      },
-      crop: {
+      }
+      this.state.crop = {
         x: 0,
         y: 0
-      },
-      size: args.size || {
+      }
+      this.state.size = args.size || {
         x: 0,
         y: 0
-      },
-      frames: args.frames || [],
-      angle: args.angle || 0,
-      image: args.image || new Image(),
-      delay: args.delay || 5,
-      tick: args.tick || 0,
-      orientation: args.orientation || 'horizontal'
+      }
+      
+      this.state.frames = args.frames || []
+      this.state.angle = args.angle || 0
+      this.state.image = args.image || new Image()
+      this.state.delay = args.delay || 5
+      this.state.tick = args.tick || 0
+      this.state.orientation = args.orientation || 'horizontal'
     }
-  }
 
   update () {
+  super.update ();
+  
     if (this.state.tick <= 0) {
       if (this.orientation === 'vertical') {
         this.state.crop.y = this.state.frames.shift()
@@ -87,7 +112,7 @@ class Sprite extends Entity {
   }
 
   render () {
-    super.render(this)
+    super.render()
 
     this.scope.context.save()
     this.scope.context.translate(this.state.crop.x + (this.state.size.x / 2), this.state.crop.y + (this.state.size.y / 2))
@@ -102,4 +127,4 @@ class Sprite extends Entity {
   }
 }
 
-export { Entity, Sprite }
+export { Entity, Game, Sprite }
