@@ -3,8 +3,8 @@
 // updating the game state and re-rendering the canvas
 // (using the updated state) at the configured FPS.
 
-import { Game } from './game.js'
-import { Entity, Sprite } from './entity.js'
+import { Canvas, Loop, Collision } from './system.js'
+import { Entity, Game, Sprite } from './entity.js'
 import { Loader } from './loader.js'
 import { Sound } from './sound.js'
 
@@ -16,8 +16,8 @@ Number.prototype.boundary = boundary
 
 class Craters {
   static version () {
-    return '0.0.0.4'
+    return '0.0.0.5'
   }
 }
 
-export { Craters, Loader, Game, Entity, Sprite, Sound }
+export { Craters, Loader, Game, Canvas, Loop, Entity, Sprite, Collision, Sound }
