@@ -2,8 +2,8 @@ import { Game, Entity, Sprite, Loader } from './../../../app/craters/craters.js'
 
 'use strict'
 class Buggame extends Game {
-  intitiate () {
-    super.intitiate()
+  constructor () {
+    super.constructor('#container', window.innerWidth, window.innerHeight, 60, false)
 
     this.score = '0000'
     this.state.color = 'rgba(255,255,255,1)'
@@ -52,4 +52,4 @@ var media = new Loader()
 media.load([
   './src/media/bug.png',
   './src/media/bolt.png'
-], function () { window.game = new Buggame('#container', window.innerWidth, window.innerHeight, 60, false) })
+], function () { window.game = new Buggame() })
