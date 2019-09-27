@@ -3,7 +3,7 @@ module.exports = {
   output: [{
     file: './dist/craters.js',
     format: 'iife',
-    name: 'cg'
+    name: 'Craters'
   },
   {
     file: './dist/craters.mjs',
