@@ -24,3 +24,5 @@
 * sprite tip;
 	it can be used to create an entity quick and fast
 	i.e ladybug extends sprite
+#### v0.0.0.5
+	* separation of the canvas and loop from the game class

@@ -6,37 +6,33 @@
 [craters.js documentation](https://swashvirus.github.io/documentation-craters.js/)
 
 #### Short description
-craters.js is a simple to use micro game engine both lightweight and portable so minimal that it's just 1.5kb in size! zipped and minified.
-in it, it includes all basics you need to get a game up and running in a few lines of code 
-leaving enough room for the game logic. suitable for [js13kgames](https://js13kgames.com) competition
-
-[Buggame sprite sample game](https://swashvirus.github.io/craters.js/examples/sprites-demo/index.html)
-[Panda Breakout sample game](https://swashvirus.github.io/craters.js/examples/breakout-game/index.html)
+A Compact html5 Game Engine that helps you build fast, modern HTML5 Games
+* [Buggame sprite sample game](https://swashvirus.github.io/craters.js/examples/sprites-demo/index.html)
+* [Panda Breakout sample game](https://swashvirus.github.io/craters.js/examples/breakout-game/index.html)
 
 #### features ✨
-- Changelog
+- Changelog outlines more features
 	[Read changelog](CHANGELOG.md)
 - ES modules
-	reduces bundle size
+	craters.mjs reduces bundle size you only import what you need
 - Sound
-	sound system loads sounds methods
+	sound system used for loading and playing sound effects
 	
 - Sprite
-	a sprite system
+	a sprite system it draws and animates images and sprites
 
 - Loader
-	file loading utility
+	file loading utility used for pre-loading image files and caching them so that they can be used by i.e the sprite system
 
 - Entity
-	Entity base class
+	Entity base class for deriving your game entities from it cones with update and render methods as well as the state object with predefined variables namely velocity, acceleration, position and size
 
 - Game
-	Game base class
+	Game base class for deriving your games from it has a state object just like the entity it also has methods update and render.
 
 #### structure
-game is a method which creates an instance of a game world
+game is a method used to create an instance of game world
 the game and entities both have methods update and render
-the games instance can have entities and entities can also have their own entities as long as they inherit the craters.entity class
 
 #### let's make a game 🚀
 note the example game is included in the dist folder alternatively you can build it on your own 
