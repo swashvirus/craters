@@ -12,23 +12,23 @@ A Compact html5 Game Engine that helps you build fast, modern HTML5 Games
 
 #### features ✨
 - Changelog outlines more features
-	[Read changelog](CHANGELOG.md)
+	* [Read changelog](CHANGELOG.md)
 - ES modules
-	craters.mjs reduces bundle size you only import what you need
+	* reduces bundle size you only import what you need
 - Sound
-	sound system used for loading and playing sound effects
+	* a sound system used for loading and playing sound effects
 	
 - Sprite
-	a sprite system it draws and animates images and sprites
+	* a sprite system it draws and animates images and sprites
 
 - Loader
-	file loading utility used for pre-loading image files and caching them so that they can be used by i.e the sprite system
+	* a file loading utility used for pre-loading image files and caching them so that they can be used by i.e the sprite system
 
 - Entity
-	Entity base class for deriving your game entities from it cones with update and render methods as well as the state object with predefined variables namely velocity, acceleration, position and size
+	* a base class for deriving your game entities from it cones with update and render methods as well as the state object with predefined variables namely velocity, acceleration, position and size
 
 - Game
-	Game base class for deriving your games from it has a state object just like the entity it also has methods update and render.
+	* a base class for deriving your games from it has a state object just like the entity it also has methods update and render.
 
 #### structure
 game is a method used to create an instance of game world
