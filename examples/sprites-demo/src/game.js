@@ -1,4 +1,4 @@
-import { Game, Entity, Sprite, Loader } from './../../../app/craters/craters.js'
+import { Game, Entity, Sprite, Loader } from './../../app/craters/craters.js'
 
 'use strict'
 class Buggame extends Game {
