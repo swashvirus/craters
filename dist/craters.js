@@ -4,7 +4,7 @@ var Craters = (function (exports) {
   // Rect collision tests the edges of each rect to
   // test whether the objects are overlapping the other
   class Collision {
-  	static detector (collider, collidee) {
+  	static detect (collider, collidee) {
   	    // Store the collider and collidee edges
   	    var l1 = collider.state.pos.x;
   	    var t1 = collider.state.pos.y;
