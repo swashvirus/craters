@@ -1,6 +1,6 @@
 {
   "name": "craters.js",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A Compact Game Engine that helps you build fast, modern HTML5 Games",
   "main": "./index.js",
   "scripts": {
@@ -16,10 +16,10 @@
   },
 
   "keywords": [
-    "node",
-    "nodejs",
-    "javascript",
-    "library",
+    "html5-game-engine",
+    "game-library",
+    "js13kgames",
+    "html5-game-development",
     "game-engine"
   ],
   "author": "John Swana",

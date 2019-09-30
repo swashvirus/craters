@@ -1,7 +1,6 @@
 const path = require('path')
 
 module.exports = {
-  mode: 'development',
   entry: {
     './build/game.min.js': './app/game.js',
     './dist/craters.min.js': './dist/craters.js',

@@ -22,7 +22,112 @@ class Collision {
 	    
 	    // If the algorithm made it here, it had to collide
 	    return true;
-    }
+    };
+    
+	static solve (collider, collidee) {
+	    // Find the mid points of the collidee and collider
+	    var pMidX = collider.state.size.x * .5 + collider.state.pos.x;
+	    var pMidY = collider.state.size.y * .5 + collider.state.pos.y;
+	    var aMidX = collidee.state.size.x * .5 + collidee.state.pos.x;
+	    var aMidY = collidee.state.size.y * .5 + collidee.state.pos.y;
+	    
+	    // To find the side of entry calculate based on
+	    // the normalized sides
+	    var dx = (aMidX - pMidX) / collidee.state.size.y * .5;
+	    var dy = (aMidY - pMidY) / collidee.state.size.y * .5;;
+	    
+	    // Calculate the absolute change in x and y
+	    var absDX = abs(dx);
+	    var absDY = abs(dy);
+	    
+	    // If the distance between the normalized x and y
+	    // position is less than a small threshold (.1 in this case)
+	    // then this object is approaching from a corner
+	    if (abs(absDX - absDY) < .1) {
+	
+	        // If the collider is approaching from positive X
+	        if (dx < 0) {
+	
+	            // Set the collider x to the right side
+	            collider.state.pos.x = collidee.state.pos.x + collidee.state.size.x;
+	
+	        // If the collider is approaching from negative X
+	        } else {
+	
+	            // Set the collider x to the left side
+	            collider.state.pos.x = collidee.state.pos.x - collider.state.size.x;
+	        }
+	
+	        // If the collider is approaching from positive Y
+	        if (dy < 0) {
+	
+	            // Set the collider y to the bottom
+	            collider.state.pos.y = collidee.state.pos.y + collidee.state.size.y;
+	
+	        // If the collider is approaching from negative Y
+	        } else {
+	
+	            // Set the collider y to the top
+	            collider.state.pos.y = collidee.state.pos.y - collider.state.size.y;
+	        }
+	        
+	        // Randomly select a x/y direction to reflect velocity on
+	        if (Math.random() < .5) {
+	
+	            // Reflect the velocity at a reduced rate
+	            collider.state.vel.x = -collider.state.vel.x * collidee.restitution;
+	
+	            // If the object’s velocity is nearing 0, set it to 0
+	            // STICKY_THRESHOLD is set to .0004
+	            if (abs(collider.state.vel.x) < STICKY_THRESHOLD) {
+	                collider.state.vel.x = 0;
+	            }
+	        } else {
+	
+	            collider.state.vel.y = -collider.state.vel.y * collidee.restitution;
+	            if (abs(collider.state.vel.y) < STICKY_THRESHOLD) {
+	                collider.state.vel.y = 0;
+	            }
+	        }
+	
+	    // If the object is approaching from the sides
+	    } else if (absDX > absDY) {
+	
+	        // If the collider is approaching from positive X
+	        if (dx < 0) {
+	            collider.state.pos.x = collidee.state.pos.x + collidee.state.size.x;
+	
+	        } else {
+	        // If the collider is approaching from negative X
+	            collider.state.pos.x = collidee.state.pos.x - collider.state.size.x;
+	        }
+	        
+	        // Velocity component
+	        collider.state.vel.x = -collider.state.vel.x * collidee.restitution;
+	
+	        if (abs(collider.state.vel.x) < STICKY_THRESHOLD) {
+	            collider.state.vel.x = 0;
+	        }
+	
+	    // If this collision is coming from the top or bottom more
+	    } else {
+	
+	        // If the collider is approaching from positive Y
+	        if (dy < 0) {
+	            collider.state.pos.y = collidee.state.pos.y + collidee.state.size.y;
+	
+	        } else {
+	        // If the collider is approaching from negative Y
+	            collider.state.pos.y = collidee.state.pos.y - collider.state.size.y;
+	        }
+	        
+	        // Velocity component
+	        collider.state.vel.y = -collider.state.vel.y * collidee.restitution;
+	        if (abs(collider.state.vel.y) < STICKY_THRESHOLD) {
+	            collider.state.vel.y = 0;
+	        }
+	    }
+	};
 }
 
 // Game Loop Module
