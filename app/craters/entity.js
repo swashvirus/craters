@@ -13,7 +13,17 @@ class Game {
       font: '1em Arial'
     }
   }
-
+  
+  addObject(obj){
+    // used for adding entities
+    this.entities.push(obj)
+  }
+  
+  removeObject(index){
+   // used to remove entities
+    this.entities.splice(index, 1)
+  }
+  
   update () {
     for (var entity = 0; entity < this.entities.length; entity++) {
       // Fire off each active entities `render` method
