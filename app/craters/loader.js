@@ -46,4 +46,6 @@ class Loader {
   }
 }
 
-export { Loader }
+export {
+  Loader
+}

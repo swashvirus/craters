@@ -2,8 +2,7 @@
 	<script type="text/javascript" src="./../../dist/craters.js"></script>
 	<script type="text/javascript">
 		"use strict";
-		class mygame extends Craters.Game 
-		{
+		class mygame extends Craters.Game {
 			constructor (container, width, height){
 				super ();
 				
@@ -14,15 +13,15 @@
 				this.loop = new Craters.Loop(this, 60)
 			}
 			
-			render () {
-				super.render()
-				this.clearContext(this.context, this.state.size)
-				
-				this.context.font = '2em Arial'
-				this.context.fillText('It\'s working.️', 65, (this.state.size.y / 2), (this.state.size.x))
-			}
-		};
+		    render () {
+		        super.render()
+		        this.clearContext(this.context, this.state.size)
+		        
+		        this.context.font = '2em Arial'
+		        this.context.fillText('It\'s working.️', 65, (this.state.size.y / 2), (this.state.size.x))
+		    }
+		}
 		
-		window.game = new mygame ('html', window.innerWidth, window.innerHeight, 60, true)
+		window.game = new mygame('html', window.innerWidth, window.innerHeight, 60, true)
 	</script>
 </html>

@@ -5,6 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "test": "",
+    "fix": "bash ./clean.sh && standard ./app/craters/* --fix",
     "build": "rollup --config && webpack"
   },
   "repository": {

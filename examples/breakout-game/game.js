@@ -1,6 +1,6 @@
 'use strict';
 // import what we needed for the game 
-import { Game, Sprite, Canvas, Loop, Collision, Loader, Sound } from './../../app/craters/craters.js'
+import { Game, Sprite, Canvas, Loop, Loader, Sound } from './../../app/craters/craters.js'
 var media = new Loader(); // well use this for loading media
 var audio = new Sound();
 // derive our game from craters Game
@@ -16,7 +16,7 @@ class mygame extends Game {
 		this.loop = new Loop(this, 60) // define the frame rate at which the game will be updated and rendered
 		this.ball = (this.entities.push(new ball(this)) - 1); // save the index of the ball
 		this.paddle = (this.entities.push(new paddle(this)) - 1); // save the index of the paddle
-		this.bamboos = this.started this.score = 0; // initial score , bamboos and state we'll set them all to zero
+		this.bamboos = this.started = this.score = 0; // initial score , bamboos and state we'll set them all to zero
 	}
 	// the main game update loop
 	update () {
@@ -128,6 +128,138 @@ class paddle extends Sprite {
 	super.update()
 	this.state.pos = { x: this.scope.entities[this.scope.ball].state.pos.x + 25 - (this.state.size.x / 2), y: (this.scope.state.size.y - this.state.size.y) }
   }
+}
+
+// Rect collision tests the edges of each rect to
+// test whether the objects are overlapping the other
+class Collision {
+	static detect (collider, collidee) {
+	    // Store the collider and collidee edges
+	    var l1 = collider.state.pos.x;
+	    var t1 = collider.state.pos.y;
+	    var r1 = l1 + collider.state.size.x;
+	    var b1 = t1 + collider.state.size.y;
+	    
+	    var l2 = collidee.state.pos.x;
+	    var t2 = collidee.state.pos.y;
+	    var r2 = l2 + collidee.state.size.x;
+	    var b2 = t2 + collidee.state.size.y;
+	    
+	    // If the any of the edges are beyond any of the
+	    // others, then we know that the box cannot be
+	    // colliding
+	    if (b1 < t2 || t1 > b2 || r1 < l2 || l1 > r2) {
+	        return false;
+	    }
+	    
+	    // If the algorithm made it here, it had to collide
+	    return true;
+    };
+    
+	static solve (collider, collidee) {
+	    // Find the mid points of the collidee and collider
+	    var pMidX = collider.state.size.x * .5 + collider.state.pos.x;
+	    var pMidY = collider.state.size.y * .5 + collider.state.pos.y;
+	    var aMidX = collidee.state.size.x * .5 + collidee.state.pos.x;
+	    var aMidY = collidee.state.size.y * .5 + collidee.state.pos.y;
+	    
+	    // To find the side of entry calculate based on
+	    // the normalized sides
+	    var dx = (aMidX - pMidX) / collidee.state.size.y * .5;
+	    var dy = (aMidY - pMidY) / collidee.state.size.y * .5;;
+	    
+	    // Calculate the absolute change in x and y
+	    var absDX = abs(dx);
+	    var absDY = abs(dy);
+	    
+	    // If the distance between the normalized x and y
+	    // position is less than a small threshold (.1 in this case)
+	    // then this object is approaching from a corner
+	    if (abs(absDX - absDY) < .1) {
+	
+	        // If the collider is approaching from positive X
+	        if (dx < 0) {
+	
+	            // Set the collider x to the right side
+	            collider.state.pos.x = collidee.state.pos.x + collidee.state.size.x;
+	
+	        // If the collider is approaching from negative X
+	        } else {
+	
+	            // Set the collider x to the left side
+	            collider.state.pos.x = collidee.state.pos.x - collider.state.size.x;
+	        }
+	
+	        // If the collider is approaching from positive Y
+	        if (dy < 0) {
+	
+	            // Set the collider y to the bottom
+	            collider.state.pos.y = collidee.state.pos.y + collidee.state.size.y;
+	
+	        // If the collider is approaching from negative Y
+	        } else {
+	
+	            // Set the collider y to the top
+	            collider.state.pos.y = collidee.state.pos.y - collider.state.size.y;
+	        }
+	        
+	        // Randomly select a x/y direction to reflect velocity on
+	        if (Math.random() < .5) {
+	
+	            // Reflect the velocity at a reduced rate
+	            collider.state.vel.x = -collider.state.vel.x * collidee.restitution;
+	
+	            // If the object’s velocity is nearing 0, set it to 0
+	            // STICKY_THRESHOLD is set to .0004
+	            if (abs(collider.state.vel.x) < STICKY_THRESHOLD) {
+	                collider.state.vel.x = 0;
+	            }
+	        } else {
+	
+	            collider.state.vel.y = -collider.state.vel.y * collidee.restitution;
+	            if (abs(collider.state.vel.y) < STICKY_THRESHOLD) {
+	                collider.state.vel.y = 0;
+	            }
+	        }
+	
+	    // If the object is approaching from the sides
+	    } else if (absDX > absDY) {
+	
+	        // If the collider is approaching from positive X
+	        if (dx < 0) {
+	            collider.state.pos.x = collidee.state.pos.x + collidee.state.size.x;
+	
+	        } else {
+	        // If the collider is approaching from negative X
+	            collider.state.pos.x = collidee.state.pos.x - collider.state.size.x;
+	        }
+	        
+	        // Velocity component
+	        collider.state.vel.x = -collider.state.vel.x * collidee.restitution;
+	
+	        if (abs(collider.state.vel.x) < STICKY_THRESHOLD) {
+	            collider.state.vel.x = 0;
+	        }
+	
+	    // If this collision is coming from the top or bottom more
+	    } else {
+	
+	        // If the collider is approaching from positive Y
+	        if (dy < 0) {
+	            collider.state.pos.y = collidee.state.pos.y + collidee.state.size.y;
+	
+	        } else {
+	        // If the collider is approaching from negative Y
+	            collider.state.pos.y = collidee.state.pos.y - collider.state.size.y;
+	        }
+	        
+	        // Velocity component
+	        collider.state.vel.y = -collider.state.vel.y * collidee.restitution;
+	        if (abs(collider.state.vel.y) < STICKY_THRESHOLD) {
+	            collider.state.vel.y = 0;
+	        }
+	    }
+	};
 }
 
 // preload all the media and start the game

@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  entry: { './src/game': './src/game.js' },
+  entry: { './game': './game.js' },
   output: {
     path: path.resolve(__dirname, './'),
     filename: '[name].min.js'
