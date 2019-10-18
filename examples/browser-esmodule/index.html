@@ -7,11 +7,12 @@
     <meta name="monetization" content="$coil.xrptipbot.com/opitRVRFTna9zDFUGa1ZjA">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 </head>
-	<body scroll="no" style="margin: 0">
-	    <div id="container"></div>
-	    <script type="module">
-		'use strict';
-		import { Game, Canvas, Loop } from './../../app/craters/craters.js'
+
+<body scroll="no" style="margin: 0">
+    <div id="container"></div>
+    <script type="module">
+        'use strict';
+		import { Game, Canvas, Loop } from './../../dist/craters.mjs'
 		
 		class mygame extends Game {
 			constructor (container, width, height){
@@ -35,5 +36,6 @@
 		
 		window.game = new mygame('#container', window.innerWidth, window.innerHeight, 60, true)
 		</script>
-	</body>
+</body>
+
 </html>

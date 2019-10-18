@@ -1,27 +1,32 @@
-<!DOCTYPE html><html>
-	<script type="text/javascript" src="./../../dist/craters.js"></script>
-	<script type="text/javascript">
-		"use strict";
-		class mygame extends Craters.Game {
-			constructor (container, width, height){
-				super ();
-				
-				this.state.size = {x: width, y: height}
-				this.viewport = new Craters.Canvas(this.state.size.x, this.state.size.y, container);
-				this.viewport.style.background = "#29434d";
-				this.context = this.viewport.getContext('2d')
-				this.loop = new Craters.Loop(this, 60)
-			}
-			
-		    render () {
-		        super.render()
-		        this.clearContext(this.context, this.state.size)
-		        
-		        this.context.font = '2em Arial'
-		        this.context.fillText('It\'s working.️', 65, (this.state.size.y / 2), (this.state.size.x))
-		    }
-		}
-		
-		window.game = new mygame('html', window.innerWidth, window.innerHeight, 60, true)
-	</script>
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" src="./../../dist/craters.js"></script>
+<script type="text/javascript">
+    "use strict";
+    class mygame extends Craters.Game {
+        constructor(container, width, height) {
+            super();
+
+            this.state.size = {
+                x: width,
+                y: height
+            }
+            this.viewport = new Craters.Canvas(this.state.size.x, this.state.size.y, container);
+            this.viewport.style.background = "#29434d";
+            this.context = this.viewport.getContext('2d')
+            this.loop = new Craters.Loop(this, 60)
+        }
+
+        render() {
+            super.render()
+            this.clearContext(this.context, this.state.size)
+
+            this.context.font = '2em Arial'
+            this.context.fillText('It\'s working.️', 65, (this.state.size.y / 2), (this.state.size.x))
+        }
+    }
+
+    window.game = new mygame('html', window.innerWidth, window.innerHeight, 60, true)
+</script>
+
 </html>

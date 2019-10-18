@@ -1,21 +1,24 @@
 {
   "name": "craters.js",
-  "version": "1.0.9",
+  "version": "1.2.0",
   "description": "A Compact Game Engine that helps you build fast, modern HTML5 Games",
   "main": "./index.js",
   "scripts": {
-    "test": "",
-    "fix": "bash ./clean.sh && standard ./app/craters/* --fix",
-    "build": "rollup --config && webpack"
+    "test": "node ./__test__/craters.test.js",
+    "fix": "bash ./.beautify && standard ./craters/*.js --fix #&& standard ./examples/*/*.js --fix",
+    "build": "npm run fix && rollup --config && webpack"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/swashvirus/craters.js.git"
   },
   "standard": {
-    "globals": [ "Audio", "Image", "Event" ]
+    "globals": [
+      "Audio",
+      "Image",
+      "Event"
+    ]
   },
-
   "keywords": [
     "html5-game-engine",
     "game-library",
@@ -29,6 +32,9 @@
     "url": "https://github.com/swashvirus/craters.js/issues"
   },
   "homepage": "https://github.com/swashvirus/craters.js#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "esm": "^3.2.25"
   }
 }
