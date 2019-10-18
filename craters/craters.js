@@ -4,19 +4,19 @@
 // (using the updated state) at the configured FPS.
 
 import {
-  Canvas,
-  Loop
+    Canvas,
+    Loop
 } from './system.js'
 import {
-  Entity,
-  Game,
-  Sprite
+    Entity,
+    Game,
+    Sprite
 } from './entity.js'
 import {
-  Loader
+    Loader
 } from './loader.js'
 import {
-  Sound
+    Sound
 } from './sound.js'
 /*
 const boundary = function numberboundary (min, max) {
@@ -26,18 +26,18 @@ const boundary = function numberboundary (min, max) {
 Number.prototype.boundary = boundary
 */
 class Craters {
-  static version () {
-    return '0.0.0.5'
-  }
+    static version() {
+        return '0.0.0.5'
+    }
 }
 
 export {
-  Craters,
-  Loader,
-  Game,
-  Canvas,
-  Loop,
-  Entity,
-  Sprite,
-  Sound
+    Craters,
+    Loader,
+    Game,
+    Canvas,
+    Loop,
+    Entity,
+    Sprite,
+    Sound
 }

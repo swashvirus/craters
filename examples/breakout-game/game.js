@@ -7,7 +7,7 @@ import {
     Loop,
     Loader,
     Sound
-} from './../../app/craters/craters.js'
+} from 'craters.js'
 var media = new Loader() // well use this for loading media
 var audio = new Sound()
 // derive our game from craters Game

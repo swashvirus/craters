@@ -6,7 +6,7 @@ import {
     Entity,
     Sprite,
     Loader
-} from '../../app/craters/craters.js'
+} from 'craters.js'
 
 class mygame extends Game {
     constructor(container, width, height) {
