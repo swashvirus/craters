@@ -1,0 +1,5 @@
+.ideas
+node_modules
+.beautify
+examples
+__test__
