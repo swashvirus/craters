@@ -36,7 +36,7 @@ class mygame extends Game {
     }
 
     render() {
-        this.clearContext(this.context, this.state.size)
+        this.viewport.clear()
         super.render()
         this.context.fillText('score: ' + this.score, (16), (50))
     }

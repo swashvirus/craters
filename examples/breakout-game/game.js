@@ -6,7 +6,8 @@ import {
     Canvas,
     Loop,
     Loader,
-    Sound
+    Sound,
+    Maths
 } from 'craters.js'
 var media = new Loader() // well use this for loading media
 var audio = new Sound()
@@ -24,12 +25,16 @@ class mygame extends Game {
             y: 0
         } // we'll use this to let the collider have an idea of the position of the game
         this.viewport = new Canvas(this.state.size.x, this.state.size.y, container) // this.viewport is a canvas element used to display our game
-        this.context = this.viewport.getContext('2d') // get the context of the canvas // to be used for the actual drawings
+        this.context = this.viewport.context // get the context of the canvas // to be used for the actual drawings
         this.context.fillStyle = '#fff' // white font
         this.loop = new Loop(this, 60) // define the frame rate at which the game will be updated and rendered
         this.ball = (this.entities.push(new ball(this)) - 1) // save the index of the ball
         this.paddle = (this.entities.push(new paddle(this)) - 1) // save the index of the paddle
         this.bamboos = this.started = this.score = 0 // initial score , bamboos and state we'll set them all to zero
+        window.addEventListener('resize', () => {
+	        this.viewport.resize(this, {x: window.innerWidth, y: window.innerHeight})
+	        this.context.fillStyle = '#fff' // white font // context was reset
+        });
     }
 
     // the main game update loop
@@ -42,12 +47,10 @@ class mygame extends Game {
 
     // the main rendering function of the game
     render() {
-        this.clearContext(this.context, this.state.size) // clear the game context
-        var that = this // assign this to that so we have a reference to the game scope
-
+        this.viewport.clear() // clear the game context
         // listen for clicks and start the game if there's any
-        document.addEventListener('click', function() {
-            that.started++
+        document.addEventListener('click', () => {
+            this.started++
         })
         // else if the game isn't started draw the title image
         if (this.started < 1) {
@@ -106,15 +109,28 @@ class ball extends Sprite {
         // by bouncing back `backwards`
 
         // X-axis collision
-        if ((this.state.pos.x + this.state.size.x > this.scope.state.size.x) || (this.state.pos.x < 0)) {
+        if ((this.state.pos.x + this.state.size.x > this.scope.state.size.x)) {
+            if (this.state.vel.x < 0) return;
             this.state.vel.x *= -1
         }
         // Y-axis collision
-        if ((this.state.pos.y + this.state.size.y > this.scope.state.size.y) || (this.state.pos.y < 0)) {
+        if ((this.state.pos.y + this.state.size.y > this.scope.state.size.y)) {
+            if (this.state.vel.y < 0) return;
+            this.state.vel.y *= -1
+        }
+
+        if ((this.state.pos.x < 0)) {
+            if (this.state.vel.x > 0) return;
+            this.state.vel.x *= -1
+        }
+        // Y-axis collision
+        if ((this.state.pos.y < 0)) {
+            if (this.state.vel.y > 0) return;
             this.state.vel.y *= -1
         }
         // collision with paddle
         if (Collision.detect(this.scope.entities[this.scope.paddle], this)) {
+            if (this.state.vel.y < 0) return;
             this.state.vel.y *= -1
         }
     }
@@ -134,6 +150,9 @@ class bamboo extends Sprite {
         this.state.pos = {
             x: pos.x,
             y: pos.y
+        }
+        for(var i = 0; i < 10; i++){
+	        this.entities.push(new particle(this.scope, {x: this.state.pos.x, y: this.state.pos.y}))
         }
     }
 
@@ -163,8 +182,24 @@ class particle extends Sprite {
             y: 35
         }
         this.state.pos = pos
-        this.state.accel.y = (Math.random()) * 1.25
-        this.state.accel.x = (Math.random() - 0.5) * 1.25
+        this.state.vel.y = (Math.random() - 0.5) * 15
+        this.state.vel.x = (Math.random() - 0.5) * 15
+        
+        this.state.gravity.y = 0.15;
+        this.state.friction = {
+	        x: 0.005,
+	        y: 0.005
+        }
+    }
+    
+    update(){
+	    super.update()
+	    if ((this.state.pos.y + this.state.size.y > this.scope.state.size.y)) {
+		    if (this.state.vel.y < 0) return;
+		    this.state.vel.y *= -1
+	    }
+	    
+	    this.state.pos.y = Maths.boundary((this.state.pos.y), (this.state.size.y), (this.scope.state.size.y - (this.state.size.y)))
     }
 }
 

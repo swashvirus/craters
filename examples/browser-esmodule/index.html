@@ -27,7 +27,7 @@
 			
 		    render () {
 		        super.render()
-		        this.clearContext(this.context, this.state.size)
+		        this.viewport.clear()
 		        
 		        this.context.font = '2em Arial'
 		        this.context.fillText('It\'s working.️', 65, (this.state.size.y / 2), (this.state.size.x))
