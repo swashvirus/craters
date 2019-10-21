@@ -1,8 +1,8 @@
 // Craters.js micro game framework
-// This module contains the basics fundamental starting point calling game loop, which handles
-// updating the game state and re-rendering the canvas
-// (using the updated state) at the configured FPS.
-
+// This module contains the core craters.js framework fundamentals
+// it loads modules and exports them
+import * as Vector from './math/vector.js'
+import * as Maths from './math/math.js'
 import {
     Canvas,
     Loop
@@ -18,16 +18,25 @@ import {
 import {
     Sound
 } from './sound.js'
-/*
-const boundary = function numberboundary (min, max) {
-  return Math.min(Math.max(this, min), max)
+
+if (typeof window === 'undefined' && global) {
+    global.window = {
+        performance: {
+            now: function(start) {
+                if (!start) return Date.now()
+                var end = Date.now(start)
+                return Math.round((end[0] * 1000) + (end[1] / 1000000))
+            }
+        },
+        requestAnimationFrame: function(f) {
+            setImmediate(() => f(this.performance.now()))
+        }
+    }
 }
-// Expose methods
-Number.prototype.boundary = boundary
-*/
+
 class Craters {
     static version() {
-        return '0.0.0.5'
+        return '1.2.0'
     }
 }
 
@@ -39,5 +48,7 @@ export {
     Loop,
     Entity,
     Sprite,
-    Sound
+    Sound,
+    Maths,
+    Vector
 }

@@ -1,6 +1,6 @@
 {
   "name": "craters.js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Compact Game Engine that helps you build fast, modern HTML5 Games",
   "main": "./index.js",
   "scripts": {

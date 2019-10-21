@@ -4,8 +4,16 @@ class Game {
         this.state = {
             container: container,
             size: {
-                x: 10,
-                y: 10
+                x: 512,
+                y: 512
+            },
+            gravity: {
+                x: 0,
+                y: 0
+            },
+            friction: {
+                x: 0,
+                y: 0
             }
         }
     }
@@ -22,13 +30,36 @@ class Game {
 
     update() {
         // Loop through all bodies and update one at a time
-        this.entities.forEach(function(body) {
+        this.entities.forEach((body) => {
             body.update()
             switch (body.type) {
                 case 'dynamic':
-                case 'kinematic':
-                case 'default':
+                    // gravity applies here
+                    body.state.vel.x += body.state.accel.x + (body.state.gravity.x + this.state.gravity.x)
+                    body.state.vel.y += body.state.accel.y + (body.state.gravity.y + this.state.gravity.y)
+                    body.state.pos.x += body.state.vel.x
+                    body.state.pos.y += body.state.vel.y
 
+                    var fx = body.state.friction.x,
+                        nx = body.state.vel.x + fx,
+                        x = body.state.vel.x - fx,
+                        fy = body.state.friction.y,
+                        ny = body.state.vel.y + fy,
+                        y = body.state.vel.y - fy;
+
+                    body.state.vel.x = (
+                        (nx < 0) ? nx :
+                        (x > 0) ? x : 0
+                    );
+
+                    body.state.vel.y = (
+                        (ny < 0) ? ny :
+                        (y > 0) ? y : 0
+                    );
+
+                    break
+                case 'kinematic':
+                    // there's no force of gravity applied onto kinematic bodies
                     body.state.vel.x += body.state.accel.x
                     body.state.vel.y += body.state.accel.y
                     body.state.pos.x += body.state.vel.x
@@ -43,40 +74,34 @@ class Game {
 
     render() {
         // Loop through all bodies and update one at a time
-        this.entities.forEach(function(body) {
+        this.entities.forEach((body) => {
             body.render()
         })
-    }
-
-    clearContext(context, size) {
-        context.clearRect(0, 0, size.x, size.y)
     }
 }
 
 class Entity extends Game {
     constructor() {
         super()
-        this.state = {
-            size: {
-                x: 10,
-                y: 10
-            },
-            pos: {
-                x: 0,
-                y: 0
-            },
-            vel: {
-                x: 0,
-                y: 0
-            },
-            accel: {
-                x: 0,
-                y: 0
-            },
-            radius: 10,
-            angle: 0
+        this.state.size = {
+            x: 10,
+            y: 10
         }
-        this.type = 'kinematic'
+        this.state.pos = {
+            x: 0,
+            y: 0
+        }
+        this.state.vel = {
+            x: 0,
+            y: 0
+        }
+        this.state.accel = {
+            x: 0,
+            y: 0
+        }
+        this.state.radius = 10
+        this.state.angle = 0
+        this.type = 'dynamic'
     }
 }
 

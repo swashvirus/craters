@@ -26,3 +26,8 @@
 	i.e ladybug extends sprite
 #### v0.0.0.5
 	* separation of the canvas and loop from the game class
+#### v1.2.1
+	* I've adopted npm version numbers 👋
+	* canvas and rendering related stuff separated , and bunched into a module named Canvas
+	* this means craters.js runs on node.js environment for the first time 👏
+	I've always wanted this 😋
