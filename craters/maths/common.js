@@ -1,3 +1,23 @@
+const degToRad = function(angle) {
+    return angle * Math.PI / 180;
+};
+
+const radToDeg = function(angle) {
+    return angle * 180 / Math.PI;
+};
+
+const distance = function(x1, y1, x2, y2) {
+    return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+};
+
+const map = function(value, low1, high1, low2, high2) {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+};
+
+const boundary = function(value, min, max) {
+    return Math.min(Math.max(value, min), max)
+}
+
 /**
  * Generic Vector class
  *
@@ -30,7 +50,7 @@
  *
  */
 
-import {radToDeg} from './math';
+// import {radToDeg} from './math';
 
 /**
  * Base Vector constructor
@@ -38,7 +58,7 @@ import {radToDeg} from './math';
  * @param {number} x - x coordinate
  * @param {number} y - y coordinate
  */
-export const Vector = function(x, y) {
+const Vector = function(x, y) {
     this.x = x || 0;
     this.y = y || 0;
 };
@@ -387,8 +407,9 @@ Vector.perp = function(v1, side) {
             return new Vector(-v1.y, v1.x);
     }
 };
+
 Vector.negate = function(v) {
     return new Vector(-v.x, -v.y);
 };
 
-export default vector;
+export {Vector, boundary, degToRad, radToDeg, distance, map}

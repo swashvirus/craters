@@ -20,12 +20,12 @@ class Game {
 
     addObject(obj) {
         // used for adding entities
-        this.entities.push(obj)
+        return this.entities.push(obj)
     }
 
     removeObject(index) {
         // used to remove entities
-        this.entities.splice(index, 1)
+        return this.entities.splice(index, 1)
     }
 
     update() {

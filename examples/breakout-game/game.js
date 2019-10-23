@@ -32,8 +32,11 @@ class mygame extends Game {
         this.paddle = (this.entities.push(new paddle(this)) - 1) // save the index of the paddle
         this.bamboos = this.started = this.score = 0 // initial score , bamboos and state we'll set them all to zero
         window.addEventListener('resize', () => {
-	        this.viewport.resize(this, {x: window.innerWidth, y: window.innerHeight})
-	        this.context.fillStyle = '#fff' // white font // context was reset
+            this.viewport.resize(this, {
+                x: window.innerWidth,
+                y: window.innerHeight
+            })
+            this.context.fillStyle = '#fff' // white font // context was reset
         });
     }
 
@@ -151,8 +154,11 @@ class bamboo extends Sprite {
             x: pos.x,
             y: pos.y
         }
-        for(var i = 0; i < 10; i++){
-	        this.entities.push(new particle(this.scope, {x: this.state.pos.x, y: this.state.pos.y}))
+        for (var i = 0; i < 10; i++) {
+            this.entities.push(new particle(this.scope, {
+                x: this.state.pos.x,
+                y: this.state.pos.y
+            }))
         }
     }
 
@@ -184,22 +190,22 @@ class particle extends Sprite {
         this.state.pos = pos
         this.state.vel.y = (Math.random() - 0.5) * 15
         this.state.vel.x = (Math.random() - 0.5) * 15
-        
+
         this.state.gravity.y = 0.15;
         this.state.friction = {
-	        x: 0.005,
-	        y: 0.005
+            x: 0.005,
+            y: 0.005
         }
     }
-    
-    update(){
-	    super.update()
-	    if ((this.state.pos.y + this.state.size.y > this.scope.state.size.y)) {
-		    if (this.state.vel.y < 0) return;
-		    this.state.vel.y *= -1
-	    }
-	    
-	    this.state.pos.y = Maths.boundary((this.state.pos.y), (this.state.size.y), (this.scope.state.size.y - (this.state.size.y)))
+
+    update() {
+        super.update()
+        if ((this.state.pos.y + this.state.size.y > this.scope.state.size.y)) {
+            if (this.state.vel.y < 0) return;
+            this.state.vel.y *= -1
+        }
+
+        this.state.pos.y = Maths.boundary((this.state.pos.y), (this.state.size.y), (this.scope.state.size.y - (this.state.size.y)))
     }
 }
 

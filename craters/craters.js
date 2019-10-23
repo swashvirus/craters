@@ -1,8 +1,8 @@
 // Craters.js micro game framework
 // This module contains the core craters.js framework fundamentals
 // it loads modules and exports them
-import * as Vector from './math/vector.js'
-import * as Maths from './math/math.js'
+import * as Maths from './maths/common.js'
+
 import {
     Canvas,
     Loop
@@ -36,7 +36,7 @@ if (typeof window === 'undefined' && global) {
 
 class Craters {
     static version() {
-        return '1.2.0'
+        return '1.2.2'
     }
 }
 
@@ -49,6 +49,5 @@ export {
     Entity,
     Sprite,
     Sound,
-    Maths,
-    Vector
+    Maths
 }
