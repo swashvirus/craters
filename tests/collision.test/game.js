@@ -5,7 +5,6 @@ import {
     Entity,
     Maths
 } from '../../index.js'
-import * as SAT from 'sat-js'
 
 // Game
 class mygame extends Game {
@@ -16,7 +15,7 @@ class mygame extends Game {
             x: width,
             y: height
         }
-
+        
         this.loop = new Loop(this, 60)
         this.viewport = new Canvas(this.state.size.x, this.state.size.y, container);
         this.context = this.viewport.context;
@@ -71,17 +70,17 @@ class marble extends Entity {
         if ((this.state.pos.y + this.shape.r > this.scope.state.size.y) || (this.state.pos.y < 0)) {
             this.state.vel.y *= 0
         }
-
+		
         for (var i = 0; i < this.scope.entities.length; i++) {
             if (this.scope.entities[i].id == this.id) continue;
             var response = new SAT.Response();
             var collided = SAT.testCircleCircle(this.shape, this.scope.entities[i].shape, response);
             if (collided) {
-
+                
                 response.overlapV.scale(0.5);
                 this.state.pos.sub(response.overlapV);
                 this.scope.entities[i].state.pos.add(response.overlapV);
-
+                
                 this.state.vel.subtract(response.overlapN)
                 this.scope.entities[i].state.vel.add(response.overlapN)
             }
