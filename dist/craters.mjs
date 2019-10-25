@@ -541,7 +541,7 @@ class Game {
         // Loop through all bodies and update one at a time
         this.entities.forEach((body) => {
             body.state.loop = this.state.loop;
-            body.update();
+
             switch (body.type) {
                 case 'dynamic':
                     // gravity applies here
@@ -566,7 +566,6 @@ class Game {
                         (ny < 0) ? ny :
                         (y > 0) ? y : 0
                     );
-
                     break;
 
                 case 'static':
@@ -580,6 +579,8 @@ class Game {
                 default:
                     // throw new Error('type not valid')
             }
+
+            body.update();
         });
     }
 

@@ -26,28 +26,28 @@ class mygame extends Game {
         })
 
         Box2D.SCALE = 1;
-        this.state.gravity.y = 80;
+        this.state.gravity.y = 100;
         var gravity = new Box2D.Common.Math.b2Vec2(0, this.state.gravity.y);
         this.world = new Box2D.Dynamics.b2World(gravity, true);
 
         // ground
         var bodyDef = new Box2D.Dynamics.b2BodyDef();
         bodyDef.type = Box2D.Dynamics.b2Body.b2_staticBody;
-		
-		// fixture
+
+        // fixture
         var fixDef = new Box2D.Dynamics.b2FixtureDef;
         fixDef.density = 1.0;
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;
-		
-		// shape
+
+        // shape
         fixDef.shape = new Box2D.Collision.Shapes.b2PolygonShape();
         fixDef.shape.SetAsBox(this.state.size.x, 10);
         bodyDef.position = new Box2D.Common.Math.b2Vec2(0, this.state.size.y);
-        
+
         // add ground
         this.world.CreateBody(bodyDef).CreateFixture(fixDef);
-		
+
         // add marbles
         for (var i = 0; i < 25; i++) {
             let id = this.addObject(new marble(this)) - 1
@@ -74,6 +74,7 @@ class marble extends Entity {
         super();
         this.scope = scope
         this.state.pos = new Maths.Vector((this.scope.state.size.x / 2) + ((Math.random() - 0.5) * 50), (this.scope.state.size.x / 2) + ((Math.random() - 0.5) * 50))
+        this.state.radius = (Math.random() * 50) + 10;
 
         this.type = "static";
         var bodyDef = new Box2D.Dynamics.b2BodyDef();
