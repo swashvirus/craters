@@ -11,7 +11,7 @@ A Compact html5 Game Engine that helps you build fast, modern HTML5 Games
 * [Panda Breakout sample game](https://swashvirus.github.io/craters.js/examples/breakout-game/index.html)
 
 #### Features ✨
-- The Changelog outlines more features [Read changelog](changelog.md)
+- The Changelog outlines more features [Read changelog](CHANGELOG.md)
 - ES modules
 	* reduces bundle size you only import what you need
 - Sound
