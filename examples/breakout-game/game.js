@@ -37,7 +37,7 @@ class mygame extends Game {
                 y: window.innerHeight
             })
             this.context.fillStyle = '#fff' // white font // context was reset
-        });
+        })
     }
 
     // the main game update loop
@@ -93,8 +93,8 @@ class ball extends Sprite {
         // assign some constants
         this.scope = scope // scope
         this.state.vel = {
-            x: 8,
-            y: -5
+            x: 337.5,
+            y: -168.75
         } // initiatal velocity
         this.state.size = {
             x: 48,
@@ -113,27 +113,27 @@ class ball extends Sprite {
 
         // X-axis collision
         if ((this.state.pos.x + this.state.size.x > this.scope.state.size.x)) {
-            if (this.state.vel.x < 0) return;
+            if (this.state.vel.x < 0) return
             this.state.vel.x *= -1
         }
         // Y-axis collision
         if ((this.state.pos.y + this.state.size.y > this.scope.state.size.y)) {
-            if (this.state.vel.y < 0) return;
+            if (this.state.vel.y < 0) return
             this.state.vel.y *= -1
         }
 
         if ((this.state.pos.x < 0)) {
-            if (this.state.vel.x > 0) return;
+            if (this.state.vel.x > 0) return
             this.state.vel.x *= -1
         }
         // Y-axis collision
         if ((this.state.pos.y < 0)) {
-            if (this.state.vel.y > 0) return;
+            if (this.state.vel.y > 0) return
             this.state.vel.y *= -1
         }
         // collision with paddle
         if (Collision.detect(this.scope.entities[this.scope.paddle], this)) {
-            if (this.state.vel.y < 0) return;
+            if (this.state.vel.y < 0) return
             this.state.vel.y *= -1
         }
     }
@@ -188,10 +188,10 @@ class particle extends Sprite {
             y: 35
         }
         this.state.pos = pos
-        this.state.vel.y = (Math.random() - 0.5) * 15
-        this.state.vel.x = (Math.random() - 0.5) * 15
+        this.state.vel.y = (Math.random() - 0.5) * 150
+        this.state.vel.x = (Math.random() - 0.5) * 150
 
-        this.state.gravity.y = 0.15;
+        this.state.gravity.y = 0.25
         this.state.friction = {
             x: 0.005,
             y: 0.005
@@ -201,11 +201,11 @@ class particle extends Sprite {
     update() {
         super.update()
         if ((this.state.pos.y + this.state.size.y > this.scope.state.size.y)) {
-            if (this.state.vel.y < 0) return;
+            if (this.state.vel.y < 0) return
             this.state.vel.y *= -1
         }
 
-        this.state.pos.y = Maths.boundary((this.state.pos.y), (this.state.size.y), (this.scope.state.size.y - (this.state.size.y)))
+        // this.state.pos.y = Maths.boundary((this.state.pos.y), (this.state.size.y), (this.scope.state.size.y - (this.state.size.y)))
     }
 }
 

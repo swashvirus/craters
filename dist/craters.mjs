@@ -420,13 +420,14 @@ class Loop {
         var loop = {
             elapsed: 0,
             tframe: (1000 / tframe),
+            nframe: tframe,
             before: window.performance.now()
         };
         // Initialize timer variables so we can calculate tframe
         // Main game rendering loop
         loop.main = function() {
             loop.startLoop = window.requestAnimationFrame(loop.main);
-            loop.fps = Math.round(((1000 / (window.performance.now() - loop.before) * 100) / 100));
+            loop.delta = Math.round(((1000 / (window.performance.now() - loop.before) * 100) / 100));
 
             if (window.performance.now() < loop.before + loop.tframe) return
             loop.before = window.performance.now();
@@ -435,11 +436,13 @@ class Loop {
             loop.stopLoop = () => {
                 window.cancelAnimationFrame(loop.startLoop);
             };
+            // update scope
+            scope.state.loop = loop;
 
             // Update the game state
-            scope.update(loop.elapsed, loop.fps);
+            scope.update(loop.elapsed, loop.delta);
             // Render the next frame
-            scope.render(loop.elapsed, loop.fps);
+            scope.render(loop.elapsed, loop.delta);
             loop.elapsed++;
         };
 
@@ -487,13 +490,22 @@ class Canvas {
             scope.state.size.y = size.y;
         };
 
-        canvas.clear = (w, x, y, z) => {
+        canvas.clear = (v, w, x, y, z) => {
+            v = v || null;
             w = w || 0;
             x = x || 0;
             y = y || canvas.width;
             z = z || canvas.height;
-            canvas.context.clearRect(w, x, y, z);
-        };
+
+            if (v) { // clear with color if true
+                canvas.context.save();
+                canvas.context.fillStyle = v;
+                canvas.context.fillRect(w, x, y, z);
+                canvas.context.fill();
+                canvas.context.restore();
+            } else {
+                canvas.context.clearRect(w, x, y, z);
+            }        };
 
         canvas.camera = (x, y) => {
             canvas.context.setTransform(1, 0, 0, 1, 0, 0); // reset the transform matrix
@@ -504,23 +516,14 @@ class Canvas {
     }
 }
 
+// Game
 class Game {
-    constructor(container, width, height, fps, debug) {
+    constructor() {
         this.entities = [];
         this.state = {
-            container: container,
-            size: {
-                x: 512,
-                y: 512
-            },
-            gravity: {
-                x: 0,
-                y: 0
-            },
-            friction: {
-                x: 0,
-                y: 0
-            }
+            size: new Vector(1024, 512),
+            gravity: new Vector(0, 0),
+            friction: new Vector(0, 0)
         };
     }
 
@@ -534,24 +537,25 @@ class Game {
         return this.entities.splice(index, 1)
     }
 
-    update() {
+    update(elapsed, fps) {
         // Loop through all bodies and update one at a time
         this.entities.forEach((body) => {
+            body.state.loop = this.state.loop;
             body.update();
             switch (body.type) {
                 case 'dynamic':
                     // gravity applies here
                     body.state.vel.x += body.state.accel.x + (body.state.gravity.x + this.state.gravity.x);
                     body.state.vel.y += body.state.accel.y + (body.state.gravity.y + this.state.gravity.y);
-                    body.state.pos.x += body.state.vel.x;
-                    body.state.pos.y += body.state.vel.y;
+                    body.state.pos.x += (body.state.vel.x * (1 / ((body.state.loop.delta + body.state.loop.nframe) / 2)));
+                    body.state.pos.y += (body.state.vel.y * (1 / ((body.state.loop.delta + body.state.loop.nframe) / 2)));
 
-                    var fx = body.state.friction.x,
-                        nx = body.state.vel.x + fx,
-                        x = body.state.vel.x - fx,
-                        fy = body.state.friction.y,
-                        ny = body.state.vel.y + fy,
-                        y = body.state.vel.y - fy;
+                    var fx = body.state.friction.x;
+                    var nx = body.state.vel.x + fx;
+                    var x = body.state.vel.x - fx;
+                    var fy = body.state.friction.y;
+                    var ny = body.state.vel.y + fy;
+                    var y = body.state.vel.y - fy;
 
                     body.state.vel.x = (
                         (nx < 0) ? nx :
@@ -563,9 +567,10 @@ class Game {
                         (y > 0) ? y : 0
                     );
 
-                    break
-                case 'kinematic':
-                    // there's no force of gravity applied onto kinematic bodies
+                    break;
+
+                case 'static':
+                    // there's no force of gravity applied onto static bodies
                     body.state.vel.x += body.state.accel.x;
                     body.state.vel.y += body.state.accel.y;
                     body.state.pos.x += body.state.vel.x;
@@ -586,48 +591,29 @@ class Game {
     }
 }
 
+// Entity
 class Entity extends Game {
     constructor() {
         super();
-        this.state.size = {
-            x: 10,
-            y: 10
-        };
-        this.state.pos = {
-            x: 0,
-            y: 0
-        };
-        this.state.vel = {
-            x: 0,
-            y: 0
-        };
-        this.state.accel = {
-            x: 0,
-            y: 0
-        };
-        this.state.radius = 10;
+        this.state.size = new Vector(20, 20);
+        this.state.pos = new Vector(0, 0);
+        this.state.vel = new Vector(0, 0);
+        this.state.accel = new Vector(0, 0);
+        this.state.radius = 20;
         this.state.angle = 0;
         this.type = 'dynamic';
     }
 }
 
+// Sprite
 class Sprite extends Entity {
     constructor(scope, args) {
         super();
 
         this.scope = scope;
-        this.state.pos = args.pos || {
-            x: 0,
-            y: 0
-        };
-        this.state.crop = {
-            x: 0,
-            y: 0
-        };
-        this.state.size = args.size || {
-            x: 0,
-            y: 0
-        };
+        this.state.pos = args.pos || new Vector(0, 0);
+        this.state.crop = new Vector(0, 0);
+        this.state.size = args.size || new Vector(0, 0);
 
         this.state.frames = args.frames || [];
         this.state.angle = args.angle || 0;

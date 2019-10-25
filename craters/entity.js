@@ -1,20 +1,13 @@
+import * as Maths from './maths/common.js'
+
+// Game
 class Game {
-    constructor(container, width, height, fps, debug) {
+    constructor() {
         this.entities = []
         this.state = {
-            container: container,
-            size: {
-                x: 512,
-                y: 512
-            },
-            gravity: {
-                x: 0,
-                y: 0
-            },
-            friction: {
-                x: 0,
-                y: 0
-            }
+            size: new Maths.Vector(1024, 512),
+            gravity: new Maths.Vector(0, 0),
+            friction: new Maths.Vector(0, 0)
         }
     }
 
@@ -28,38 +21,40 @@ class Game {
         return this.entities.splice(index, 1)
     }
 
-    update() {
+    update(elapsed, fps) {
         // Loop through all bodies and update one at a time
         this.entities.forEach((body) => {
+            body.state.loop = this.state.loop;
             body.update()
             switch (body.type) {
                 case 'dynamic':
                     // gravity applies here
                     body.state.vel.x += body.state.accel.x + (body.state.gravity.x + this.state.gravity.x)
                     body.state.vel.y += body.state.accel.y + (body.state.gravity.y + this.state.gravity.y)
-                    body.state.pos.x += body.state.vel.x
-                    body.state.pos.y += body.state.vel.y
+                    body.state.pos.x += (body.state.vel.x * (1 / ((body.state.loop.delta + body.state.loop.nframe) / 2)))
+                    body.state.pos.y += (body.state.vel.y * (1 / ((body.state.loop.delta + body.state.loop.nframe) / 2)))
 
-                    var fx = body.state.friction.x,
-                        nx = body.state.vel.x + fx,
-                        x = body.state.vel.x - fx,
-                        fy = body.state.friction.y,
-                        ny = body.state.vel.y + fy,
-                        y = body.state.vel.y - fy;
+                    var fx = body.state.friction.x
+                    var nx = body.state.vel.x + fx
+                    var x = body.state.vel.x - fx
+                    var fy = body.state.friction.y
+                    var ny = body.state.vel.y + fy
+                    var y = body.state.vel.y - fy
 
                     body.state.vel.x = (
                         (nx < 0) ? nx :
                         (x > 0) ? x : 0
-                    );
+                    )
 
                     body.state.vel.y = (
                         (ny < 0) ? ny :
                         (y > 0) ? y : 0
-                    );
+                    )
 
-                    break
-                case 'kinematic':
-                    // there's no force of gravity applied onto kinematic bodies
+                    break;
+
+                case 'static':
+                    // there's no force of gravity applied onto static bodies
                     body.state.vel.x += body.state.accel.x
                     body.state.vel.y += body.state.accel.y
                     body.state.pos.x += body.state.vel.x
@@ -80,48 +75,29 @@ class Game {
     }
 }
 
+// Entity
 class Entity extends Game {
     constructor() {
         super()
-        this.state.size = {
-            x: 10,
-            y: 10
-        }
-        this.state.pos = {
-            x: 0,
-            y: 0
-        }
-        this.state.vel = {
-            x: 0,
-            y: 0
-        }
-        this.state.accel = {
-            x: 0,
-            y: 0
-        }
-        this.state.radius = 10
+        this.state.size = new Maths.Vector(20, 20)
+        this.state.pos = new Maths.Vector(0, 0)
+        this.state.vel = new Maths.Vector(0, 0)
+        this.state.accel = new Maths.Vector(0, 0)
+        this.state.radius = 20
         this.state.angle = 0
         this.type = 'dynamic'
     }
 }
 
+// Sprite
 class Sprite extends Entity {
     constructor(scope, args) {
         super()
 
         this.scope = scope
-        this.state.pos = args.pos || {
-            x: 0,
-            y: 0
-        }
-        this.state.crop = {
-            x: 0,
-            y: 0
-        }
-        this.state.size = args.size || {
-            x: 0,
-            y: 0
-        }
+        this.state.pos = args.pos || new Maths.Vector(0, 0)
+        this.state.crop = new Maths.Vector(0, 0)
+        this.state.size = args.size || new Maths.Vector(0, 0)
 
         this.state.frames = args.frames || []
         this.state.angle = args.angle || 0

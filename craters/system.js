@@ -7,13 +7,14 @@ class Loop {
         var loop = {
             elapsed: 0,
             tframe: (1000 / tframe),
+            nframe: tframe,
             before: window.performance.now()
         }
         // Initialize timer variables so we can calculate tframe
         // Main game rendering loop
         loop.main = function() {
             loop.startLoop = window.requestAnimationFrame(loop.main)
-            loop.fps = Math.round(((1000 / (window.performance.now() - loop.before) * 100) / 100))
+            loop.delta = Math.round(((1000 / (window.performance.now() - loop.before) * 100) / 100))
 
             if (window.performance.now() < loop.before + loop.tframe) return
             loop.before = window.performance.now()
@@ -22,11 +23,13 @@ class Loop {
             loop.stopLoop = () => {
                 window.cancelAnimationFrame(loop.startLoop)
             }
+            // update scope
+            scope.state.loop = loop;
 
             // Update the game state
-            scope.update(loop.elapsed, loop.fps)
+            scope.update(loop.elapsed, loop.delta)
             // Render the next frame
-            scope.render(loop.elapsed, loop.fps)
+            scope.render(loop.elapsed, loop.delta)
             loop.elapsed++
         }
 
@@ -74,12 +77,22 @@ class Canvas {
             scope.state.size.y = size.y
         }
 
-        canvas.clear = (w, x, y, z) => {
+        canvas.clear = (v, w, x, y, z) => {
+            v = v || null
             w = w || 0
             x = x || 0
             y = y || canvas.width
             z = z || canvas.height
-            canvas.context.clearRect(w, x, y, z)
+
+            if (v) { // clear with color if true
+                canvas.context.save();
+                canvas.context.fillStyle = v;
+                canvas.context.fillRect(w, x, y, z)
+                canvas.context.fill();
+                canvas.context.restore();
+            } else {
+                canvas.context.clearRect(w, x, y, z)
+            };
         }
 
         canvas.camera = (x, y) => {
