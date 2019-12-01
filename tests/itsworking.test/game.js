@@ -1,22 +1,14 @@
-import {
-    Game,
-    Loop,
-    Canvas
-} from '../../index.js'
+import {Game, Vector} from '../../craters/craters'
 
 // game
 class mygame extends Game {
-    constructor(container, width, height) {
-        super();
-
-        this.state.size = {
-            x: width,
-            y: height
-        }
-
-        this.loop = new Loop(this, 60)
-        this.viewport = new Canvas(this.state.size.x, this.state.size.y, container);
-        this.context = this.viewport.context;
+    constructor() {
+        super({
+	        fps: 60,
+	        container: '#container',
+	        size: new Vector(1000, 500)
+        });
+        
         this.viewport.style.background = "#eee";
         this.viewport.resize(this, {
             x: window.innerWidth,
@@ -25,12 +17,12 @@ class mygame extends Game {
     }
 
     update(elapsed, fps) {
+        super.update()
         // console.log('tick ' + elapsed + ' at:' + fps + ' fps')
     }
 
     render() {
-        this.viewport.clear()
-        super.render()
+        super.render();
 
         this.context.fillStyle = "#fff";
         this.context.font = '2em Arial'
@@ -38,4 +30,4 @@ class mygame extends Game {
     }
 }
 
-let game = new mygame('#container', 1024, 512)
+let game = new mygame();

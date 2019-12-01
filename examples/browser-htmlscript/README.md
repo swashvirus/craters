@@ -1,1 +1,0 @@
-# demo-craters.js-samples sprites demo

@@ -1,5 +1,7 @@
-// modified soundbox.js lib
-class Sound {
+// modified version 
+// soundbox.js library
+
+export class Sound {
     constructor() {
         this.sounds = {} // The loaded sounds and their instances
         this.instances = [] // Sounds that are currently playing
@@ -79,7 +81,3 @@ class Sound {
         }
     }
 };
-
-export {
-    Sound
-}

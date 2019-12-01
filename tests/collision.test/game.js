@@ -1,39 +1,32 @@
-import {
-    Game,
-    Loop,
-    Canvas,
-    Entity,
-    Maths
-} from '../../index.js'
-
+import {Game, Entity, Fixtures, Vector} from '../../craters/craters'
+import {loadImage} from '../../craters/Modules/Assets/Image.js'
 // Game
 class mygame extends Game {
     constructor(container, width, height) {
-        super();
-
-        this.state.size = {
-            x: width,
-            y: height
-        }
+		super({
+	        debug: false,
+	        fps: 60,
+	        container: '#container',
+	        size: new Vector(500, 500),
+	        hash: new Vector(50, 50),
+	        resources: {image: ['./bug.png'], data: ['./map.json']}
+        });
         
-        this.loop = new Loop(this, 60)
-        this.viewport = new Canvas(this.state.size.x, this.state.size.y, container);
-        this.context = this.viewport.context;
         this.viewport.style.background = "#eee";
         this.viewport.resize(this, {
             x: window.innerWidth,
             y: window.innerHeight
-        })
-
+        });
+        
+        // this.state.gravity = new Vector(0, 0.01)
         // add some marbles
-        for (var i = 0; i < 25; i++) {
+        for (var i = 0; i < 10; i++) {
             let id = this.addObject(new marble(this)) - 1
             this.entities[id].id = id;
         }
     }
 
     render() {
-        this.viewport.clear()
         super.render()
     }
 }
@@ -41,66 +34,57 @@ class mygame extends Game {
 // Marble
 class marble extends Entity {
     constructor(scope) {
-        super()
-
+        let params = {
+	        debug: false,
+	        texture: {
+		        style: {
+			        fillStyle: "green",
+			        strokeStyle: "white"
+		        },
+		        /*frames: [0],
+		        tileheight: '196',
+		        tilewidth: '218',
+		        image: sprite.fetch('./bug.png')*/
+	        },
+	        velocity: new Vector(((Math.random() - 0.5) * 300), ((Math.random() - 0.5) * 300))
+        }
+        super(params);
+        
         this.scope = scope;
-        this.type = 'dynamic';
-
-        this.shape = new SAT.Circle(new SAT.Vector((this.scope.state.size.x / 2), (this.scope.state.size.x / 2)), (Math.random() * 50) + 10);
-        this.state.pos = this.shape.pos
-
-        this.state.gravity.y = 1;
-        this.state.friction = {
-            x: 0.0125,
-            y: 0.0125
-        }
-
-        this.state.vel.x = ((Math.random() - 0.5));
-        this.state.vel.y = ((Math.random() - 0.5));
+        this.state.position.x = ((Math.random()) * this.scope.state.size.x)
+        this.state.position.y = ((Math.random()) * this.scope.state.size.y)
+        this.fixture = (Math.random() < 0.5) ? new Fixtures.Circle(this.state.position, 50) : new Fixtures.Polygon(this.state.position, [{x:0, y:0}, {x:0, y:50}, {x:50, y:50}, {x:50, y:0}]);
+        this.fixture.r = this.fixture.r || 0;
     }
-
     update() {
-        super.update();
-
-        // X-axis collision
-        if ((this.state.pos.x + this.shape.r > this.scope.state.size.x) || (this.state.pos.x < 0)) {
-            this.state.vel.x *= 0
-        }
-        // Y-axis collision
-        if ((this.state.pos.y + this.shape.r > this.scope.state.size.y) || (this.state.pos.y < 0)) {
-            this.state.vel.y *= 0
-        }
-		
-        for (var i = 0; i < this.scope.entities.length; i++) {
-            if (this.scope.entities[i].id == this.id) continue;
-            var response = new SAT.Response();
-            var collided = SAT.testCircleCircle(this.shape, this.scope.entities[i].shape, response);
-            if (collided) {
-                
-                response.overlapV.scale(0.5);
-                this.state.pos.sub(response.overlapV);
-                this.scope.entities[i].state.pos.add(response.overlapV);
-                
-                this.state.vel.subtract(response.overlapN)
-                this.scope.entities[i].state.vel.add(response.overlapN)
-            }
-        }
-
-        this.state.pos.y = Maths.boundary((this.state.pos.y), (this.shape.r), (this.scope.state.size.y - (this.shape.r)))
+	    // X-axis collision
+	    if ((this.state.position.x + this.fixture.r > this.scope.state.size.x)) {
+	    if (this.state.velocity.x < 0) return
+		    this.state.velocity.x *= -1
+	    }
+	    // Y-axis collision
+	    if ((this.state.position.y + this.fixture.r > this.scope.state.size.y)) {
+	    if (this.state.velocity.y < 0) return
+		    this.state.velocity.y *= -1
+	    }
+	    
+	    if ((this.state.position.x - this.fixture.r < 0)) {
+	    if (this.state.velocity.x > 0) return
+		    this.state.velocity.x *= -1
+	    }
+	    // Y-axis collision
+	    if ((this.state.position.y - this.fixture.r < 0)) {
+	    if (this.state.velocity.y > 0) return
+		    this.state.velocity.y *= -1
+	    }
     }
-
     render() {
-
-        this.scope.context.beginPath();
-        this.scope.context.arc((this.state.pos.x), (this.state.pos.y), (this.shape.r), 0, Math.PI * 2);
-        this.scope.context.lineWidth = 1;
-
-        this.scope.context.strokeStyle = '#000';
-        this.scope.context.fillStyle = 'green';
-
-        this.scope.context.fill();
-        this.scope.context.stroke();
+		super.render();
+		
     }
 }
 
-let game = new mygame('#container', 1024, 512)
+let sprite = new loadImage()
+let image = sprite.load('./bug.png', () => {
+	let game = new mygame('#container', 1024, 512)
+});

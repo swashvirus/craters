@@ -1,117 +1,90 @@
-import {
-    Game,
-    Loop,
-    Canvas,
-    Entity,
-    Maths
-} from '../../index.js'
+// experimental
+// workinprogress++
+import Box2D from './Box2d.js'
+import {Game, Entity, Fixtures, Vector} from '../../craters/craters'
 
-// game 
-class mygame extends Game {
-    constructor(container, width, height) {
-        super();
+const b2Vec2 = Box2D.Common.Math.b2Vec2,
+    b2BodyDef = Box2D.Dynamics.b2BodyDef,
+    b2Body = Box2D.Dynamics.b2Body,
+    b2FixtureDef = Box2D.Dynamics.b2FixtureDef,
+    b2Fixture = Box2D.Dynamics.b2Fixture,
+    b2World = Box2D.Dynamics.b2World,
+    b2MassData = Box2D.Collision.Shapes.b2MassData,
+    b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape,
+    b2CircleShape = Box2D.Collision.Shapes.b2CircleShape,
+    b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
 
-        this.state.size = {
-            x: width,
-            y: height
-        }
 
-        this.loop = new Loop(this, 60)
-        this.viewport = new Canvas(this.state.size.x, this.state.size.y, container);
-        this.context = this.viewport.context;
-        this.viewport.style.background = "#eee";
-        this.viewport.resize(this, {
-            x: window.innerWidth,
-            y: window.innerHeight
-        })
+class Box2dGame extends Game {
+    constructor(params) {
+        super(params);
+        let gravity = new b2Vec2(
+            this.state.gravity.x,
+            this.state.gravity.y
+        );
+        // create box2d world
+        this.world = new b2World(gravity);
+    }
+    // Todo figure out fixture
+    addObject(obj) {
+        this.world.CreateBody(obj.body)
 
-        Box2D.SCALE = 1;
-        this.state.gravity.y = 100;
-        var gravity = new Box2D.Common.Math.b2Vec2(0, this.state.gravity.y);
-        this.world = new Box2D.Dynamics.b2World(gravity, true);
-
-        // ground
-        var bodyDef = new Box2D.Dynamics.b2BodyDef();
-        bodyDef.type = Box2D.Dynamics.b2Body.b2_staticBody;
-
-        // fixture
-        var fixDef = new Box2D.Dynamics.b2FixtureDef;
-        fixDef.density = 1.0;
-        fixDef.friction = 0.5;
-        fixDef.restitution = 0.2;
-
-        // shape
-        fixDef.shape = new Box2D.Collision.Shapes.b2PolygonShape();
-        fixDef.shape.SetAsBox(this.state.size.x, 10);
-        bodyDef.position = new Box2D.Common.Math.b2Vec2(0, this.state.size.y);
-
-        // add ground
-        this.world.CreateBody(bodyDef).CreateFixture(fixDef);
-
-        // add marbles
-        for (var i = 0; i < 25; i++) {
-            let id = this.addObject(new marble(this)) - 1
-            this.entities[id].id = id;
-        }
+        super.addObject(obj)
     }
 
     update(elapsed, fps) {
-        this.world.Step(1 / fps, 10, 10);
+        this.world.Step((1 / fps), 10, 10);
         this.world.ClearForces();
-
-        super.update()
-    }
-
-    render() {
-        this.viewport.clear()
-        super.render()
+        super.update ()
     }
 }
 
-// body
-class marble extends Entity {
-    constructor(scope) {
-        super();
-        this.scope = scope
-        this.state.pos = new Maths.Vector((this.scope.state.size.x / 2) + ((Math.random() - 0.5) * 50), (this.scope.state.size.x / 2) + ((Math.random() - 0.5) * 50))
-        this.state.radius = (Math.random() * 50) + 10;
-
-        this.type = "static";
+class Box2dEntity extends Entity {
+    constructor(params) {
+        super(params);
         var bodyDef = new Box2D.Dynamics.b2BodyDef();
-
         bodyDef.position = new Box2D.Common.Math.b2Vec2(
-            (this.state.pos.x + this.state.size.x / 2) * Box2D.SCALE,
-            (this.state.pos.y + this.state.size.y / 2) * Box2D.SCALE
+            (this.state.position.x) + 70 / 2,
+            (this.state.position.y) + 70 / 2
         );
-
-        bodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody;
-        this.body = this.scope.world.CreateBody(bodyDef);
+        switch (body.type) {
+            case 'dynamic':
+                bodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody;
+                break;
+            case 'static':
+                bodyDef.type = Box2D.Dynamics.b2Body.b2_staticBody;
+                break;
+        }
+        this.body = bodyDef;
 
         var fixture = new Box2D.Dynamics.b2FixtureDef;
-        fixture.shape = new Box2D.Collision.Shapes.b2CircleShape(
-            this.state.radius
-        );
+        switch (body.fixture.type) {
+            case 'polygon':
+                fixture.shape = new b2PolygonShape;
+                let points = [];
+                for (let i = 0; i < this.fixture.points.length; i++) {
+                    var vec = new Box2D.Common.Math.b2Vec2(this.fixture.points[i].x, this.fixture.points[i].y);
+                    points[i] = vec;
+                }
+                fixture.shape.SetAsArray(points, points.length);
+                break;
+
+            case 'circle':
+                var fixture = new Box2D.Dynamics.b2FixtureDef;
+                fixture.shape = new Box2D.Collision.Shapes.b2CircleShape(
+                    this.fixture.r
+                );
+                break;
+        }
 
         fixture.density = 1.0;
-        fixture.friction = 10.5;
+        fixture.friction = 1.5;
         fixture.restitution = 0.3;
+        this.body.fixture = fixture;
 
-        this.body.CreateFixture(fixture);
-        this.body.ApplyImpulse(new Box2D.Common.Math.b2Vec2(((Math.random() - 0.5) * 100), ((Math.random() - 0.7) * 100)), this.body.GetPosition());
-    }
-
-    render() {
-        this.state.pos = this.body.GetPosition();
-        this.scope.context.beginPath();
-        this.scope.context.arc((this.state.pos.x), (this.state.pos.y), (this.state.radius), 0, Math.PI * 2);
-        this.scope.context.lineWidth = 1;
-
-        this.scope.context.strokeStyle = '#000';
-        this.scope.context.fillStyle = 'green';
-
-        this.scope.context.fill();
-        this.scope.context.stroke();
+        update() {
+            this.state.position = this.body.GetPosition();
+            super.update()
+        }
     }
 }
-
-let game = new mygame('#container', 1024, 512)

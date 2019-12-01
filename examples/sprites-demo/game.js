@@ -1,87 +1,72 @@
-'use strict'
-import {
-    Game,
-    Loop,
-    Canvas,
-    Entity,
-    Sprite,
-    Loader
-} from 'craters.js'
+import {Game, Entity, Fixtures, Vector} from '../../craters/craters'
+import {loadImage} from '../../craters/Modules/Assets/Image.js'
 
 class mygame extends Game {
     constructor(container, width, height) {
-        super()
-
+		super({
+	        fps: 60,
+	        debug: false,
+	        container: '#container',
+	        size: new Vector(500, 500)
+        });
+        
         this.score = '0000'
-        this.state.size = {
-            x: width,
-            y: height
-        }
-        this.viewport = new Canvas(this.state.size.x, this.state.size.y, container)
-        this.context = this.viewport.getContext('2d')
-        this.context.font = '2em Arial'
-        this.context.fillStyle = '#fff'
-        this.loop = new Loop(this, 60)
-
+		this.viewport.resize(this, {
+		    x: window.innerWidth,
+		    y: window.innerHeight
+		})
+		
         for (var i = 0; i < 15; i++) {
-            this.entities.push(new boltbug(this, {
-                pos: {
-                    x: (Math.random() * this.state.size.x),
-                    y: (Math.random() * this.state.size.y)
-                }
-            }))
+            this.addObject(new boltbug(this))
         }
-
-        this.entities.push(new ladybug(this))
+        this.addObject(new ladybug(this))
     }
 
     render() {
-        this.viewport.clear()
         super.render()
+        this.context.font = '2em Arial'
+        this.context.fillStyle = '#fff'
         this.context.fillText('score: ' + this.score, (16), (50))
     }
 }
 
-class ladybug extends Sprite {
-    constructor(scope) {
-        super(scope, {
-            frames: [0, 1, 2]
-        })
-        this.scope = scope
-        this.state.image = media.fetch('./media/bug.png')
-        this.state.size = {
-            x: 196,
-            y: 218
-        }
-        this.state.pos = {
-            x: (scope.state.size.x / 2) - (this.state.size.x / 2),
-            y: (scope.state.size.y - this.state.size.y)
-        }
+class bug extends Entity {
+    constructor(scope, image, width, height) {
+        super({
+	        debug: false,
+	        texture: {
+	        style: {
+	        fillStyle: "red",
+	        strokeStyle: "white"
+	        },
+	        frames: [0,1,2],
+	        tileheight: height,
+	        tilewidth: width,
+	        image: image
+        }});
 
+        this.state.position.x = ((Math.random()) * (scope.state.size.x))
+        this.state.position.y = ((Math.random()) * (scope.state.size.y))
+		this.fixture = new Fixtures.Polygon(this.state.position, [{x:0, y:0}, {x:0, y:height}, {x:width, y:height}, {x:width, y:0}]);
         this.state.angle = (Math.random() * 360)
     }
 }
 
-class boltbug extends Sprite {
+class ladybug extends bug {
     constructor(scope, args) {
-        super(scope, {
-            frames: [0, 1, 2]
-        })
-        this.scope = scope
-        this.state.image = media.fetch('./media/bolt.png')
-        this.state.size = {
-            x: 214,
-            y: 282
-        }
-        this.state.pos = args.pos
-        this.state.angle = (Math.random() * 360)
+        super(scope, media.fetch('./media/bug.png'), 196, 218)
     }
 }
 
+class boltbug extends bug {
+    constructor(scope, args) {
+        super(scope, media.fetch('./media/bolt.png'), 214, 282)
+    }
+}
 // what this does is , it loads all resources
 // and later , it starts the game if all files were loaded
 
-var media = new Loader()
+var media = new loadImage()
 media.load([
     './media/bug.png',
     './media/bolt.png'

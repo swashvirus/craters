@@ -1,149 +1,123 @@
-import * as Maths from './maths/common.js'
+import {Vector} from './Geometry/Geometry.js'
+import Textures from './Texture/Textures.js'
 
-// Game
-class Game {
-    constructor() {
-        this.entities = []
-        this.state = {
-            size: new Maths.Vector(1024, 512),
-            gravity: new Maths.Vector(0, 0),
-            friction: new Maths.Vector(0, 0)
+export default class Entity {
+    constructor(params) {
+		// define shortcuts 
+		let vec = Vector;
+		let num = Number;
+		let obj = Object;
+		let str = String;
+		let arr = Array;
+		
+		params.debug = params.debug || false;
+		params.position = params.position || new vec()
+		params.angle = params.angle || new num();
+		params.maxVelocity = params.maxVelocity || new vec(200, 200)
+		params.velocity = params.velocity || new vec()
+		params.acceleration = params.acceleration || new vec()
+		params.mass = params.mass || new num(1);
+		params.force = params.force || new vec()
+		params.texture = params.texture || new obj({
+			// texture properties
+		})
+		params.texture.style = params.texture.style || new obj({
+			// texture style properties
+		})
+		params.texture.style.fillStyle = params.texture.style.fillStyle || new str("#ddd")
+		params.texture.style.lineWidth = params.texture.style.lineWidth || new num(2)
+		params.texture.style.strokeStyle = params.texture.style.strokeStyle || new str("#333")
+		
+		this.debug = params.debug;
+		this.state = {
+			// an object storing
+			// entity properties
+		}
+		this.state.position = params.position
+		this.state.angle = params.angle
+		
+		params.collision = params.collision || new obj({
+			// collision properties
+		})
+		// default collision properties
+		params.collision.collides = params.collision.collides || true;
+		params.collision.group = params.collision.group || new arr(['everyone']);
+		params.collision.checkAgenist = params.collision.checkAgenist || new arr(['everyone']);
+		params.gravityFactor = params.gravityFactor || new vec(1, 1)
+		
+		// collision properties
+		this.collision = {
+			collides: params.collision.collides,
+			group: params.collision.group,
+			checkAgenist: params.collision.checkAgenist
+		}
+		
+		// body dynamics
+		this.state.force = params.force
+		this.gravityFactor = params.gravityFactor
+		// mass
+		this.state.mass = params.mass
+        // body kinematics
+        this.state.maxVelocity = params.maxVelocity
+        this.state.velocity = params.velocity
+        this.state.acceleration = params.acceleration
+        
+        // body type
+        this.types = {
+	        kinematic: 'kinematic',
+	        dynamic: 'dynamic'
         }
-    }
-
-    addObject(obj) {
-        // used for adding entities
-        return this.entities.push(obj)
-    }
-
-    removeObject(index) {
-        // used to remove entities
-        return this.entities.splice(index, 1)
-    }
-
-    update(elapsed, fps) {
-        // Loop through all bodies and update one at a time
-        this.entities.forEach((body) => {
-            body.state.loop = this.state.loop;
-
-            switch (body.type) {
-                case 'dynamic':
-                    // gravity applies here
-                    body.state.vel.x += body.state.accel.x + (body.state.gravity.x + this.state.gravity.x)
-                    body.state.vel.y += body.state.accel.y + (body.state.gravity.y + this.state.gravity.y)
-                    body.state.pos.x += (body.state.vel.x * (1 / ((body.state.loop.delta + body.state.loop.nframe) / 2)))
-                    body.state.pos.y += (body.state.vel.y * (1 / ((body.state.loop.delta + body.state.loop.nframe) / 2)))
-
-                    var fx = body.state.friction.x
-                    var nx = body.state.vel.x + fx
-                    var x = body.state.vel.x - fx
-                    var fy = body.state.friction.y
-                    var ny = body.state.vel.y + fy
-                    var y = body.state.vel.y - fy
-
-                    body.state.vel.x = (
-                        (nx < 0) ? nx :
-                        (x > 0) ? x : 0
-                    )
-
-                    body.state.vel.y = (
-                        (ny < 0) ? ny :
-                        (y > 0) ? y : 0
-                    )
-                    break;
-
-                case 'static':
-                    // there's no force of gravity applied onto static bodies
-                    body.state.vel.x += body.state.accel.x
-                    body.state.vel.y += body.state.accel.y
-                    body.state.pos.x += body.state.vel.x
-                    body.state.pos.y += body.state.vel.y
-
-                    break
-                default:
-                    // throw new Error('type not valid')
-            }
-
-            body.update()
-        })
-    }
-
-    render() {
-        // Loop through all bodies and update one at a time
-        this.entities.forEach((body) => {
-            body.render()
-        })
-    }
-}
-
-// Entity
-class Entity extends Game {
-    constructor() {
-        super()
-        this.state.size = new Maths.Vector(20, 20)
-        this.state.pos = new Maths.Vector(0, 0)
-        this.state.vel = new Maths.Vector(0, 0)
-        this.state.accel = new Maths.Vector(0, 0)
-        this.state.radius = 20
-        this.state.angle = 0
-        this.type = 'dynamic'
-    }
-}
-
-// Sprite
-class Sprite extends Entity {
-    constructor(scope, args) {
-        super()
-
-        this.scope = scope
-        this.state.pos = args.pos || new Maths.Vector(0, 0)
-        this.state.crop = new Maths.Vector(0, 0)
-        this.state.size = args.size || new Maths.Vector(0, 0)
-
-        this.state.frames = args.frames || []
-        this.state.angle = args.angle || 0
-        this.state.image = args.image || new Image()
-        this.state.delay = args.delay || 5
-        this.state.tick = args.tick || 0
-        this.state.orientation = args.orientation || 'horizontal'
-    }
-
-    update() {
-        super.update()
-
-        if (this.state.tick <= 0) {
-            if (this.orientation === 'vertical') {
-                this.state.crop.y = this.state.frames.shift()
-                this.state.frames.push(this.state.crop.y)
-            } else {
-                this.state.crop.x = this.state.frames.shift()
-                this.state.frames.push(this.state.crop.x)
-            }
-
-            this.state.tick = this.state.delay
+        
+        // set default body type
+        this.type = params.type;
+        
+        // fixture
+        this.fixture = {
+	        // friction
+	        // size
+	        // density
+	        // material
         }
-
-        this.state.tick--
+        
+        // body texture
+        this.texture = new Textures.Sprite(this, params.texture);
     }
-
+    
+    // update own state
+    update () {
+    
+    }
+    
+    // render own state
     render() {
-        super.render()
-
-        this.scope.context.save()
-        this.scope.context.translate(this.state.crop.x + (this.state.size.x / 2), this.state.crop.y + (this.state.size.y / 2))
-        this.scope.context.rotate((this.state.angle) * (Math.PI / 180))
-        this.scope.context.translate(-(this.state.crop.x + (this.state.size.x / 2)), -(this.state.crop.y + (this.state.size.y / 2)))
-
-        this.scope.context.drawImage(this.state.image,
-            (this.state.crop.x * this.state.size.x), (this.state.crop.y * this.state.size.y), this.state.size.x, this.state.size.y,
-            this.state.pos.x, this.state.pos.y, this.state.size.x, this.state.size.y)
-
-        this.scope.context.restore()
+	    let style = this.texture.style;
+	    let context = this.context;
+	    
+	    // if(this.debug) {
+	    // Todo save , centroid.
+	    context.save()
+	    context.beginPath();
+	    context.strokeStyle = "red";
+	    context.lineWidth = "1";
+	    
+	    let bounds = this.fixture.getAABB();
+	    let edges = bounds.edges;
+	    let width = (edges[0].x - edges[2].x) / 2,
+		    height = (edges[1].y - edges[3].y) / 2;
+	    let position = this.state.position;
+	    let x = position.x,
+		    y = position.y;
+	    if(this.fixture.type == "circle")
+	    x = position.x - (width / 2),
+		y = position.y - (height / 2);
+	    
+	    context.rect(x , y , width, height)
+	    context.stroke()
+	    context.restore()
+	    // }
+	    context.fillStyle = style.fillStyle;
+	    context.lineWidth =  style.lineWidth;
+	    context.strokeStyle = style.strokeStyle;
+	    context.lineJoin = 'miter';
     }
-}
-
-export {
-    Entity,
-    Game,
-    Sprite
 }

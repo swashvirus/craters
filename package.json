@@ -35,6 +35,7 @@
   "homepage": "https://github.com/swashvirus/craters.js#readme",
   "dependencies": {},
   "devDependencies": {
+    "@purtuga/esm-webpack-plugin": "^1.1.1",
     "chai": "^4.2.0",
     "esm": "^3.2.25",
     "sat-js": "^0.8.0"

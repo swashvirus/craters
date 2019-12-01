@@ -2,9 +2,10 @@
 // This module contains the game loop, which handles
 // updating the game state and re-rendering the canvas
 // (using the updated state) at the configured tframe.
-class Loop {
+export class Loop {
     constructor(scope, tframe) {
         var loop = {
+            delta: (1000 / tframe),
             elapsed: 0,
             tframe: (1000 / tframe),
             nframe: tframe,
@@ -24,6 +25,7 @@ class Loop {
                 window.cancelAnimationFrame(loop.startLoop)
             }
             // update scope
+            if(scope.state)
             scope.state.loop = loop;
 
             // Update the game state
@@ -39,7 +41,7 @@ class Loop {
     }
 }
 
-class Canvas {
+export class Canvas {
     constructor(width, height, container) {
         container = document.querySelector(container || 'body')
         // Generate a canvas and store it as our viewport
@@ -102,9 +104,4 @@ class Canvas {
 
         return canvas // return the canvas
     }
-}
-
-export {
-    Canvas,
-    Loop
 }
