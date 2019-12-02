@@ -1,0 +1,350 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A Compact Game Engine that helps you build fast, modern HTML5 Games.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="theme-color" content="#333" />
+    <title>Craters.js Game Engine</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Craters.js Game Engine">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="./font/material-icons.css">
+    <link rel="stylesheet" href="material.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+  </head>
+  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+          <h3>Craters.js Game Engine</h3>
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+          <a href="#overview" class="mdl-layout__tab is-active">Overview</a>
+          <a href="#Description" class="mdl-layout__tab">Description</a>
+          <a href="#Structure" class="mdl-layout__tab">Structure</a>
+          <a href="#Install" class="mdl-layout__tab">Install</a>
+          <a href="#Resources" class="mdl-layout__tab">Resources</a>
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
+            <i class="material-icons" role="presentation">add</i>
+            <span class="visuallyhidden">Add</span>
+          </button>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <div class="mdl-layout__tab-panel is-active" id="overview">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <i class="material-icons">timer</i>
+            </header>
+            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>
+                
+                <span id="days"></span>
+                <span id="hours"></span>
+                <span id="minutes"></span>
+                <span id="seconds"></span>
+                
+                </h4>
+                Js13k Game Jam Countdown <span id="years"></span>
+                Perfect Game jam to show off your creations. less than 13kb optional zipped and minified
+              </div>
+              <div class="mdl-card__actions">
+                <a href="http://js13kGames.com" class="mdl-button">Learn more</a>
+              </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn1">
+              <li class="mdl-menu__item">Share</li>
+              <li class="mdl-menu__item" disabled>modify</li>
+              <li class="mdl-menu__item">learn more</li>
+            </ul>
+          </section>
+		  <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text">
+                <h4>Short description</h4>
+	                A Compact Game Engine that helps you build fast, modern HTML5 Games
+              </div>
+              <div class="mdl-card__actions">
+                <a href="#Install" class="mdl-button">Learn more</a>
+              </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn4">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn4">
+              <li class="mdl-menu__item">Share</li>
+              <li class="mdl-menu__item" disabled>modify</li>
+              <li class="mdl-menu__item">learn more</li>
+            </ul>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text">
+                <h4>Structure</h4>
+	                game is a method used to create an instance of game world
+	                the game and entities both have methods update and render
+              </div>
+              <div class="mdl-card__actions">
+                <a href="#Install" class="mdl-button">Learn more</a>
+              </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn5">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn5">
+              <li class="mdl-menu__item">Share</li>
+              <li class="mdl-menu__item" disabled>modify</li>
+              <li class="mdl-menu__item">learn more</li>
+            </ul>
+          </section>
+          <section class="section--footer mdl-color--white mdl-grid">
+            <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+              <div class="section__circle-container__circle mdl-color--accent section__circle--big"></div>
+            </div>
+            <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+              <h5>watchmyback</h5>
+              A game I made for js13k Game jam using Craters.js Game Engine
+            </div>
+            <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+              <div class="section__circle-container__circle mdl-color--accent section__circle--big"></div>
+            </div>
+            <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+              <h5>Firedrone</h5>
+              A game I made for js13k Game jam using Craters.js Game Engine
+            </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel" id="Description">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Description</h4>
+              craters.js is a simple to use micro game engine
+              <ul class="toc">
+                <h4>Contents</h4>
+                <a href="#lorem1">Description</a>
+                
+              </ul>
+
+              <h5 id="lorem1">Getting started</h5>
+              
+	          it includes all basics you need to get a game up and running in a few lines of code 
+              leaving enough room for the game logic. suitable for js13kgames competition
+              <ul>
+                <li>lightweight and portable so minimal that it's just 1.5kb in size! zipped and minified.</li>
+                <li>Easy to use Simply Extend existing methods.</li>
+                <li>Portable to nodejs with a few hacks.</li>
+              </ul>
+
+              <p>
+                what's not to like about it
+              </p>
+              
+            </div>
+          </section>
+        </div>
+		<div class="mdl-layout__tab-panel" id="Structure">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Structure</h4>
+              Ready let's Get started
+              <ul class="toc">
+                <h4>Contents</h4>
+                <a href="#lorem1">Game</a>
+                <a href="#lorem2">Entity</a>
+                <a href="#lorem3">let's make a game</a>
+              </ul>
+
+              <h5 id="lorem1">Game method</h5>
+              game is a method which creates an instance of a game world
+              <ul>
+                <li>the game and entities both have methods update and render.</li>
+                <li>the games instance can have entities and entities can also have their own entities.</li>
+                <li>Entities inherit the craters.entity class.</li>
+              </ul>
+
+              <h5 id="lorem2">Entity method</h5>
+              <p>
+                Entities inherit the craters.entity class
+              </p>
+              
+              <h5 id="lorem3">let's make a game</h5>
+			  <p>
+				  <script src="https://gist.github.com/swashvirus/ed209cda9423822ff77f815ba2c003ed.js"></script>
+			  </p>
+            </div>
+          </section>
+        </div>
+		<div class="mdl-layout__tab-panel" id="Install">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Install</h4>
+              Ready let's go!
+              <ul class="toc">
+                <h4>Contents</h4>
+                <a href="#lorem1">Github Repository</a>
+                <a href="#lorem2">Node module</a>
+              </ul>
+
+              <h5 id="lorem1">Setup craters.js</h5>
+              Once you've chosen your preferred method of installation craters.js is found in the dist folder
+              <ul>
+                <li>git clone https://github.com/swashvirus/craters.js.git</li>
+                <li>Node module craters.js</li>
+              </ul>
+
+              <p>
+              happy coding
+              </p>
+              
+            </div>
+          </section>
+        </div>
+		<div class="mdl-layout__tab-panel" id="Resources">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Resources</h4>
+              Resources contains references and other helpful information
+              <ul class="toc">
+                <h4>Contents</h4>
+                <a href="#lorem1">Packaging</a>
+              </ul>
+
+              <h5 id="lorem1">packaging your game</h5>
+              Once done creating the game to clean up things you can use webpack to minify the game into a single bundle alternatives 
+              <ul>
+                <li>Parcel</li>
+                <li>Uglify</li>
+                <li>Webpack teaser</li>
+              </ul>
+
+              <p>
+	              You mention it
+              </p>
+              
+            </div>
+          </section>
+        </div>
+        
+        <a href="https://github.com/swashvirus/craters.js" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Contribute</a>
+        
+        <footer class="mdl-mega-footer">
+          <div class="mdl-mega-footer--middle-section">
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">Description</h1>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a href="#">Short Description</a></li>
+              </ul>
+            </div>
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">Structure</h1>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a href="#">Game</a></li>
+                <li><a href="#">Entity</a></li>
+                <li><a href="#">Class</a></li>
+              </ul>
+            </div>
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">Install</h1>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a href="#">Node module</a></li>
+                <li><a href="#">Github</a></li>
+              </ul>
+            </div>
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">Resources</h1>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a href="#">Plugins</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">About craters.js</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mdl-mega-footer--bottom-section">
+            <div class="mdl-logo">
+              More Information
+            </div>
+            <ul class="mdl-mega-footer--link-list">
+              <li><a href="http://github.com/swashvirus/craters.js">Github</a></li>
+              <li><a href="http://twitter.com/swashjunior/">Twitter</a></li>
+              <li><a href="http://github.com/swashvirus/">John Swana</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script src="material.js"></script>
+    <script src="countdown.js"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117282982-3"></script>
+	<script>
+	/*** Google analytics ***/
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-117282982-3');
+	</script>
+  </body>
+</html>
