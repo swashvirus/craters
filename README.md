@@ -39,7 +39,7 @@ A Compact html5 Game Engine that helps you build fast, modern HTML5 Games
 - Sound module
 	* Creates instances of audio files a fork of Soundbox.js
 
-### Craters.js Installation
+### Installation
 
 - Clone git repository
 ```bash 
