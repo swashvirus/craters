@@ -11,7 +11,7 @@ import Fixtures from './Fixture/Fixtures.js'
 
 class Craters {
     static version() {
-        return '1.2.2'
+        return '1.3.0'
     }
 }
 
