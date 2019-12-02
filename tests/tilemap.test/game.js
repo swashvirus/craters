@@ -5,7 +5,7 @@ class mygame extends Game {
     constructor(container, width, height) {
 		super({
 	        fps: 60,
-	        debug: true,
+	        debug: false,
 	        container: '#container',
 	        size: new Vector(500, 500),
 	        resources: {image:['./tilemap.png'], data: ['./map.json']}
@@ -85,7 +85,7 @@ class mygame extends Game {
 class marble extends Entity {
     constructor(scope) {
         super({
-        debug: true,
+        debug: false,
         texture: {
         style: {
         fillStyle: "green",

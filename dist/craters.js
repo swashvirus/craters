@@ -1504,8 +1504,8 @@ class Entity_Entity {
 	    let style = this.texture.style;
 	    let context = this.context;
 	    
-	    // if(this.debug) {
-	    // Todo save , centroid.
+	    if(this.debug) {
+	    // Todo more tools , centroid.
 	    context.save()
 	    context.beginPath();
 	    context.strokeStyle = "red";
@@ -1525,7 +1525,7 @@ class Entity_Entity {
 	    context.rect(x , y , width, height)
 	    context.stroke()
 	    context.restore()
-	    // }
+	    }
 	    context.fillStyle = style.fillStyle;
 	    context.lineWidth =  style.lineWidth;
 	    context.strokeStyle = style.strokeStyle;

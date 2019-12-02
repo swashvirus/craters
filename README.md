@@ -10,6 +10,7 @@ A Compact html5 Game Engine that helps you build fast, modern HTML5 Games
 * [Buggame sprite sample game](https://swashvirus.github.io/craters.js/examples/sprites-demo/index.html)
 * [Panda Breakout sample game](https://swashvirus.github.io/craters.js/examples/breakout-game/index.html)
 * [Tilemap sample game](https://swashvirus.github.io/craters.js/tests/tilemap.test/index.html)
+
 #### Features ✨
 #### Rigid Body Physics.
 
@@ -39,13 +40,12 @@ A Compact html5 Game Engine that helps you build fast, modern HTML5 Games
 	* Creates instances of audio files a fork of Soundbox.js
 
 ### Craters.js Installation
-#### Clone git repository
 
+- Clone git repository
 ```bash 
 git clone https://github.com/swashvirus/craters.js.git
 ```
-#### Npm package installation
-
+- Npm package
 ```bash
 npm install craters.js
 ```
