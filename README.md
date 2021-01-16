@@ -2,14 +2,14 @@
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/craters.js)
 ![es modules](https://img.shields.io/badge/es-modules-green)
 
-![craters.js logo](https://swashvirus.github.io/craters.js/craters.gif)
+![craters.js logo](craters.gif)
 [craters.js documentation](https://swashvirus.github.io/craters.js/docs/index.html)
 
 #### Short description
 A Compact html5 Game Engine that helps you build fast, modern HTML5 Games
-* [Buggame sprite sample game](https://swashvirus.github.io/craters.js/examples/sprites-demo/index.html)
-* [Panda Breakout sample game](https://swashvirus.github.io/craters.js/examples/breakout-game/index.html)
-* [Tilemap sample game](https://swashvirus.github.io/craters.js/tests/tilemap.test/index.html)
+* [Buggame sprite sample game](https://00x0000000000.github.io/craters.js/examples/sprites-demo/index.html)
+* [Panda Breakout sample game](https://00x0000000000.github.io/craters.js/examples/breakout-game/index.html)
+* [Tilemap sample game](https://00x0000000000.github.io/craters.js/tests/tilemap.test/index.html)
 
 #### Features ✨
 #### Rigid Body Physics.
@@ -43,7 +43,7 @@ A Compact html5 Game Engine that helps you build fast, modern HTML5 Games
 
 - Clone git repository
 ```bash 
-git clone https://github.com/swashvirus/craters.js.git
+git clone https://github.com/00x0000000000/craters.git
 ```
 - Npm package
 ```bash
