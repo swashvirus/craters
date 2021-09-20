@@ -1,7 +1,7 @@
 {
   "name": "test-experiment",
   "version": "1.0.0",
-  "description": "craters.js test experiment.",
+  "description": "craters test experiment.",
   "main": "game.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "craters.js": "^1.2.0"
+    "craters": "^1.2.0"
   }
 }

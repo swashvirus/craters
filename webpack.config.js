@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = [{
         mode: 'production',
         entry: {
-            './dist/craters.min.js': './craters/craters.js'
+            './dist/craters.min.js': './src/craters'
         },
 
         output: {
@@ -15,7 +15,7 @@ module.exports = [{
     {
         mode: 'production',
         entry: {
-            './dist/craters.js': './craters/craters.js'
+            './dist/craters': './src/craters'
         },
         optimization: {
             minimize: false
@@ -29,7 +29,7 @@ module.exports = [{
     {
         mode: "development",
         entry: {
-            './dist/craters.dev': './craters/craters.js'
+            './dist/craters.dev': './src/craters'
         },
         optimization: {
             minimize: false

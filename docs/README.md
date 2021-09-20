@@ -1,1 +1,1 @@
-# documentation-craters.js
+# documentation-craters

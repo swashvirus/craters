@@ -2698,7 +2698,7 @@ class Game_Game {
 		})
 	}
 }
-// CONCATENATED MODULE: ./craters/craters.js
+// CONCATENATED MODULE: ./craters/craters
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Craters", function() { return Craters; });
 /* concated harmony reexport Game */__webpack_require__.d(__webpack_exports__, "Game", function() { return Game_Game; });
 /* concated harmony reexport Entity */__webpack_require__.d(__webpack_exports__, "Entity", function() { return Entity_Entity; });
@@ -2706,7 +2706,7 @@ class Game_Game {
 /* concated harmony reexport Vector */__webpack_require__.d(__webpack_exports__, "Vector", function() { return Vector; });
 /* concated harmony reexport Maths */__webpack_require__.d(__webpack_exports__, "Maths", function() { return Common; });
 // Craters.js micro game framework
-// This module contains the core craters.js framework fundamentals
+// This module contains the core craters framework fundamentals
 // it loads modules and exports them
 
 

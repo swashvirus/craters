@@ -1,8 +1,6 @@
 .ideas
 node_modules
-.beautify
 examples
-__test__
 rollup.config.js
 webpack.config.js
 craters.gif

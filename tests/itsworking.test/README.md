@@ -1,1 +1,1 @@
-# craters.js test experiment.
+# craters test experiment.
