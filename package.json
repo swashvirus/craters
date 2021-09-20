@@ -1,42 +1,33 @@
 {
-  "name": "craters.js",
+  "name": "craters",
   "version": "1.3.1",
   "description": "A Compact Game Engine that helps you build fast, modern HTML5 Games",
-  "main": "./index.js",
+  "main": "./src/craters.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "lib": "lib",
+    "test": "tests"
+  },
   "scripts": {
-    "test": "node ./__test__/craters.test.js",
-    "fix": "bash ./.beautify",
-    "build": "npm run fix && rollup --config && webpack",
-    "std-test": "standard ./craters/*.js --fix && standard ./examples/*/*.js --fix"
+    "build": "rollup --config; webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/swashvirus/craters.js.git"
-  },
-  "standard": {
-    "globals": [
-      "Audio",
-      "Image",
-      "Event"
-    ]
+    "url": "git+https://github.com/swashvirus/craters.git"
   },
   "keywords": [
-    "html5-game-engine",
-    "game-library",
-    "js13kgames",
-    "html5-game-development",
-    "game-engine"
+  "html5-game-engine",
+  "game-library",
+  "js13kgames",
+  "html5-game-development",
+  "game-engine"
   ],
-  "author": "John Swana",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/swashvirus/craters.js/issues"
+    "url": "https://github.com/swashvirus/craters/issues"
   },
-  "homepage": "https://github.com/swashvirus/craters.js#readme",
-  "dependencies": {},
-  "devDependencies": {
-    "@purtuga/esm-webpack-plugin": "^1.1.1",
-    "chai": "^4.2.0",
-    "esm": "^3.2.25"
-  }
+  "homepage": "https://github.com/swashvirus/craters#readme"
 }

@@ -1,5 +1,5 @@
 // Craters.js micro game framework
-// This module contains the core craters.js framework fundamentals
+// This module contains the core craters framework fundamentals
 // it loads modules and exports them
 import './Polyfill.js'
 
