@@ -22,21 +22,21 @@ module.exports = [{
         },
         output: {
             path: path.resolve(__dirname, './'),
-            filename: '[name]'
+            filename: '[name].js'
         }
     },
 
     {
         mode: "development",
         entry: {
-            './dist/craters.dev': './src/craters'
+            './dist/craters': './src/craters'
         },
         optimization: {
             minimize: false
         },
         output: {
             path: path.resolve(__dirname, './'),
-            filename: '[name].js'
+            filename: '[name].dev.js'
         }
     }
 ];
