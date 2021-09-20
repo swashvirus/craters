@@ -1999,12 +1999,4 @@ class Game {
 	}
 }
 
-// Craters.js micro game framework
-
-class Craters {
-    static version() {
-        return '1.3.0'
-    }
-}
-
-export { Craters, Entity, Fixtures, Game, Maths, Vector };
+export { Entity, Fixtures, Game, Maths, Vector };
