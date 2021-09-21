@@ -2,7 +2,7 @@
   "name": "craters",
   "version": "1.3.1",
   "description": "A Compact Game Engine that helps you build fast, modern HTML5 Games",
-  "main": "./src/craters.js",
+  "main": "./src/Craters",
   "directories": {
     "doc": "docs",
     "example": "examples",
@@ -10,7 +10,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "rollup --config; webpack",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

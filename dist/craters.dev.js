@@ -42,6 +42,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/Craters":
+/*!************************!*\
+  !*** ./src/Craters ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Craters\": () => (/* binding */ Craters),\n/* harmony export */   \"Game\": () => (/* reexport safe */ _Game_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]),\n/* harmony export */   \"Entity\": () => (/* reexport safe */ _Entity_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]),\n/* harmony export */   \"Fixtures\": () => (/* reexport safe */ _Fixture_Fixtures_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"]),\n/* harmony export */   \"Vector\": () => (/* reexport safe */ _Geometry_Geometry_js__WEBPACK_IMPORTED_MODULE_3__.Vector),\n/* harmony export */   \"Maths\": () => (/* reexport safe */ _Geometry_Geometry_js__WEBPACK_IMPORTED_MODULE_3__.Maths)\n/* harmony export */ });\n/* harmony import */ var _Polyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Polyfill.js */ \"./src/Polyfill.js\");\n/* harmony import */ var _Polyfill_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Polyfill_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Entity_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Entity.js */ \"./src/Entity.js\");\n/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Game.js */ \"./src/Game.js\");\n/* harmony import */ var _Geometry_Geometry_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Geometry/Geometry.js */ \"./src/Geometry/Geometry.js\");\n/* harmony import */ var _Fixture_Fixtures_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Fixture/Fixtures.js */ \"./src/Fixture/Fixtures.js\");\n// Craters micro game framework\n// This module contains the core craters framework fundamentals\n// it loads modules and exports them\n\n\n\n\n\n\n\n\nclass Craters {\n    static version() {\n        return '1.3.0'\n    }\n}\n\n\n\n//# sourceURL=webpack://craters/./src/Craters?");
+
+/***/ }),
+
 /***/ "./src/Entity.js":
 /*!***********************!*\
   !*** ./src/Entity.js ***!
@@ -226,17 +237,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Sprite_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sprite.js */ \"./src/Texture/Sprite.js\");\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({Sprite: _Sprite_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]});\n\n//# sourceURL=webpack://craters/./src/Texture/Textures.js?");
 
-/***/ }),
-
-/***/ "./src/craters.js":
-/*!************************!*\
-  !*** ./src/craters.js ***!
-  \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Craters\": () => (/* binding */ Craters),\n/* harmony export */   \"Game\": () => (/* reexport safe */ _Game_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]),\n/* harmony export */   \"Entity\": () => (/* reexport safe */ _Entity_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]),\n/* harmony export */   \"Fixtures\": () => (/* reexport safe */ _Fixture_Fixtures_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"]),\n/* harmony export */   \"Vector\": () => (/* reexport safe */ _Geometry_Geometry_js__WEBPACK_IMPORTED_MODULE_3__.Vector),\n/* harmony export */   \"Maths\": () => (/* reexport safe */ _Geometry_Geometry_js__WEBPACK_IMPORTED_MODULE_3__.Maths)\n/* harmony export */ });\n/* harmony import */ var _Polyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Polyfill.js */ \"./src/Polyfill.js\");\n/* harmony import */ var _Polyfill_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Polyfill_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Entity_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Entity.js */ \"./src/Entity.js\");\n/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Game.js */ \"./src/Game.js\");\n/* harmony import */ var _Geometry_Geometry_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Geometry/Geometry.js */ \"./src/Geometry/Geometry.js\");\n/* harmony import */ var _Fixture_Fixtures_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Fixture/Fixtures.js */ \"./src/Fixture/Fixtures.js\");\n// Craters.js micro game framework\n// This module contains the core craters framework fundamentals\n// it loads modules and exports them\n\n\n\n\n\n\n\n\nclass Craters {\n    static version() {\n        return '1.3.0'\n    }\n}\n\n\n\n//# sourceURL=webpack://craters/./src/craters.js?");
-
 /***/ })
 
 /******/ 	});
@@ -323,7 +323,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/craters.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/Craters");
 /******/ 	
 /******/ })()
 ;

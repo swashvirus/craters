@@ -1,126 +1,16 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports) {
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
 
-var g;
+/***/ 204:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global, setImmediate) {// for nodejs environment
+// for nodejs environment
 // the script creates an equivalent of 
 // requestAnimationFrame function
 
 var cg = new Object();
-if (typeof window === 'undefined' && global) {
-    global.window = {
+if (typeof window === 'undefined' && __webpack_require__.g) {
+    __webpack_require__.g.window = {
         performance: {
             now: function(start) {
                 if (!start) return Date.now()
@@ -136,472 +26,59 @@ if (typeof window === 'undefined' && global) {
 
 // assingn cg to window object
 window['cg'] = cg;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0), __webpack_require__(2).setImmediate))
 
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ })
 
-/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
-            (typeof self !== "undefined" && self) ||
-            window;
-var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(scope, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(3);
-// On some exotic environments, it's not clear which object `setimmediate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof global !== "undefined" && global.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof global !== "undefined" && global.clearImmediate) ||
-                         (this && this.clearImmediate);
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
-    "use strict";
-
-    if (global.setImmediate) {
-        return;
-    }
-
-    var nextHandle = 1; // Spec says greater than zero
-    var tasksByHandle = {};
-    var currentlyRunningATask = false;
-    var doc = global.document;
-    var registerImmediate;
-
-    function setImmediate(callback) {
-      // Callback can either be a function or a string
-      if (typeof callback !== "function") {
-        callback = new Function("" + callback);
-      }
-      // Copy function arguments
-      var args = new Array(arguments.length - 1);
-      for (var i = 0; i < args.length; i++) {
-          args[i] = arguments[i + 1];
-      }
-      // Store and register the task
-      var task = { callback: callback, args: args };
-      tasksByHandle[nextHandle] = task;
-      registerImmediate(nextHandle);
-      return nextHandle++;
-    }
-
-    function clearImmediate(handle) {
-        delete tasksByHandle[handle];
-    }
-
-    function run(task) {
-        var callback = task.callback;
-        var args = task.args;
-        switch (args.length) {
-        case 0:
-            callback();
-            break;
-        case 1:
-            callback(args[0]);
-            break;
-        case 2:
-            callback(args[0], args[1]);
-            break;
-        case 3:
-            callback(args[0], args[1], args[2]);
-            break;
-        default:
-            callback.apply(undefined, args);
-            break;
-        }
-    }
-
-    function runIfPresent(handle) {
-        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
-        // So if we're currently running a task, we'll need to delay this invocation.
-        if (currentlyRunningATask) {
-            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
-            // "too much recursion" error.
-            setTimeout(runIfPresent, 0, handle);
-        } else {
-            var task = tasksByHandle[handle];
-            if (task) {
-                currentlyRunningATask = true;
-                try {
-                    run(task);
-                } finally {
-                    clearImmediate(handle);
-                    currentlyRunningATask = false;
-                }
-            }
-        }
-    }
-
-    function installNextTickImplementation() {
-        registerImmediate = function(handle) {
-            process.nextTick(function () { runIfPresent(handle); });
-        };
-    }
-
-    function canUsePostMessage() {
-        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
-        // where `global.postMessage` means something completely different and can't be used for this purpose.
-        if (global.postMessage && !global.importScripts) {
-            var postMessageIsAsynchronous = true;
-            var oldOnMessage = global.onmessage;
-            global.onmessage = function() {
-                postMessageIsAsynchronous = false;
-            };
-            global.postMessage("", "*");
-            global.onmessage = oldOnMessage;
-            return postMessageIsAsynchronous;
-        }
-    }
-
-    function installPostMessageImplementation() {
-        // Installs an event handler on `global` for the `message` event: see
-        // * https://developer.mozilla.org/en/DOM/window.postMessage
-        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
-
-        var messagePrefix = "setImmediate$" + Math.random() + "$";
-        var onGlobalMessage = function(event) {
-            if (event.source === global &&
-                typeof event.data === "string" &&
-                event.data.indexOf(messagePrefix) === 0) {
-                runIfPresent(+event.data.slice(messagePrefix.length));
-            }
-        };
-
-        if (global.addEventListener) {
-            global.addEventListener("message", onGlobalMessage, false);
-        } else {
-            global.attachEvent("onmessage", onGlobalMessage);
-        }
-
-        registerImmediate = function(handle) {
-            global.postMessage(messagePrefix + handle, "*");
-        };
-    }
-
-    function installMessageChannelImplementation() {
-        var channel = new MessageChannel();
-        channel.port1.onmessage = function(event) {
-            var handle = event.data;
-            runIfPresent(handle);
-        };
-
-        registerImmediate = function(handle) {
-            channel.port2.postMessage(handle);
-        };
-    }
-
-    function installReadyStateChangeImplementation() {
-        var html = doc.documentElement;
-        registerImmediate = function(handle) {
-            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
-            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
-            var script = doc.createElement("script");
-            script.onreadystatechange = function () {
-                runIfPresent(handle);
-                script.onreadystatechange = null;
-                html.removeChild(script);
-                script = null;
-            };
-            html.appendChild(script);
-        };
-    }
-
-    function installSetTimeoutImplementation() {
-        registerImmediate = function(handle) {
-            setTimeout(runIfPresent, 0, handle);
-        };
-    }
-
-    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
-    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
-    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
-
-    // Don't get fooled by e.g. browserify environments.
-    if ({}.toString.call(global.process) === "[object process]") {
-        // For Node.js before 0.9
-        installNextTickImplementation();
-
-    } else if (canUsePostMessage()) {
-        // For non-IE10 modern browsers
-        installPostMessageImplementation();
-
-    } else if (global.MessageChannel) {
-        // For web workers, where supported
-        installMessageChannelImplementation();
-
-    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
-        // For IE 6–8
-        installReadyStateChangeImplementation();
-
-    } else {
-        // For older browsers
-        installSetTimeoutImplementation();
-    }
-
-    attachTo.setImmediate = setImmediate;
-    attachTo.clearImmediate = clearImmediate;
-}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0), __webpack_require__(4)))
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 
-// EXTERNAL MODULE: ./craters/Polyfill.js
-var Polyfill = __webpack_require__(1);
+// UNUSED EXPORTS: Craters, Entity, Fixtures, Game, Maths, Vector
 
-// CONCATENATED MODULE: ./craters/Geometry/Common.js
+// EXTERNAL MODULE: ./src/Polyfill.js
+var Polyfill = __webpack_require__(204);
+;// CONCATENATED MODULE: ./src/Geometry/Common.js
 const degToRad = function(angle) {
     return angle * Math.PI / 180;
 };
@@ -622,12 +99,12 @@ const boundary = function(value, min, max) {
     return Math.min(Math.max(value, min), max)
 };
 
-const Common_abs = function abs(x) {
+const abs = function abs(x) {
 	return (x < 0 ? -x : x)
 };
 
-/* harmony default export */ var Common = ({abs: Common_abs, boundary, degToRad, radToDeg, distance, map});
-// CONCATENATED MODULE: ./craters/Geometry/QuadTree.js
+/* harmony default export */ const Common = ({abs, boundary, degToRad, radToDeg, distance, map});
+;// CONCATENATED MODULE: ./src/Geometry/QuadTree.js
 /*jslint vars: true, nomen: true, plusplus: true, continue:true, forin:true */
 /*global Node, BoundsNode */
 
@@ -674,7 +151,7 @@ const Common_abs = function abs(x) {
     * @param {Number} maxDepth The maximum number of levels that the quadtree will create. Default is 4.
     * @param {Number} maxChildren The maximum number of children that a node can contain before it is split into sub-nodes.
     **/
-    function QuadTree(bounds, pointQuad, maxDepth, maxChildren) {
+    function QuadTree_QuadTree(bounds, pointQuad, maxDepth, maxChildren) {
         var node;
         if (pointQuad) {
 
@@ -691,7 +168,7 @@ const Common_abs = function abs(x) {
     * @property root
     * @type Node
     **/
-    QuadTree.prototype.root = null;
+    QuadTree_QuadTree.prototype.root = null;
 
 
     /**
@@ -700,7 +177,7 @@ const Common_abs = function abs(x) {
     * @param {Object|Array} item The item or Array of items to be inserted into the QuadTree. The item should expose x, y 
     * properties that represents its position in 2D space.
     **/
-    QuadTree.prototype.insert = function (item) {
+    QuadTree_QuadTree.prototype.insert = function (item) {
         if (item instanceof Array) {
             var len = item.length;
 
@@ -717,7 +194,7 @@ const Common_abs = function abs(x) {
     * Clears all nodes and children from the QuadTree
     * @method clear
     **/
-    QuadTree.prototype.clear = function () {
+    QuadTree_QuadTree.prototype.clear = function () {
         this.root.clear();
     };
 
@@ -728,7 +205,7 @@ const Common_abs = function abs(x) {
     * @param {Object} item An object representing a 2D coordinate point (with x, y properties), or a shape
     * with dimensions (x, y, width, height) properties.
     **/
-    QuadTree.prototype.retrieve = function (item) {
+    QuadTree_QuadTree.prototype.retrieve = function (item) {
         //get a copy of the array of items
         var out = this.root.retrieve(item).slice(0);
         return out;
@@ -1045,7 +522,7 @@ const Common_abs = function abs(x) {
         //call the hidden super.clear, and make sure its called with this = this instance
         //Object.getPrototypeOf(BoundsNode.prototype).clear.call(this);
     };
-// CONCATENATED MODULE: ./craters/Geometry/Vector.js
+;// CONCATENATED MODULE: ./src/Geometry/Vector.js
 
 // Vector
 // ----------
@@ -1059,7 +536,7 @@ const Common_abs = function abs(x) {
 * @param {?number=} y The y position.
 * @constructor
 */
-function Vector(x, y) {
+function Vector_Vector(x, y) {
 	this['x'] = x || 0;
 	this['y'] = y || 0;
 }
@@ -1069,7 +546,7 @@ function Vector(x, y) {
 * @param {Vector} other The other Vector.
 * @return {Vector} This for chaining.
 */
-Vector.prototype['copy'] = Vector.prototype.copy = function(other) {
+Vector_Vector.prototype['copy'] = Vector_Vector.prototype.copy = function(other) {
 	this['x'] = other['x'];
 	this['y'] = other['y'];
 	return this;
@@ -1079,8 +556,8 @@ Vector.prototype['copy'] = Vector.prototype.copy = function(other) {
 /**
 * @return {Vector} The new cloned vector
 */
-Vector.prototype['clone'] = Vector.prototype.clone = function() {
-	return new Vector(this['x'], this['y']);
+Vector_Vector.prototype['clone'] = Vector_Vector.prototype.clone = function() {
+	return new Vector_Vector(this['x'], this['y']);
 };
 
 // Change this vector to be perpendicular to what it was before. (Effectively
@@ -1088,7 +565,7 @@ Vector.prototype['clone'] = Vector.prototype.clone = function() {
 /**
 * @return {Vector} This for chaining.
 */
-Vector.prototype['perp'] = Vector.prototype.perp = function() {
+Vector_Vector.prototype['perp'] = Vector_Vector.prototype.perp = function() {
 	var x = this['x'];
 	this['x'] = this['y'];
 	this['y'] = -x;
@@ -1100,7 +577,7 @@ Vector.prototype['perp'] = Vector.prototype.perp = function() {
 * @param {number} angle The angle to rotate (in radians)
 * @return {Vector} This for chaining.
 */
-Vector.prototype['rotate'] = Vector.prototype.rotate = function (angle) {
+Vector_Vector.prototype['rotate'] = Vector_Vector.prototype.rotate = function (angle) {
 	var x = this['x'];
 	var y = this['y'];
 	this['x'] = x * Math.cos(angle) - y * Math.sin(angle);
@@ -1112,7 +589,7 @@ Vector.prototype['rotate'] = Vector.prototype.rotate = function (angle) {
 /**
 * @return {Vector} This for chaining.
 */
-Vector.prototype['reverse'] = Vector.prototype.reverse = function() {
+Vector_Vector.prototype['reverse'] = Vector_Vector.prototype.reverse = function() {
 	this['x'] = -this['x'];
 	this['y'] = -this['y'];
 	return this;
@@ -1123,7 +600,7 @@ Vector.prototype['reverse'] = Vector.prototype.reverse = function() {
 /**
 * @return {Vector} This for chaining.
 */
-Vector.prototype['normalize'] = Vector.prototype.normalize = function() {
+Vector_Vector.prototype['normalize'] = Vector_Vector.prototype.normalize = function() {
 	var d = this.len();
 	if(d > 0) {
 		this['x'] = this['x'] / d;
@@ -1137,7 +614,7 @@ Vector.prototype['normalize'] = Vector.prototype.normalize = function() {
 * @param {Vector} other The other Vector.
 * @return {Vector} This for chaining.
 */
-Vector.prototype['add'] = Vector.prototype.add = function(other) {
+Vector_Vector.prototype['add'] = Vector_Vector.prototype.add = function(other) {
 	this['x'] += other['x'];
 	this['y'] += other['y'];
 	return this;
@@ -1148,7 +625,7 @@ Vector.prototype['add'] = Vector.prototype.add = function(other) {
 * @param {Vector} other The other Vector.
 * @return {Vector} This for chaiing.
 */
-Vector.prototype['sub'] = Vector.prototype.sub = function(other) {
+Vector_Vector.prototype['sub'] = Vector_Vector.prototype.sub = function(other) {
 	this['x'] -= other['x'];
 	this['y'] -= other['y'];
 	return this;
@@ -1162,7 +639,7 @@ Vector.prototype['sub'] = Vector.prototype.sub = function(other) {
 *   is not specified, the x scaling factor will be used.
 * @return {Vector} This for chaining.
 */
-Vector.prototype['scale'] = Vector.prototype.scale = function(x,y) {
+Vector_Vector.prototype['scale'] = Vector_Vector.prototype.scale = function(x,y) {
 	this['x'] *= x;
 	this['y'] *= typeof y != 'undefined' ? y : x;
 	return this;
@@ -1173,7 +650,7 @@ Vector.prototype['scale'] = Vector.prototype.scale = function(x,y) {
 * @param {Vector} other The vector to project onto.
 * @return {Vector} This for chaining.
 */
-Vector.prototype['project'] = Vector.prototype.project = function(other) {
+Vector_Vector.prototype['project'] = Vector_Vector.prototype.project = function(other) {
 	var amt = this.dot(other) / other.len2();
 	this['x'] = amt * other['x'];
 	this['y'] = amt * other['y'];
@@ -1186,7 +663,7 @@ Vector.prototype['project'] = Vector.prototype.project = function(other) {
 * @param {Vector} other The unit vector to project onto.
 * @return {Vector} This for chaining.
 */
-Vector.prototype['projectN'] = Vector.prototype.projectN = function(other) {
+Vector_Vector.prototype['projectN'] = Vector_Vector.prototype.projectN = function(other) {
 	var amt = this.dot(other);
 	this['x'] = amt * other['x'];
 	this['y'] = amt * other['y'];
@@ -1198,7 +675,7 @@ Vector.prototype['projectN'] = Vector.prototype.projectN = function(other) {
 * @param {Vector} axis The vector representing the axis.
 * @return {Vector} This for chaining.
 */
-Vector.prototype['reflect'] = Vector.prototype.reflect = function(axis) {
+Vector_Vector.prototype['reflect'] = Vector_Vector.prototype.reflect = function(axis) {
 	var x = this['x'];
 	var y = this['y'];
 	this.project(axis).scale(2);
@@ -1213,7 +690,7 @@ Vector.prototype['reflect'] = Vector.prototype.reflect = function(axis) {
 * @param {Vector} axis The unit vector representing the axis.
 * @return {Vector} This for chaining.
 */
-Vector.prototype['reflectN'] = Vector.prototype.reflectN = function(axis) {
+Vector_Vector.prototype['reflectN'] = Vector_Vector.prototype.reflectN = function(axis) {
 	var x = this['x'];
 	var y = this['y'];
 	this.projectN(axis).scale(2);
@@ -1227,7 +704,7 @@ Vector.prototype['reflectN'] = Vector.prototype.reflectN = function(axis) {
 * @param {Vector}  other The vector to dot this one against.
 * @return {number} The dot product.
 */
-Vector.prototype['dot'] = Vector.prototype.dot = function(other) {
+Vector_Vector.prototype['dot'] = Vector_Vector.prototype.dot = function(other) {
 	return this['x'] * other['x'] + this['y'] * other['y'];
 };
 
@@ -1235,7 +712,7 @@ Vector.prototype['dot'] = Vector.prototype.dot = function(other) {
 /**
 * @return {number} The length^2 of this vector.
 */
-Vector.prototype['len2'] = Vector.prototype.len2 = function() {
+Vector_Vector.prototype['len2'] = Vector_Vector.prototype.len2 = function() {
 	return this.dot(this);
 };
 
@@ -1243,10 +720,10 @@ Vector.prototype['len2'] = Vector.prototype.len2 = function() {
 /**
 * @return {number} The length of this vector.
 */
-Vector.prototype['len'] = Vector.prototype.len = function() {
+Vector_Vector.prototype['len'] = Vector_Vector.prototype.len = function() {
 	return Math.sqrt(this.len2());
 };
-// CONCATENATED MODULE: ./craters/Geometry/Geometry.js
+;// CONCATENATED MODULE: ./src/Geometry/Geometry.js
 // load the methods and sub divided them
 // to make bite sized methods
 // vectors, fixtures, common
@@ -1255,60 +732,7 @@ Vector.prototype['len'] = Vector.prototype.len = function() {
 
 
 
-// CONCATENATED MODULE: ./craters/Texture/Solid.js
-class Solid {
-	constructor(body, params) {
-		this.body = body;
-		this.style = params.style;
-		this.fixture = body.fixture;
-		this.position = body.state.position;
-	}
-	
-	update(){
-	
-	}
-	
-	render() {
-	let body = this.body;
-	let context = body.context;
-	context.fillStyle = this.style.fillStyle;
-	context.lineWidth = this.style.lineWidth;
-	context.strokeStyle = this.style.strokeStyle;
-	context.lineJoin = 'miter';
-	
-	switch (body.fixture.type) {
-		    case 'circle': {
-				context.beginPath();
-				context.ellipse(
-			        body.state.position.x,
-			        body.state.position.y,
-			        body.fixture.r,
-			        body.fixture.r,
-			        0, 0,
-			        Math.PI * 2
-		        );
-		        context.closePath();
-		        context.stroke();
-		        context.fill();
-		        break;
-		    }
-		    case 'polygon': {
-		        context.beginPath();
-		        // console.log(JSON.stringify(body.fixture.points))
-		        context.moveTo(body.state.position.x + body.fixture.points[0].x, body.state.position.y + body.fixture.points[0].y);
-		        for (let i = 1; i < body.fixture.points.length; i++) {
-			        let v = body.fixture.points[i];
-			        context.lineTo(body.state.position.x + v.x, body.state.position.y + v.y);
-		        };
-		        context.lineTo(body.state.position.x + body.fixture.points[0].x, body.state.position.y + body.fixture.points[0].y);
-		        context.fill();
-		        context.stroke();
-		        break;
-		    }
-		}
-	}
-}
-// CONCATENATED MODULE: ./craters/Texture/Sprite.js
+;// CONCATENATED MODULE: ./src/Texture/Sprite.js
 class Sprite {
 	constructor(object, params) {
 		this.size = {
@@ -1404,15 +828,14 @@ class Sprite {
 		}
 	}
 }
-// CONCATENATED MODULE: ./craters/Texture/Textures.js
+;// CONCATENATED MODULE: ./src/Texture/Textures.js
+
+/* harmony default export */ const Texture_Textures = ({Sprite: Sprite});
+;// CONCATENATED MODULE: ./src/Entity.js
 
 
-/* harmony default export */ var Textures = ({Solid: Solid, Sprite: Sprite});
-// CONCATENATED MODULE: ./craters/Entity.js
 
-
-
-class Entity_Entity {
+class Entity {
     constructor(params) {
 		// define shortcuts 
 		let vec = Vector;
@@ -1532,126 +955,18 @@ class Entity_Entity {
 	    context.lineJoin = 'miter';
     }
 }
-// CONCATENATED MODULE: ./craters/System.js
-// Game Loop Module
-// This module contains the game loop, which handles
-// updating the game state and re-rendering the canvas
-// (using the updated state) at the configured tframe.
-class Loop {
-    constructor(scope, tframe) {
-        var loop = {
-            delta: (1000 / tframe),
-            elapsed: 0,
-            tframe: (1000 / tframe),
-            nframe: tframe,
-            before: window.performance.now()
-        }
-        // Initialize timer variables so we can calculate tframe
-        // Main game rendering loop
-        loop.main = function() {
-            loop.startLoop = window.requestAnimationFrame(loop.main)
-            loop.delta = Math.round(((1000 / (window.performance.now() - loop.before) * 100) / 100))
-
-            if (window.performance.now() < loop.before + loop.tframe) return
-            loop.before = window.performance.now()
-            // Request a new Animation Frame
-            // setting to `stopLoop` so animation can be stopped via
-            loop.stopLoop = () => {
-                window.cancelAnimationFrame(loop.startLoop)
-            }
-            // update scope
-            if(scope.state)
-            scope.state.loop = loop;
-
-            // Update the game state
-            scope.update(loop.elapsed, loop.delta)
-            // Render the next frame
-            scope.render(loop.elapsed, loop.delta)
-            loop.elapsed++
-        }
-
-        // Start off main loop
-        loop.main()
-        return loop
-    }
-}
-
-class Canvas {
-    constructor(width, height, container) {
-        container = document.querySelector(container || 'body')
-        // Generate a canvas and store it as our viewport
-        var canvas = document.createElement('canvas')
-        var context = canvas.getContext('2d')
-        // Pass our canvas' context to our getPixelRatio method
-        var backingStores = ['webkitBackingStorePixelRatio', 'mozBackingStorePixelRatio', 'msBackingStorePixelRatio', 'oBackingStorePixelRatio', 'backingStorePixelRatio']
-        var deviceRatio = window.devicePixelRatio
-        // Iterate through our backing store props and determine the proper backing ratio.
-        var backingRatio = backingStores.reduce(function(prev, curr) {
-            return (Object.prototype.hasOwnProperty.call(context, curr) ? context[curr] : 1)
-        })
-        // Return the proper pixel ratio by dividing the device ratio by the backing ratio
-        var ratio = deviceRatio / backingRatio
-
-        // Set the canvas' width then downscale via CSS
-        canvas.width = Math.round(width * ratio)
-        canvas.height = Math.round(height * ratio)
-        canvas.style.width = width + 'px'
-        canvas.style.height = height + 'px'
-        // Scale the context so we get accurate pixel density
-        context.setTransform(ratio, 0, 0, ratio, 0, 0)
-        // Append viewport into our game within the dom
-        container.insertBefore(canvas, container.firstChild)
-        canvas.context = canvas.getContext('2d')
-
-        canvas.resize = (scope, size) => {
-            canvas.style.width = size.x + 'px'
-            canvas.style.height = size.y + 'px'
-            canvas.width = Math.round(size.x * ratio)
-            canvas.height = Math.round(size.y * ratio)
-            context.setTransform(ratio, 0, 0, ratio, 0, 0)
-
-            scope.state.size.x = size.x
-            scope.state.size.y = size.y
-        }
-
-        canvas.clear = (v, w, x, y, z) => {
-            v = v || null
-            w = w || 0
-            x = x || 0
-            y = y || canvas.width
-            z = z || canvas.height
-
-            if (v) { // clear with color if true
-                canvas.context.save();
-                canvas.context.fillStyle = v;
-                canvas.context.fillRect(w, x, y, z)
-                canvas.context.fill();
-                canvas.context.restore();
-            } else {
-                canvas.context.clearRect(w, x, y, z)
-            };
-        }
-
-        canvas.camera = (x, y) => {
-            canvas.context.setTransform(1, 0, 0, 1, 0, 0) // reset the transform matrix
-            canvas.context.translate(-x, -y)
-        }
-
-        return canvas // return the canvas
-    }
-}
-// CONCATENATED MODULE: ./craters/Fixture/Polygon.js
+;// CONCATENATED MODULE: ./src/Fixture/Polygon.js
 // ## Polygon
 // Represents a *convex* polygon with any number of points (specified in counter-clockwise order)
 
 
 
-class Polygon_Polygon {
+class Polygon {
 	constructor(pos, points) {
 		this['type'] = 'polygon'
-		this['pos'] = pos || new Vector();
+		this['pos'] = pos || new Vector_Vector();
 		this['angle'] = 0;
-		this['offset'] = new Vector();
+		this['offset'] = new Vector_Vector();
 		this.setPoints(points || []);
 	}
 	setPoints(points) {
@@ -1672,9 +987,9 @@ class Polygon_Polygon {
 			i -= 1;
 			continue;
 			}
-			calcPoints.push(new Vector());
-			edges.push(new Vector());
-			normals.push(new Vector());
+			calcPoints.push(new Vector_Vector());
+			edges.push(new Vector_Vector());
+			normals.push(new Vector_Vector());
 			}
 		}
 		this['points'] = points;
@@ -1762,7 +1077,7 @@ class Polygon_Polygon {
 				yMax = point["y"];
 			}
 		}
-		return new AABB_AABB(this['pos'].clone().add(new Vector(xMin, yMin)), xMax - xMin, yMax - yMin).toPolygon();
+		return new AABB(this['pos'].clone().add(new Vector_Vector(xMin, yMin)), xMax - xMin, yMax - yMin).toPolygon();
 	};
 	
 	getCentroid() {
@@ -1782,18 +1097,18 @@ class Polygon_Polygon {
 		ar = ar * 3; // we want 1 / 6 the area and we currently have 2*area
 		cx = cx / ar;
 		cy = cy / ar;
-		return new Vector(cx, cy);
+		return new Vector_Vector(cx, cy);
 	}
 }
-// CONCATENATED MODULE: ./craters/Geometry/AABB.js
+;// CONCATENATED MODULE: ./src/Geometry/AABB.js
 // ## AABB
 // Represents an axis-aligned AABB, with a width and height.
 
 
 
-class AABB_AABB {
+class AABB {
 	constructor(pos, w, h) {
-		this['pos'] = pos || new Vector();
+		this['pos'] = pos || new Vector_Vector();
 		this['w'] = w || 0;
 		this['h'] = h || 0;
 	}
@@ -1803,13 +1118,13 @@ class AABB_AABB {
 		var pos = this['pos'];
 		var w = this['w'];
 		var h = this['h'];
-		return new Polygon_Polygon(new Vector(pos['x'], pos['y']), [
-			new Vector(), new Vector(w, 0),
-			new Vector(w,h), new Vector(0,h)
+		return new Polygon(new Vector_Vector(pos['x'], pos['y']), [
+			new Vector_Vector(), new Vector_Vector(w, 0),
+			new Vector_Vector(w,h), new Vector_Vector(0,h)
 		]);
 	}
 }
-// CONCATENATED MODULE: ./craters/Fixture/Circle.js
+;// CONCATENATED MODULE: ./src/Fixture/Circle.js
 // ## Circle
 // Represents a circular fixture
 
@@ -1818,9 +1133,9 @@ class AABB_AABB {
 class Circle_Circle {
 	constructor(pos, r) {
 		this['type'] = 'circle'
-		this['pos'] = pos || new Vector();
+		this['pos'] = pos || new Vector_Vector();
 		this['r'] = r || 0;
-		this['offset'] = new Vector();
+		this['offset'] = new Vector_Vector();
 	}
 	
 	// Compute the axis-aligned bounding AABB (AABB) of this Circle.
@@ -1831,8 +1146,8 @@ class Circle_Circle {
 	*/
 	getAABB() {
 		var r = this['r'];
-		var corner = this['pos'].clone().add(this['offset']).sub(new Vector(r, r));
-		return new AABB_AABB(corner, r*2, r*2).toPolygon();
+		var corner = this['pos'].clone().add(this['offset']).sub(new Vector_Vector(r, r));
+		return new AABB(corner, r*2, r*2).toPolygon();
 	};
 	getCentroid() {
 		let aabb = this.getAABB();
@@ -1840,7 +1155,7 @@ class Circle_Circle {
 		let y = aabb.edges[2].y;
 		let cx = (aabb.edges[0].x - x) / 2;
 		let cy = (aabb.edges[1].y - y) / 2;
-		return new Vector(cx, cy);
+		return new Vector_Vector(cx, cy);
 	}
 	// Set the current offset to apply to the radius.
 	/**
@@ -1852,12 +1167,12 @@ class Circle_Circle {
 		return this;
 	}
 }
-// CONCATENATED MODULE: ./craters/Fixture/Fixtures.js
+;// CONCATENATED MODULE: ./src/Fixture/Fixtures.js
 
 
 
-/* harmony default export */ var Fixtures = ({Circle: Circle_Circle, Polygon: Polygon_Polygon});
-// CONCATENATED MODULE: ./craters/Modules/Tilemap/Tile.js
+/* harmony default export */ const Fixture_Fixtures = ({Circle: Circle_Circle, Polygon: Polygon});
+;// CONCATENATED MODULE: ./src/Modules/Tilemap/Tile.js
 
 
 
@@ -1897,7 +1212,7 @@ class Tile_Tile {
 		this.texture = new Textures.Sprite(this, params);
 	}
 };
-// CONCATENATED MODULE: ./craters/Modules/Tilemap/Tilemap.js
+;// CONCATENATED MODULE: ./src/Modules/Tilemap/Tilemap.js
 
 
 // tilemap add (tilesheet)
@@ -1928,7 +1243,7 @@ class Tilemap_Tilemap {
 			img.src = params.image;
 			img.onload = () => {
 				params.image = img;
-					let tiles = new Tile_Tile(this.context, params, tile);
+					let tiles = new Tile(this.context, params, tile);
 					this.quad.insert(tiles)
 					this.pool.push(tiles)
 				}
@@ -1970,26 +1285,7 @@ class Tilemap_Tilemap {
 		})
 	}
 };
-// CONCATENATED MODULE: ./craters/Collision/Broadphase.js
-class Broadphase {
-    // 
-    static collides(collider, collidee) {
-        if (collider.collision.collides && collidee.collision.collides) {
-            // TODO: 
-            // additionally check group 
-            return true;
-        }
-        return false;
-    }
-    
-    static query(collidee, quad) {
-	    let collideds = [];
-	    let collided = quad.retrieve(collidee);
-	    collided.forEach((item) => {collideds.push(item.item)})
-	    return collideds;
-    }
-}
-// CONCATENATED MODULE: ./craters/Geometry/SAT.js
+;// CONCATENATED MODULE: ./src/Geometry/SAT.js
 // Version 0.8.0 - Copyright 2012 - 2018 -  Jim Riecken <jimr@jimr.ca>
 //
 // Released under the MIT License - https://github.com/jriecken/sat-js
@@ -2001,7 +1297,7 @@ class Broadphase {
 
 
 
-  var SAT = {AABB: AABB_AABB, Circle: Circle_Circle, Polygon: Polygon_Polygon};
+  var SAT_SAT = {AABB: AABB, Circle: Circle_Circle, Polygon: Polygon};
   // ## Response
   //
   // An object representing the result of an intersection. Contains:
@@ -2016,11 +1312,11 @@ class Broadphase {
   function Response() {
     this['a'] = null;
     this['b'] = null;
-    this['overlapN'] = new Vector();
-    this['overlapV'] = new Vector();
+    this['overlapN'] = new Vector_Vector();
+    this['overlapV'] = new Vector_Vector();
     this.clear();
   }
-  SAT['Response'] = Response;
+  SAT_SAT['Response'] = Response;
 
   // Set some values of the response back to their defaults.  Call this between tests if
   // you are going to reuse a single Response object for multiple intersection tests (recommented
@@ -2043,7 +1339,7 @@ class Broadphase {
    * @type {Array<Vector>}
    */
   var T_VECTORS = [];
-  for (var SAT_i = 0; SAT_i < 10; SAT_i++) { T_VECTORS.push(new Vector()); }
+  for (var i = 0; i < 10; i++) { T_VECTORS.push(new Vector_Vector()); }
 
   // A pool of arrays of numbers used in calculations to avoid allocating
   // memory.
@@ -2051,7 +1347,7 @@ class Broadphase {
    * @type {Array<Array<number>>}
    */
   var T_ARRAYS = [];
-  for (var SAT_i = 0; SAT_i < 5; SAT_i++) { T_ARRAYS.push([]); }
+  for (var i = 0; i < 5; i++) { T_ARRAYS.push([]); }
 
   // Temporary response used for polygon hit detection.
   /**
@@ -2063,7 +1359,7 @@ class Broadphase {
   /**
    * @type {Polygon}
    */
-  var TEST_POINT = new AABB_AABB(new Vector(), 0.000001, 0.000001).toPolygon();
+  var TEST_POINT = new AABB(new Vector_Vector(), 0.000001, 0.000001).toPolygon();
 
   // ## Helper Functions
 
@@ -2169,7 +1465,7 @@ class Broadphase {
     T_ARRAYS.push(rangeB);
     return false;
   }
-  SAT['isSeparatingAxis'] = isSeparatingAxis;
+  SAT_SAT['isSeparatingAxis'] = isSeparatingAxis;
 
   // Calculates which Voronoi region a point is on a line segment.
   // It is assumed that both the line and the point are relative to `(0,0)`
@@ -2226,7 +1522,7 @@ class Broadphase {
     // If the distance between is smaller than the radius then the point is inside the circle.
     return distanceSq <= radiusSq;
   }
-  SAT['pointInCircle'] = pointInCircle;
+  SAT_SAT['pointInCircle'] = pointInCircle;
 
   // Check if a point is inside a convex polygon.
   /**
@@ -2243,7 +1539,7 @@ class Broadphase {
     }
     return result;
   }
-  SAT['pointInPolygon'] = pointInPolygon;
+  SAT_SAT['pointInPolygon'] = pointInPolygon;
 
   // Check if two circles collide.
   /**
@@ -2279,7 +1575,7 @@ class Broadphase {
     T_VECTORS.push(differenceV);
     return true;
   }
-  SAT['testCircleCircle'] = testCircleCircle;
+  SAT_SAT['testCircleCircle'] = testCircleCircle;
 
   // Check if a polygon and a circle collide.
   /**
@@ -2415,7 +1711,7 @@ class Broadphase {
     T_VECTORS.push(point);
     return true;
   }
-  SAT['testPolygonCircle'] = testPolygonCircle;
+  SAT_SAT['testPolygonCircle'] = testPolygonCircle;
 
   // Check if a circle and a polygon collide.
   //
@@ -2444,7 +1740,7 @@ class Broadphase {
     }
     return result;
   }
-  SAT['testCirclePolygon'] = testCirclePolygon;
+  SAT_SAT['testCirclePolygon'] = testCirclePolygon;
 
   // Checks whether polygons collide.
   /**
@@ -2481,13 +1777,13 @@ class Broadphase {
     }
     return true;
   }
-  SAT['testPolygonPolygon'] = testPolygonPolygon;
+  SAT_SAT['testPolygonPolygon'] = testPolygonPolygon;
 
-  /* harmony default export */ var Geometry_SAT = (SAT);
-// CONCATENATED MODULE: ./craters/Collision/Narrowphase.js
+  /* harmony default export */ const Geometry_SAT = ((/* unused pure expression or super */ null && (SAT_SAT)));
+;// CONCATENATED MODULE: ./src/Collision/Narrowphase.js
 
 
-class Narrowphase {
+class Narrowphase_Narrowphase {
     static overlap(collider, collidee) {
         return true;
     }
@@ -2503,7 +1799,7 @@ class Narrowphase {
 	    return collided;
     }
 }
-// CONCATENATED MODULE: ./craters/Collision/Solver.js
+;// CONCATENATED MODULE: ./src/Collision/Solver.js
 
 
 
@@ -2511,22 +1807,22 @@ class Narrowphase {
 
 class Solver_Solver {
 	constructor() {
-		this.response = new Geometry_SAT.Response(); // Response reused for collisions
+		this.response = new SAT.Response(); // Response reused for collisions
 	}
 	resolve(collidee, colliders) {
 		colliders.forEach((collider) => {
 			let collided;
-			if (collider.fixture instanceof Circle_Circle) {
-				if (collidee.fixture instanceof Circle_Circle) {
-					collided = Geometry_SAT.testCircleCircle(collider.fixture, collidee.fixture, this.response);
+			if (collider.fixture instanceof Circle) {
+				if (collidee.fixture instanceof Circle) {
+					collided = SAT.testCircleCircle(collider.fixture, collidee.fixture, this.response);
 				} else {
-					collided = Geometry_SAT.testCirclePolygon(collider.fixture, collidee.fixture, this.response);
+					collided = SAT.testCirclePolygon(collider.fixture, collidee.fixture, this.response);
 				}
 			} else {
-				if (collidee.fixture instanceof Circle_Circle) {
-					collided = Geometry_SAT.testPolygonCircle(collider.fixture, collidee.fixture, this.response);
+				if (collidee.fixture instanceof Circle) {
+					collided = SAT.testPolygonCircle(collider.fixture, collidee.fixture, this.response);
 				} else {
-					collided = Geometry_SAT.testPolygonPolygon(collider.fixture, collidee.fixture, this.response);
+					collided = SAT.testPolygonPolygon(collider.fixture, collidee.fixture, this.response);
 				}
 			}
 			if (collided) {
@@ -2553,7 +1849,7 @@ class Solver_Solver {
 		})
 	}
 };
-// CONCATENATED MODULE: ./craters/Game.js
+;// CONCATENATED MODULE: ./src/Game.js
 
 
 
@@ -2565,7 +1861,7 @@ class Solver_Solver {
 
 
 
-class Game_Game {
+class Game {
 	constructor(params) {
 		params.entities = params.entities || [];
 		params.size = params.size || new Vector(1000, 500);
@@ -2593,8 +1889,8 @@ class Game_Game {
 		this.context = this.viewport.context;
 		// Create new grid
 		this.quad = new QuadTree({x: params.quad.x, y: params.quad.y, width: params.size.x, height: params.size.y});
-		this.solver = new Solver_Solver();
-		this.tilemap = new Tilemap_Tilemap(params.tilemap, this.context, this.quad)
+		this.solver = new Solver();
+		this.tilemap = new Tilemap(params.tilemap, this.context, this.quad)
 		
 		// Loop main game
 		this.loop = new Loop(this, params.fps)
@@ -2659,7 +1955,7 @@ class Game_Game {
 			let node = this.quad.root;
 			let drawBound = (node) => {
 				let bounds = node._bounds;
-				let abs = Common.abs;
+				let abs = Maths.abs;
 				let context = this.context;
 				
 				context.save()
@@ -2698,14 +1994,8 @@ class Game_Game {
 		})
 	}
 }
-// CONCATENATED MODULE: ./craters/craters
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Craters", function() { return Craters; });
-/* concated harmony reexport Game */__webpack_require__.d(__webpack_exports__, "Game", function() { return Game_Game; });
-/* concated harmony reexport Entity */__webpack_require__.d(__webpack_exports__, "Entity", function() { return Entity_Entity; });
-/* concated harmony reexport Fixtures */__webpack_require__.d(__webpack_exports__, "Fixtures", function() { return Fixtures; });
-/* concated harmony reexport Vector */__webpack_require__.d(__webpack_exports__, "Vector", function() { return Vector; });
-/* concated harmony reexport Maths */__webpack_require__.d(__webpack_exports__, "Maths", function() { return Common; });
-// Craters.js micro game framework
+;// CONCATENATED MODULE: ./src/Craters
+// Craters micro game framework
 // This module contains the core craters framework fundamentals
 // it loads modules and exports them
 
@@ -2718,11 +2008,12 @@ class Game_Game {
 
 class Craters {
     static version() {
-        return '1.2.2'
+        return '1.3.0'
     }
 }
 
 
+})();
 
-/***/ })
-/******/ ]);
+/******/ })()
+;
