@@ -1,4 +1,4 @@
-# Craters.js
+# Craters
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/craters)
 ![es modules](https://img.shields.io/badge/es-modules-green)
 
