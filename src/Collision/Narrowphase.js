@@ -1,4 +1,4 @@
-import SAT from '../Geometry/SAT.js';
+import SAT from '../Geometry/SAT.js'
 
 export default class Narrowphase {
     static overlap(collider, collidee) {
