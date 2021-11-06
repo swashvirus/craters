@@ -2,3 +2,8 @@
 /docs/
 /coverage/
 /test/
+/src/
+/logo/
+/.github/
+*.*
+!/dist/**/**

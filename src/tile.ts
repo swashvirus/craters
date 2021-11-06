@@ -13,7 +13,26 @@ export default class Tile {
   fillStyle: string;
   strokeStyle: string;
   lineWidth: number;
-  constructor(canvas2DRenderer: any, sImage: any, sWidth: number, sHeight: number, dWidth: number, dHeight: number, positions: number[][] = [[0, 0], [sImage.width, 0], [sImage.width, sImage.height], [0, sImage.height]], width: number = sImage.width, height: number = sImage.height, repeat: string = "no-repeat", fillStyle: string = "rgba(25.5, 114.75, 114.75, 0)", strokeStyle: string = "rgba(229.5, 25.5, 25.5, 0)", lineWidth: number = 2) {
+  constructor(
+    canvas2DRenderer: any,
+    sImage: any,
+    sWidth: number,
+    sHeight: number,
+    dWidth: number,
+    dHeight: number,
+    positions: number[][] = [
+      [0, 0],
+      [sImage.width, 0],
+      [sImage.width, sImage.height],
+      [0, sImage.height]
+    ],
+    width: number = sImage.width,
+    height: number = sImage.height,
+    repeat: string = "no-repeat",
+    fillStyle: string = "rgba(25.5, 114.75, 114.75, 0)",
+    strokeStyle: string = "rgba(229.5, 25.5, 25.5, 0)",
+    lineWidth: number = 2
+  ) {
     this.canvas2DRenderer = canvas2DRenderer;
     this.sImage = sImage;
     this.sWidth = sWidth;
@@ -48,7 +67,7 @@ export default class Tile {
       this.sImage = this.canvas2DRenderer.createImage(canvas2DRenderer.canvasElement);
     }
   }
-  draw(sx: number, sy: number, dx: number, dy: number): void {
-    this.canvas2DRenderer.drawImage(this.sImage, sx, sy, this.sWidth, this.sHeight, dx, dy, this.dWidth, this.dHeight);
+  draw(sx: number, sy: number, dx: number, dy: number, sw: number = this.sWidth, sh: number = this.sHeight, dw: number = this.dWidth, dh: number = this.dHeight): void {
+    this.canvas2DRenderer.drawImage(this.sImage, sx, sy, sw, sh, dx, dy, dw, dh);
   }
 }

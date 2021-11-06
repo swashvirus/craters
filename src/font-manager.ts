@@ -3,15 +3,16 @@ import WebGLRenderer from "./webgl-renderer";
 import Tile from "./tile"
 class Font {
   fontMap;
+  fontAtlas;
   canvas2DRenderer;
   constructor(fontMap: Map < number, {
     x: number,
     y: number,
     width: number,
     height: number,
-    font: Tile
-  } > ) {
+  } > , fontAtlas) {
     this.fontMap = fontMap;
+    this.fontAtlas = fontAtlas;
   }
   draw(text: string, destX: number, destY: number): void {
     var textWidth = 0;
@@ -19,22 +20,22 @@ class Font {
       var charactercode = _character.charCodeAt(0);
       if (this.fontMap.has(charactercode)) {
         var character = this.fontMap.get(charactercode)
-        var width = character.width;
-        character.font.draw(character.x, character.y, destX + textWidth, destY);
+        var {width, height} = character;
+        this.fontAtlas.draw(character.x, character.y, destX + textWidth, destY, width, height, width, height);
         textWidth += width;
       }
     });
   }
 }
 export default class FontManager {
-  canvas2DRenderer: Canvas2DRenderer
+  canvas2DRenderer: any;
   fontName: string;
   fill: boolean;
   stroke: boolean;
   fillStyle: string;
   strokeStyle: string;
   constructor(
-    canvas2DRenderer: Canvas2DRenderer,
+    canvas2DRenderer: any,
     fontName: string,
     fillStyle: string = "#fafafa",
     strokeStyle: string = "#fafafa",
@@ -49,7 +50,7 @@ export default class FontManager {
     this.strokeStyle = strokeStyle
   }
   load(letters: string) {
-    var canvas2DRenderer = new Canvas2DRenderer(0, 0)
+    var canvas2DRenderer = new Canvas2DRenderer(0, 0, void 0, 1)
     var context = canvas2DRenderer.context
     context.font = this.fontName;
     var fontMap: Map < number, {
@@ -57,7 +58,6 @@ export default class FontManager {
       y: number,
       width: number,
       height: number,
-      font: Tile
     } > = new Map();
     var height = parseInt(context.font, 10) * 1.2;
     var measurements = Array.from(letters)
@@ -70,7 +70,7 @@ export default class FontManager {
     var width = measurements.map(function (measurement) {
       return measurement.measurement.width;
     }).reduce(function (previous, next) { return previous + next; });
-    canvas2DRenderer.resize(width, height, 1);
+    canvas2DRenderer.resize(width, height);
     measurements.forEach((measure) => {
       var letter = measure.letter,
         measurement = measure.measurement;
@@ -81,13 +81,13 @@ export default class FontManager {
         y = 0;
       context.fillText(letter, x, y);
       fontMap.set(letter.charCodeAt(0), {
-        font: new Tile(this.canvas2DRenderer, canvas2DRenderer.canvasElement, measurement.width, height, measurement.width, height),
         width: measurement.width,
         height: height,
         x: x,
         y: y
       });
     });
-    return new Font(fontMap)
+    var fontAtlas = new Tile(this.canvas2DRenderer, canvas2DRenderer.canvasElement, canvas2DRenderer.width, canvas2DRenderer.height, canvas2DRenderer.width, canvas2DRenderer.height)
+    return new Font(fontMap, fontAtlas)
   }
 }
