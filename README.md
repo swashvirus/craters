@@ -1,4 +1,6 @@
 # Craters
+[![CI commit action](https://github.com/swashvirus/craters/actions/workflows/commit.yml/badge.svg)](https://github.com/swashvirus/craters/actions/workflows/commit.yml)
+[![Release publish action](https://github.com/swashvirus/craters/actions/workflows/release.yml/badge.svg)](https://github.com/swashvirus/craters/actions/workflows/release.yml)
 ![craters logo](https://swashvirus.github.io/craters/media/craters.gif)
 > _Craters is a modular JavaScript framework reimplemented in TypeScript for rapid HTML5 game development_
 
