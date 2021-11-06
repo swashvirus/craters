@@ -1,0 +1,9 @@
+{
+  "name": "Craters",
+  "hideGenerator": true,
+  "includeVersion": true,
+  "entryPoints": ["src/index.ts"],
+  "entryPointStrategy": "expand",
+  "emit": "both",
+  "out": "docs"
+}
