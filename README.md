@@ -1,5 +1,5 @@
 # Craters
-![craters logo](https://swashvirus.github.io/craters/craters.gif)
+![craters logo](https://swashvirus.github.io/craters/media/craters.gif)
 > _Craters is a modular JavaScript framework reimplemented in TypeScript for rapid HTML5 game development_
 
 ## Documentation

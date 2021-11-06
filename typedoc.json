@@ -4,6 +4,7 @@
   "includeVersion": true,
   "entryPoints": ["src/index.ts"],
   "entryPointStrategy": "expand",
+  "media": "logo",
   "emit": "both",
   "out": "docs"
 }
