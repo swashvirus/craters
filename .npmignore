@@ -1,7 +1,4 @@
-.ideas
-node_modules
-examples
-rollup.config.js
-webpack.config.js
-craters.gif
-CHANGELOG.md
+/node_modules/
+/docs/
+/coverage/
+/test/
