@@ -8,7 +8,7 @@
 [Read documentation](https://swashvirus.github.io/craters/index.html)
 
 ## Examples
-_(Coming soon)_
+[Play sandbox demos](https://swashvirus.github.io/craters-sandbox/)
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
