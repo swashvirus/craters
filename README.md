@@ -2,7 +2,7 @@
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/craters)
 ![es modules](https://img.shields.io/badge/es-modules-green)
 
-![craters logo](https://swashvirus.github.io/craters/craters.gif)
+![craters logo](https://swashvirus.github.io/craters/media/craters.gif)
 [craters documentation](https://swashvirus.github.io/craters/docs/index.html)
 
 #### Short description
