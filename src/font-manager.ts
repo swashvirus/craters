@@ -61,6 +61,9 @@ export default class FontManager {
     } > = new Map();
     var height = parseInt(context.font, 10) * 1.2;
     var measurements = Array.from(letters)
+    .filter(function (character, index, characters) {
+	    return characters.indexOf(character) == index;
+    })
     .map(function (letter) {
       return {
         letter: letter,
