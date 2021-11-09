@@ -20,7 +20,7 @@ class Font {
       var charactercode = _character.charCodeAt(0);
       if (this.fontMap.has(charactercode)) {
         var character = this.fontMap.get(charactercode)
-        var {width, height} = character;
+        var { width, height } = character;
         this.fontAtlas.draw(character.x, character.y, destX + textWidth, destY, width, height, width, height);
         textWidth += width;
       }
@@ -62,7 +62,7 @@ export default class FontManager {
     var height = parseInt(context.font, 10) * 1.2;
     var measurements = Array.from(letters)
     .filter(function (character, index, characters) {
-	    return characters.indexOf(character) == index;
+      return characters.indexOf(character) == index;
     })
     .map(function (letter) {
       return {
