@@ -2,9 +2,9 @@ import chai from "chai";
 import RenderLoop from "../src/render-loop";
 var should = chai.should();
 var renderLoop;
-describe("RenderLoop", function () {
-  before("Create and initiate render loop instance", function () {
-    renderLoop = new RenderLoop(function (renderLoop) {
+describe("RenderLoop", function() {
+  before("Create and initiate render loop instance", function() {
+    renderLoop = new RenderLoop(function(renderLoop) {
       it("Should assert index value", async (done): Promise < void > => {
         renderLoop.index.should.equal.to(1)
         done()
@@ -31,14 +31,14 @@ describe("RenderLoop", function () {
       })
     }, 60)
   });
-  after("Suspend and destroy render loop instance", function () {
+  after("Suspend and destroy render loop instance", function() {
     renderLoop.stop()
     // delete renderLoop
   });
   describe("wait", async () => {
     it("Should hang and resolve after 100ms", async (): Promise < void > => {
-      return new Promise(function (resolve) {
-        setTimeout(function () {
+      return new Promise(function(resolve) {
+        setTimeout(function() {
           resolve()
         }, 100)
       })

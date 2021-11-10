@@ -1,6 +1,6 @@
 // Karma configuration
 // Generated on Tue Oct 19 2021 22:12:11 GMT+0200 (Central Africa Time)
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: "",
@@ -8,10 +8,19 @@ module.exports = function (config) {
     // available frameworks: https://www.npmjs.com/search?q=keywords:karma-adapter
     frameworks: ["mocha", "chai", "karma-typescript"],
     // list of files / patterns to load in the browser
-    files: [
-      { pattern: "src/*.ts" },
-      { pattern: "test/*.ts" },
-      { pattern: "test/*/**/*", watched: false, included: false, served: true, nocache: false },
+    files: [{
+        pattern: "src/*.ts"
+      },
+      {
+        pattern: "test/*.ts"
+      },
+      {
+        pattern: "test/*/**/*",
+        watched: false,
+        included: false,
+        served: true,
+        nocache: false
+      },
     ],
     // list of files / patterns to exclude
     exclude: [],
@@ -40,9 +49,9 @@ module.exports = function (config) {
       ChromeHeadless_custom: {
         base: "ChromeHeadless",
         flags: ["--disable-translate", "--disable-extensions",
-                    "--no-first-run", "--disable-background-networking",
-                    "--remote-debugging-port=9223"
-                ]
+          "--no-first-run", "--disable-background-networking",
+          "--remote-debugging-port=9223"
+        ]
       },
     },
     karmaTypescriptConfig: {

@@ -24,17 +24,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`;
-describe("FontManager", function () {
-  before("Create Canvas2DRenderer instance", function () {
+describe("FontManager", function() {
+  before("Create Canvas2DRenderer instance", function() {
     canvas2DRenderer = new Canvas2DRenderer(1000, 500);
   });
-  after("Destroy Canvas2DRenderer instance", function () {
+  after("Destroy Canvas2DRenderer instance", function() {
     // delete canvas2DRenderer
   });
-  beforeEach("Create Font instance", function () {
+  beforeEach("Create Font instance", function() {
     fontManager = new FontManager(canvas2DRenderer, "40px Aerial");
   });
-  afterEach("Destroy Font instance", function () {
+  afterEach("Destroy Font instance", function() {
     // delete font
   });
   describe("load()", async () => {

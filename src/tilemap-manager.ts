@@ -31,22 +31,22 @@ export default class TilemapManager {
   public load(resource: string) {
     const request: Request = new Request(resource)
     return fetch(request)
-    .then(function (response) {
-      return response.json()
-    })
-    .then(async (tilemap) => {
-      tilemap.tilesets = await Promise.all(tilemap.tilesets.map(async (tileset: any) => {
-        return new Promise((resolve, reject) => {
-          var image: HTMLImageElement = new Image();
-          image.onload = () => {
-            tileset.sprite = new Sprite(this.canvas2DRenderer, image, tileset.tilewidth, tileset.tileheight, [], 0, tileset.tilewidth, tileset.tileheight);
-            resolve(tileset);
-          }
-          image.onerror = reject;
-          image.src = tileset.image;
-        })
-      }))
-      return new Tilemap(tilemap)
-    })
+      .then(function(response) {
+        return response.json()
+      })
+      .then(async (tilemap) => {
+        tilemap.tilesets = await Promise.all(tilemap.tilesets.map(async (tileset: any) => {
+          return new Promise((resolve, reject) => {
+            var image: HTMLImageElement = new Image();
+            image.onload = () => {
+              tileset.sprite = new Sprite(this.canvas2DRenderer, image, tileset.tilewidth, tileset.tileheight, [], 0, tileset.tilewidth, tileset.tileheight);
+              resolve(tileset);
+            }
+            image.onerror = reject;
+            image.src = tileset.image;
+          })
+        }))
+        return new Tilemap(tilemap)
+      })
   }
 }

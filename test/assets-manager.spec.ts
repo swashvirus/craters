@@ -2,27 +2,27 @@ import AssetsManager from "../src/assets-manager";
 import chai from "chai";
 var should = chai.should();
 var assetsManager;
-describe("AssetsManager", function () {
-  before("prepare assetsManager instance", function () {
+describe("AssetsManager", function() {
+  before("prepare assetsManager instance", function() {
     assetsManager = new AssetsManager();
   });
-  after("destroy assetsManager instance", function () {
+  after("destroy assetsManager instance", function() {
     // delete assetsManager;
   });
   describe("loadText()", async () => {
     it("Should request text file and resolve", async (): Promise < string > => {
       return assetsManager.loadText("./base/test/assets-manager/assets/test.txt")
-      .then(function (text) {
-        text.should.equal("test")
-      });
+        .then(function(text) {
+          text.should.equal("test")
+        });
     });
   });
   describe("loadJson()", async () => {
     it("Should request json file and resolve", async (): Promise < any > => {
       return assetsManager.loadJson("./base/test/assets-manager/assets/test.json")
-      .then(function (json) {
-        json.test.should.equal(true)
-      });
+        .then(function(json) {
+          json.test.should.equal(true)
+        });
     });
   });
   describe("loadImage()", async () => {

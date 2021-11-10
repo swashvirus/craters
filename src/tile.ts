@@ -49,7 +49,7 @@ export default class Tile {
       const canvas2DRenderer: Canvas2DRenderer = new Canvas2DRenderer(sImage.width, sImage.height, null, 1);
       const context = canvas2DRenderer.context;
       context.moveTo(positions[0][0], positions[0][1]);
-      positions.forEach(function (position) {
+      positions.forEach(function(position) {
         context.lineTo(position[0], position[1]);
       })
       context.lineTo(positions[0][0], positions[0][1]);

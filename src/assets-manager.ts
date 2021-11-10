@@ -1,20 +1,20 @@
 export default class AssetsManager {
   public async loadText(resource: string): Promise < string > {
     return fetch(resource)
-    .then(function (response: Response) {
-      return response.text();
-    })
+      .then(function(response: Response) {
+        return response.text();
+      })
   }
   public async loadJson(resource: string): Promise < any > {
     return fetch(resource)
-    .then(function (response: Response) {
-      return response.json();
-    })
+      .then(function(response: Response) {
+        return response.json();
+      })
   }
   public async loadImage(resource: string): Promise < HTMLImageElement > {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       var image: HTMLImageElement = new Image();
-      image.onload = function () {
+      image.onload = function() {
         resolve(image);
       }
       image.onerror = reject;
@@ -23,12 +23,12 @@ export default class AssetsManager {
   }
   public async loadFont(fontName: string, resource: string): Promise < FontFace > {
     return new FontFace(fontName, resource)
-    .load();
+      .load();
   }
   public async loadBinary(resource: string): Promise < Blob > {
     return fetch(resource)
-    .then(function (response: Response) {
-      return response.blob();
-    })
+      .then(function(response: Response) {
+        return response.blob();
+      })
   }
 }

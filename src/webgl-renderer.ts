@@ -1,4 +1,8 @@
-import { mat4, vec3, vec2 } from "gl-matrix"
+import {
+  mat4,
+  vec3,
+  vec2
+} from "gl-matrix"
 const vertexShader = `
 	attribute vec4 a_position;
 	uniform mat4 u_matrix;
@@ -59,18 +63,18 @@ export default class WebGLRenderer {
     var positionBuffer: WebGLBuffer = gl.createBuffer()
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
     var positions = [
-	    0, 0,
-	    1, 0,
-	    1, 1,
-	    0, 1
+      0, 0,
+      1, 0,
+      1, 1,
+      0, 1
     ]
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW)
     var indexBuffer = gl.createBuffer()
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
     var indices = new Uint8Array([
-	    2, 3,
-	    0, 0,
-	    1, 2
+      2, 3,
+      0, 0,
+      1, 2
     ])
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW)
     this.n = indices.length

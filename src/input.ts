@@ -119,7 +119,9 @@ export default class Input {
   //     else // pressed and held.
   // else // not pressed.
   private pressed: Map < string, number > = new Map();
-  constructor() { this.bindKeys(); }
+  constructor() {
+    this.bindKeys();
+  }
   public bind(key: number, action: string) {
     this.bindings.set(key, action);
     this.pressed.set(action, 0);

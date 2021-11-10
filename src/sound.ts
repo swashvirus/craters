@@ -46,7 +46,7 @@ export default class SoundManager {
   }
   load(resource: string) {
     const request: Request = new Request(resource)
-    return fetch(request).then(function (response: Response) {
+    return fetch(request).then(function(response: Response) {
       return response.arrayBuffer();
     }).then((buffer: ArrayBuffer) => {
       return new Promise((resolve) => {

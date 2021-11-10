@@ -1,5 +1,5 @@
 const path = require("path")
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   grunt.initConfig({
     webpack: {
       dev: {
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             test: /\.tsx?$/,
             use: "ts-loader",
             exclude: /node_modules/,
-                    }]
+          }]
         }
       },
       prod: {

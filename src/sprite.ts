@@ -37,43 +37,43 @@ export default class Sprite {
     this.dHeight = dHeight;
     const spritesheet = new Tile(renderer, image, sWidth, sHeight, dWidth, dHeight);
     this.grid = new Array(image.height / sHeight)
-    .fill(0)
-    .map(function () {
-      return new Array(image.width / sWidth)
       .fill(0)
-      .map(function () {
-        return {
-          tile: null,
-          width: sWidth,
-          height: sHeight,
-          position: null,
-          positions: null
-        };
+      .map(function() {
+        return new Array(image.width / sWidth)
+          .fill(0)
+          .map(function() {
+            return {
+              tile: null,
+              width: sWidth,
+              height: sHeight,
+              position: null,
+              positions: null
+            };
+          });
+      })
+      .map(function(rows, row: number) {
+        return rows.map(function(columns, column) {
+          columns.position = {
+            x: column * columns.width,
+            y: row * columns.height
+          };
+          columns.positions = [{
+            x: 0,
+            y: 0
+          }, {
+            x: columns.width,
+            y: 0
+          }, {
+            x: columns.width,
+            y: columns.height
+          }, {
+            x: 0,
+            y: columns.height
+          }];
+          columns.tile = spritesheet
+          return columns;
+        });
       });
-    })
-    .map(function (rows, row: number) {
-      return rows.map(function (columns, column) {
-        columns.position = {
-          x: column * columns.width,
-          y: row * columns.height
-        };
-        columns.positions = [{
-          x: 0,
-          y: 0
-                    }, {
-          x: columns.width,
-          y: 0
-                    }, {
-          x: columns.width,
-          y: columns.height
-                    }, {
-          x: 0,
-          y: columns.height
-                    }];
-        columns.tile = spritesheet
-        return columns;
-      });
-    });
   }
   draw(dX: number, dY: number, renderLoop: RenderLoop, frameIndex ? : number[]) {
     if (frameIndex) {
@@ -82,7 +82,10 @@ export default class Sprite {
       this.index = this.frames[(Math.floor((renderLoop.elapsed / 1000) / this.duration) % this.frames.length)];
     }
     const column = this.grid[this.index[0]][this.index[1]]
-    const { x: sX, y: sY } = column.position
+    const {
+      x: sX,
+      y: sY
+    } = column.position
     column.tile.draw(sX, sY, dX, dY);
   }
 };
