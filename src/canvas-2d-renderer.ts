@@ -19,7 +19,17 @@ export default class Canvas2DRenderer {
   public createImage(image: any): any {
     return image;
   }
-  public drawImage(image: any, sx: number, sy: number, sWidth: number, sHeight: number, dx: number, dy: number, dWidth: number, dHeight: number): void {
+  public drawImage(
+    image: any,
+    sx: number = 0,
+    sy: number = 0,
+    sWidth: number = image.width,
+    sHeight: number = image.height,
+    dx: number = 0,
+    dy: number = 0,
+    dWidth: number = image.width,
+    dHeight: number = image.height
+  ): void {
     this.context.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) !;
   }
   public clear(v ? : string, w: number = 0, x: number = 0, y: number = this.width, z: number = this.height): void {

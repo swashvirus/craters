@@ -1,16 +1,17 @@
 import Canvas2DRenderer from "./canvas-2d-renderer";
-import WebGLRenderer from "./webgl-renderer";
 import Tile from "./tile"
+type FontMap = Map < number, {
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+} > ;
+type FontAtlas = Tile;
 class Font {
-  fontMap;
-  fontAtlas;
-  canvas2DRenderer;
-  constructor(fontMap: Map < number, {
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-  } > , fontAtlas) {
+  fontMap: FontMap;
+  fontAtlas: FontAtlas;
+  canvas2DRenderer: Canvas2DRenderer;
+  constructor(fontMap: FontMap, fontAtlas: FontAtlas) {
     this.fontMap = fontMap;
     this.fontAtlas = fontAtlas;
   }
@@ -56,12 +57,7 @@ export default class FontManager {
     var canvas2DRenderer = new Canvas2DRenderer(0, 0, void 0, 1)
     var context = canvas2DRenderer.context
     context.font = this.fontName;
-    var fontMap: Map < number, {
-      x: number,
-      y: number,
-      width: number,
-      height: number,
-    } > = new Map();
+    var fontMap: FontMap = new Map();
     var height = parseInt(context.font, 10) * 1.2;
     var measurements = Array.from(letters)
       .filter(function(character, index, characters) {

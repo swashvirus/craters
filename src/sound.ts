@@ -1,5 +1,4 @@
 class Sound {
-  private audioContext: AudioContext;
   private source: AudioBufferSourceNode;
   private gainNode: GainNode;
   constructor(audioContext: AudioContext, decodeAudioData: AudioBuffer) {
@@ -19,7 +18,7 @@ class Sound {
   public getVolume(): number {
     return this.gainNode.gain.value
   }
-  public setVolume(value) {
+  public setVolume(value: number) {
     this.gainNode.gain.value = value
   }
   public stop(): void {

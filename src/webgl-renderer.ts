@@ -1,7 +1,6 @@
 import {
   mat4,
   vec3,
-  vec2
 } from "gl-matrix"
 const vertexShader = `
 	attribute vec4 a_position;

@@ -36,7 +36,6 @@
     "@tsconfig/recommended": "^1.0.1",
     "@types/chai": "^4.2.22",
     "@types/mocha": "^9.0.0",
-    "@types/sat": "^0.0.31",
     "chai": "^4.3.4",
     "gl-matrix": "^3.4.3",
     "grunt": "^1.4.1",

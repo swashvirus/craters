@@ -3,10 +3,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "preserveConstEnums": true,
     "strictNullChecks": false,
     "esModuleInterop": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "declaration": true,
     "sourceMap": true,
     "allowJs": true,

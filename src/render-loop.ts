@@ -6,8 +6,8 @@ export default class RenderLoop {
   frameRatio: number;
   current: number;
   previous: number;
-  render: any;
-  constructor(render: any, frameRate: number = 60) {
+  execute: any;
+  constructor(execute: any, frameRate: number = 60) {
     this.index = 0;
     this.delta = 0;
     this.elapsed = 0;
@@ -15,7 +15,7 @@ export default class RenderLoop {
     this.frameRatio = 1000 / frameRate;
     this.current = 0;
     this.previous = window.performance.now();
-    this.render = render;
+    this.execute = execute;
     this.start()
   }
   public start(): void {
@@ -27,7 +27,7 @@ export default class RenderLoop {
       if (this.current < this.previous + this.frameRatio)
         return;
       this.previous = this.current;
-      this.render(this);
+      this.execute(this);
     }
     start()
   }

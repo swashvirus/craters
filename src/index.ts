@@ -8,6 +8,7 @@ import RenderLoop from "./render-loop";
 import SoundManager from "./sound"
 import Sprite from "./sprite";
 import TilemapManager from "./tilemap-manager";
+import * as EntityComponentSystem from "./ecs";
 export {
   AssetsManager,
   Canvas2DRenderer,
@@ -18,7 +19,8 @@ export {
   RenderLoop,
   SoundManager,
   Sprite,
-  TilemapManager
+  TilemapManager,
+  EntityComponentSystem
 };
 export default {
   AssetsManager,
@@ -30,5 +32,6 @@ export default {
   RenderLoop,
   SoundManager,
   Sprite,
-  TilemapManager
+  TilemapManager,
+  EntityComponentSystem
 };

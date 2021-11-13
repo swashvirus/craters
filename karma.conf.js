@@ -56,12 +56,18 @@ module.exports = function(config) {
     },
     karmaTypescriptConfig: {
       compilerOptions: {
-        esModuleInterop: true,
-        emitDecoratorMetadata: true,
+        strictPropertyInitialization: false,
         experimentalDecorators: true,
-        module: "commonjs",
+        emitDecoratorMetadata: true,
+        preserveConstEnums: true,
+        strictNullChecks: false,
+        esModuleInterop: true,
+        noImplicitAny: false,
+        declaration: true,
         sourceMap: true,
-        target: "ES2021"
+        allowJs: true,
+        target: "ES2015",
+        module: "commonjs",
       },
       exclude: ["node_modules"]
     },

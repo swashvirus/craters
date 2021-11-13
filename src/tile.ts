@@ -1,6 +1,6 @@
 import Canvas2DRenderer from "./canvas-2d-renderer";
 export default class Tile {
-  canvas2DRenderer;
+  canvas2DRenderer: any;
   sImage: any;
   sWidth: number;
   sHeight: number;

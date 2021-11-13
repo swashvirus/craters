@@ -2,8 +2,9 @@ import chai from "chai";
 import Canvas2DRenderer from "../src/canvas-2d-renderer"
 import FontManager from "../src/font-manager";
 var should = chai.should();
-var fontManager, canvas2DRenderer;
-var text: string = `MIT License
+describe("FontManager", function() {
+  var fontManager: FontManager, canvas2DRenderer: Canvas2DRenderer;
+  var text: string = `MIT License
 
 Copyright (c) 2019 JOHN SWANA
 
@@ -24,7 +25,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`;
-describe("FontManager", function() {
   before("Create Canvas2DRenderer instance", function() {
     canvas2DRenderer = new Canvas2DRenderer(1000, 500);
   });
@@ -38,10 +38,10 @@ describe("FontManager", function() {
     // delete font
   });
   describe("load()", async () => {
-    it("Should load text and draw text", async (done): Promise < void > => {
+    it("should load text and draw text", async (done): Promise < void > => {
       const text1 = text.substr(0, text.length / 2)
       var font = fontManager.load(text1)
-      font.draw(text)
+      font.draw(text, 0, 0)
       done()
     })
   })

@@ -1,7 +1,7 @@
 import Sprite from "./sprite";
 class Tilemap {
-  tilemap;
-  constructor(tilemap) {
+  tilemap: any;
+  constructor(tilemap: any) {
     this.tilemap = tilemap
   }
   public draw(): void {
@@ -24,11 +24,11 @@ class Tilemap {
   }
 }
 export default class TilemapManager {
-  canvas2DRenderer;
-  constructor(canvas2Drenderer) {
+  canvas2DRenderer: any;
+  constructor(canvas2Drenderer: any) {
     this.canvas2DRenderer = canvas2Drenderer;
   }
-  public load(resource: string) {
+  public async load(resource: string) {
     const request: Request = new Request(resource)
     return fetch(request)
       .then(function(response) {

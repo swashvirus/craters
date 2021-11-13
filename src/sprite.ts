@@ -1,8 +1,7 @@
-import Canvas2DRenderer from "./canvas-2d-renderer";
 import RenderLoop from "./render-loop";
 import Tile from "./tile";
 export default class Sprite {
-  renderer;
+  renderer: any;
   image: HTMLImageElement;
   sWidth: number;
   sHeight: number;

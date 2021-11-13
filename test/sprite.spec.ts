@@ -3,17 +3,18 @@ import Canvas2DRenderer from "../src/canvas-2d-renderer";
 import AssetsManager from "../src/assets-manager";
 import RenderLoop from "../src/render-loop";
 import Sprite from "../src/sprite";
+
 describe("Sprite", async () => {
-  var canvas2DRenderer;
-  var assetsManager;
-  var renderLoop;
+  var canvas2DRenderer: Canvas2DRenderer;
+  var assetsManager: AssetsManager;
+  var renderLoop: RenderLoop;
   beforeEach(function() {
     assetsManager = new AssetsManager();
     canvas2DRenderer = new Canvas2DRenderer(1920, 1200);
     renderLoop = new RenderLoop(function() {});
   })
   describe("Sprite()", async () => {
-    it("Should load sprite and draw", async (): Promise < void > => {
+    it("should load sprite and draw", async (): Promise < void > => {
       return assetsManager.loadImage("./base/test/sprite/assets/spritesheet.png")
         .then(function(spritesheet) {
           const frames = [
