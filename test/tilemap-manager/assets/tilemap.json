@@ -2,7 +2,7 @@
   "type": "map2d",
   "tilesets": [{
     "name": "platformer",
-    "image": "./base/test/tile-manager/assets/platformer.png",
+    "image": "./base/test/tilemap-manager/assets/platformer.png",
     "fixture": "Polygon",
     "imagewidth": 980,
     "imageheight": 910,
