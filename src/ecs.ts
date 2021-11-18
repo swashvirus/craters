@@ -40,7 +40,7 @@ export class Query {
   };
 };
 export class QueryManager {
-  public queries: Map < Query, Query >
+  public queries: Map < any, any > // Query fix before commit
     constructor() {
       this.queries = new Map();
     };

@@ -8,12 +8,12 @@
 [Read documentation](https://swashvirus.github.io/craters/index.html)
 
 ## Examples
-[Play sandbox demos](https://swashvirus.github.io/craters-sandbox/)
+[Play craters sandbox](https://swashvirus.github.io/craters-sandbox/)
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
-_Also, please don't edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!_
+_Also, please don't edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "src" subdirectory!_
 
 ## Release History
 _(Nothing yet)_

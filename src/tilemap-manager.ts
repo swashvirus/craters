@@ -1,5 +1,5 @@
 import Sprite from "./sprite";
-class Tilemap {
+export class Tilemap {
   tilemap: any;
   constructor(tilemap: any) {
     this.tilemap = tilemap

@@ -7,7 +7,9 @@ import Input from "./input"
 import RenderLoop from "./render-loop";
 import SoundManager from "./sound"
 import Sprite from "./sprite";
-import TilemapManager from "./tilemap-manager";
+import TilemapManager, {
+  Tilemap
+} from "./tilemap-manager";
 import * as EntityComponentSystem from "./ecs";
 export {
   AssetsManager,
@@ -20,6 +22,7 @@ export {
   SoundManager,
   Sprite,
   TilemapManager,
+  Tilemap,
   EntityComponentSystem
 };
 export default {
@@ -33,5 +36,6 @@ export default {
   SoundManager,
   Sprite,
   TilemapManager,
+  Tilemap,
   EntityComponentSystem
 };

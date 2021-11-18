@@ -1,7 +1,7 @@
 import chai from "chai";
 import Canvas2DRenderer from "../src/canvas-2d-renderer";
 import TilemapManager from "../src/tilemap-manager";
-const map2dTilemap = "./base/test/tile-manager/assets/tilemap.json";
+const map2dTilemap = "./base/test/tilemap-manager/assets/tilemap.json";
 var should = chai.should();
 describe("TilemapManager", async () => {
   var canvas2DRenderer: Canvas2DRenderer;
