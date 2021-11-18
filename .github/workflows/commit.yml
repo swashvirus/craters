@@ -26,7 +26,6 @@ jobs:
       - name: Install dependencies
         run: npm install; 
       - run: npm install --global grunt webpack karma webpack-cli typescript typedoc;
-      - run: npm install grunt webpack karma webpack-cli typescript typedoc;
       - run: npm run test; 
       - run: npm run build:prod;
       - run: npm run build:docs;
