@@ -126,14 +126,14 @@ export default class Input {
     var key = event.key;
     if (this.bindings.has(key)) {
       var action = this.bindings.get(key);
-        this.pressed.set(action, 0);
+      this.pressed.set(action, 0);
     }
   }
   private keydown(event: KeyboardEvent): void {
     var key = event.key;
     if (this.bindings.has(key)) {
       var action = this.bindings.get(key);
-        this.pressed.set(action, 2);
+      this.pressed.set(action, 2);
     }
   }
   public isPressed(action: string): number {

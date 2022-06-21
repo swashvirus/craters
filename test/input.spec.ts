@@ -32,10 +32,10 @@ describe("Input", function() {
   describe("keydown()", async () => {
     it("should dispatch", async (): Promise < Blob > => {
       var event: any = document.createEvent("Event");
-      for(var key of ["8", "13", "11"]){
-      event.key = key;
-      event.initEvent("keydown");
-      document.dispatchEvent(event);
+      for (var key of ["8", "13", "11"]) {
+        event.key = key;
+        event.initEvent("keydown");
+        document.dispatchEvent(event);
       }
       return;
     });
@@ -49,11 +49,11 @@ describe("Input", function() {
   });
   describe("keyup()", async () => {
     it("should dispatch", async (): Promise < Blob > => {
-      for(var key of ["8", "13", "11"]){
-      var event: any = document.createEvent("Event");
-      event.key = key;
-      event.initEvent("keyup");
-      document.dispatchEvent(event);
+      for (var key of ["8", "13", "11"]) {
+        var event: any = document.createEvent("Event");
+        event.key = key;
+        event.initEvent("keyup");
+        document.dispatchEvent(event);
       }
       return;
     });
