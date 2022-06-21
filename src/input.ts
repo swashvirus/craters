@@ -105,19 +105,7 @@ export default class Input {
     STOP: "178",
     PLAY_PAUSE: "179"
   }
-  // Maps key to action
   private bindings: Map < string, string > = new Map();
-  // 0: Not-pressed.
-  // 1: Pressed-and-held.
-  // 2: Pressed.
-  // var input = new Input(),
-  //     isPressed;
-  // if ((isPressed = input.isPressed(key)))
-  //     // isPressed.
-  //     if (isPressed == 2)
-  //         // tapped.
-  //     else // pressed and held.
-  // else // not pressed.
   private pressed: Map < string, number > = new Map();
   public constructor() {
     this.bindKeys();
@@ -138,18 +126,14 @@ export default class Input {
     var key = event.key;
     if (this.bindings.has(key)) {
       var action = this.bindings.get(key);
-      if (this.pressed.has(action)) {
         this.pressed.set(action, 0);
-      }
     }
   }
   private keydown(event: KeyboardEvent): void {
     var key = event.key;
     if (this.bindings.has(key)) {
       var action = this.bindings.get(key);
-      if (this.pressed.has(action)) {
         this.pressed.set(action, 2);
-      }
     }
   }
   public isPressed(action: string): number {
