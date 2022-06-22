@@ -10,58 +10,51 @@ describe("Input", function() {
     // delete input;
   });
   describe("bind()", async () => {
-    it("should bind", async (): Promise < Blob > => {
+    it("should bind", async (): Promise < void > => {
       input.bind(Input.KEY.BACKSPACE, "BACKSPACE");
       input.bind(Input.KEY.ENTER, void 0);
-      return;
     });
   });
   describe("bindKeys()", async () => {
-    it("should bindKeys", async (): Promise < Blob > => {
+    it("should bindKeys", async (): Promise < void > => {
       input.bindKeys();
-      return;
     });
   });
   describe("isPressed()", async () => {
-    it("should assert isPressed", async (): Promise < Blob > => {
+    it("should assert isPressed", async (): Promise < void > => {
       input.isPressed("BACKSPACE");
       input.isPressed("ENTER");
-      return;
     });
   });
   describe("keydown()", async () => {
-    it("should dispatch", async (): Promise < Blob > => {
+    it("should dispatch", async (): Promise < void > => {
       var event: any = document.createEvent("Event");
-      for (var key of ["8", "13", "11"]) {
+      ["8", "13", "11"].forEach((key) => {
         event.key = key;
         event.initEvent("keydown");
         document.dispatchEvent(event);
-      }
-      return;
+      })
     });
   });
   describe("isPressed()", async () => {
-    it("should assert isPressed", async (): Promise < Blob > => {
+    it("should assert isPressed", async (): Promise < void > => {
       input.isPressed("BACKSPACE");
       input.isPressed("BACKSPACE");
-      return;
     });
   });
   describe("keyup()", async () => {
-    it("should dispatch", async (): Promise < Blob > => {
-      for (var key of ["8", "13", "11"]) {
+    it("should dispatch", async (): Promise < void > => {
+      ["8", "13", "11"].forEach((key) => {
         var event: any = document.createEvent("Event");
         event.key = key;
         event.initEvent("keyup");
         document.dispatchEvent(event);
-      }
-      return;
+      })
     });
   });
   describe("unbindKeys()", async () => {
-    it("should unbindKeys", async (): Promise < Blob > => {
+    it("should unbindKeys", async (): Promise < void > => {
       input.unbindKeys();
-      return;
     });
   });
 });
